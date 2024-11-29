@@ -7,7 +7,6 @@ O **MyVaccine** é uma plataforma digital destinada a facilitar o acesso, o agen
 - **Cadastro de Usuários**: Cadastro de cidadãos com informações pessoais e de contato.
 - **Cadastro de Dependentes**: Cadastro de dependentes.
 - **Login Seguro**: Acesso via CPF e senha, com recuperação de senha.
-- **Agendamento de Vacinas**: Agendamento de vacinas em postos de saúde locais.
 - **Cartilha de Vacinação**: Informações sobre vacinas, sequência e datas de reforço.
 - **Geolocalização**: Localização de postos de saúde próximos para facilitar o agendamento.
 - **Dependentes**: Gerenciamento das vacinas de todos os membros da família em um único perfil.
