@@ -22,7 +22,7 @@
     <div class="w-full flex">
       <!-- left login -->
       <section
-        class="flex justify-center items-center w-full lg:w-[60vw] h-[92vh]"
+        class="flex justify-center items-center w-full lg:w-[60vw] h-[90vh]"
       >
         <form
           action=""

@@ -1,8 +1,8 @@
 <!-- navbar.php -->
 <navbar
-      class="px-[6%] h-[8vh] flex justify-between items-center shadow-lg navbar"
+      class="px-[6%] h-[10vh] flex justify-between items-center shadow-lg navbar"
     >
-      <a href="index.php"
+      <a href="../../public/index.php"
         ><img src="../../assets/img/logo.svg" alt="logo" class="w-[190px]"
       /></a>
       <button class="text-xl md:text-2xl" onclick="toggleMenu()">
@@ -18,7 +18,7 @@
       <ul class="flex flex-col items-center space-y-4 text-lg font-semibold">
         <li>
           <a
-            href="index.php"
+            href="../../public/index.php"
             class="px-6 py-2 hover:bg-gray-100 rounded-lg transition-colors"
             >Home</a
           >

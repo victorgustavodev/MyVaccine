@@ -26,7 +26,7 @@
       </div>
 
       <!-- right login -->
-      <section class="flex justify-center items-center w-full lg:w-[60vw] h-[92vh]">
+      <section class="flex justify-center items-center w-full lg:w-[60vw] h-[90vh]">
         <form
           action=""
           class="flex flex-col gap-3 px-6 lg:px-[32px] w-full lg:w-4/6 justify-center"
