@@ -1,15 +1,15 @@
-# 💉 MyVaccine ( Em desenvolvimento )
+# MyVaccine - Sistema de Vacinação Pública Digital 💉
 
-MyVaccine é uma aplicação web desenvolvida para facilitar a organização e o acesso às informações de vacinação. Com MyVaccine, você pode:
+O **MyVaccine** é uma plataforma digital destinada a facilitar o acesso, o agendamento e o acompanhamento das vacinas públicas. O sistema visa otimizar a gestão de campanhas de vacinação, promovendo a educação em saúde e melhorando a comunicação entre cidadãos e unidades de saúde.
 
+<br><br>
 ![image](https://github.com/user-attachments/assets/745a28de-c486-42d9-893f-6f59a072f7e8)
+<br><br>
 
 ## 🛠️ Tecnologias Utilizadas
-
 [![Techonologies](https://skillicons.dev/icons?i=php,mysql,tailwindcss,js,html,css,figma,git,vscode)](https://skillicons.dev)
 
 ## Benefícios 👍
-
 - **Acessibilidade**: Facilita o acesso à vacinação e informações sobre vacinas.
 - **Eficiência**: Reduz filas e otimiza o tempo de espera com agendamentos prévios.
 - **Integração Familiar**: Permite o gerenciamento de vacinas para toda a família.
@@ -69,9 +69,6 @@ Este projeto está licenciado sob a Licença MIT. Consulte o arquivo [📜 LICEN
 
 <!--Desenvolvido por [Victor Gustavo](https://github.com/victorgustavodev).-->
 
-# MyVaccine - Sistema de Vacinação Pública Digital 💉
-
-O **MyVaccine** é uma plataforma digital destinada a facilitar o acesso, o agendamento e o acompanhamento das vacinas públicas. O sistema visa otimizar a gestão de campanhas de vacinação, promovendo a educação em saúde e melhorando a comunicação entre cidadãos e unidades de saúde.
 
 
 
