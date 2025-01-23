@@ -2,8 +2,8 @@
 <navbar
       class="px-[6%] h-[8vh] flex justify-between items-center shadow-lg navbar"
     >
-    <a href="index.php"
-        ><img src="../../assets/img/logo.svg" alt="logo" class="w-[190px]"
+    <a href="../../public/index.php"
+        ><img src="../../assets/img/logo.png" alt="logo" class="w-[190px]"
       /></a>
       <button class="text-xl md:text-2xl" onclick="toggleMenu()">
         <i class="fa-solid fa-bars"></i>
