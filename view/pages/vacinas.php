@@ -20,7 +20,7 @@
   <?php include '../layout/navbar-visit.php'; ?>
 
     <!-- Cadastro de Vacinas -->
-    <section class="flex justify-center items-center w-full h-[90vh]">
+    <section class="flex justify-center items-center w-full h-[92vh]">
       <form
         action="POST"
         class="flex flex-col gap-3 px-6 lg:px-[32px] w-full lg:w-4/6 justify-center"
@@ -37,19 +37,6 @@
             <option value="hep_b">Vacina Hepatite B</option>
             <option value="mmr">Vacina MMR</option>
             <option value="influenza">Vacina contra a Gripe (Influenza)</option>
-          </select>
-        </div>
-
-        <div class="flex flex-col gap-2">
-          <label for="health_post">Selecionar posto:</label>
-          <select name="health_post" id="health_post" form="health_post_form" class="p-3 border-2 rounded-lg">
-            <option value="" class="text-gray-500">Selecione um posto</option>
-            <option value="bcg">UPA - Desterro (Desterro, Abreu e Lima - PE, 53600-000)</option>
-            <option value="dtp">UPA - Igarassu (Rodovia Br-101 Norte, km 47 - Cruz de Rebouças, Igarassu - PE, 53600-000)</option>
-            <option value="dtp">UPA - Paulista (Estr. do Frio, 1000 - Jardim Paulista, Paulista - PE, 53401-030)</option>
-            <option value="dtp">UPA - Olinda (Av. Dr. Joaquim Nabuco, S/N - Tabajara, Olinda - PE, 53350-005)</option>
-            <option value="dtp">UPA - Nova Descoberta (Av. Ver. Otacílio Azevedo, s/n - Nova Descoberta, Recife - PE, 52081-550)</option>
-            <option value="dtp">UPA - Caxangá (R. Ribeiro Pessoa, s/n - Iputinga, Recife - PE, 50980-000)</option>
           </select>
         </div>
 
