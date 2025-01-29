@@ -1,3 +1,9 @@
+<?php
+
+session_start();
+
+?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
   <head>
@@ -16,8 +22,6 @@
     <title>Cadastro de Vacinas</title>
   </head>
   <body class="overflow-x-hidden">
-
-  <?php include '../layout/navbar-visit.php'; ?>
 
     <!-- Cadastro de Vacinas -->
     <section class="flex justify-center items-center w-full h-[92vh]">
