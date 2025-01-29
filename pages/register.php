@@ -1,5 +1,7 @@
 <?php
 
+session_start();
+
 require_once '../routes/db-connection.php';
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -26,9 +28,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         die("As senhas não coincidem.");
     }
 
-    if (!$hashed_password) {
-        die("Erro ao gerar o hash da senha.");
-    }
+    // if (!$hashed_password) {
+    //     die("Erro ao gerar o hash da senha.");
+    // }
     
     // Verifica se o CPF já existe no banco de dados
 
@@ -42,8 +44,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // Insere o novo usuário
     $stmt = $pdo->prepare("INSERT INTO clients (name, email, cpf, password, dob, address, telephone) VALUES (?, ?, ?, ?, ?, ?, ?)");
     if ($stmt->execute([$name, $email, $cpf, $password, $dob, $address, $telephone])) {
-        echo "Cadastro realizado com sucesso!";
-        header('Location: ./index.php');
+        // echo "Cadastro realizado com sucesso!";
+        header ('Location: ../index.php');
     } else {
         echo "Erro ao cadastrar cliente.";
     }
@@ -61,6 +63,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <link rel="stylesheet" href="style.css" />
     <script src="https://kit.fontawesome.com/c8e307d42e.js" crossorigin="anonymous"></script>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet" />
+    <link rel="icon" type="image/x-icon" href="./assets/img/icon.png">
+    <title>Register - My Vaccine</title>
 </head>
 
 <body class="overflow-x-hidden">
@@ -112,7 +116,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     <div class="flex flex-col gap-2 w-1/2">
                         <label for="telephone">Telefone:</label>
                         <input type="text" name="telephone" id="telephone" class="border-2 p-3 rounded-lg"
-                            placeholder="(00) 00000-0000" required />
+                            placeholder="(00) 00000-0000" required maxlength="15" oninput="formatPhone(this)" />
                     </div>
                 </div>
 
@@ -169,7 +173,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     "></div>
     </div>
 
-    <script src="../assets/script/script.js"></script>
+    <script src="../assets//script/script.js"></script>
 
 </body>
 

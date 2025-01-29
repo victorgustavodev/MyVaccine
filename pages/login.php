@@ -37,7 +37,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <link rel="stylesheet" href="style.css" />
     <script src="https://kit.fontawesome.com/c8e307d42e.js" crossorigin="anonymous"></script>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet" />
-    <title>Login</title>
+    <link rel="icon" type="image/x-icon" href="./assets/img/icon.png">
+    <title>Login - My Vaccine</title>
 </head>
 
 <body class="overflow-x-hidden">
@@ -99,7 +100,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         </section>
     </div>
 
-    <script src="../../assets/js/script.js"></script>
+    <script src="../assets//script/script.js"></script>
 </body>
 
 </html>

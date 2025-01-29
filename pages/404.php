@@ -13,7 +13,8 @@
       href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap"
       rel="stylesheet"
     />
-    <title>404 - Página Não Encontrada</title>
+    <link rel="icon" type="image/x-icon" href="./assets/img/icon.png">
+    <title>404 - Not Found</title>
   </head>
   <body class="overflow-x-hidden text-[#100E3D]">
 

@@ -28,3 +28,18 @@
 //     }
 //     return true;
 // }
+
+function formatPhone(input) {
+    let value = input.value.replace(/\D/g, ''); // Remove qualquer caractere não numérico
+
+    // Aplica a formatação
+    if (value.length <= 10) {
+        // Formato (XX) XXXX-XXXX
+        value = value.replace(/(\d{2})(\d{4})(\d{4})/, '($1) $2-$3');
+    } else {
+        // Formato (XX) 9 XXXX-XXXX
+        value = value.replace(/(\d{2})(\d{1})(\d{4})(\d{4})/, '($1) $2 $3-$4');
+    }
+
+    input.value = value;
+}
