@@ -8,15 +8,15 @@
       <!-- <button class="text-xl md:text-2xl" onclick="toggleMenu()">
         <i class="fa-solid fa-bars"></i>
       </button> -->
-<div class="flex gap-[64px] text-[16px]">
-      <ul class="flex gap-4 transition-all duration-500 ease-in-out">
-        <li><a href="../../public/index.php" class="hover:underline">Home</a></li>
-        <li><a href="../pages/dependentes.php" class="hover:underline">Dependentes</a></li>
-        <li><a href="../pages/postos.php" class="hover:underline">Posto de saúde</a></li>
-      </ul>
-      <a href="" class="font-bold hover:text-">Login</a>
-      </div>
-    </navbar>
+      <div class="flex gap-[64px] text-[16px]">
+        <ul class="flex gap-4 transition-all duration-500 ease-in-out">
+          <li><a href="../../public/index.php" class="hover:underline">Home</a></li>
+          <li><a href="../pages/dependentes.php" class="hover:underline">Dependentes</a></li>
+          <li><a href="../pages/postos.php" class="hover:underline">Posto de saúde</a></li>
+        </ul>
+        <a href="" class="font-bold hover:text-">Login</a>
+        </div>
+      </navbar>
 
     <!-- Menu -->
     <div id="menu" class="absolute top-[10vh] right-0 h-fit w-full lg:w-fit rounded-lg flex justify-center items-center bg-white shadow-lg p-10 transform translate-x-full opacity-0 transition-all duration-500 ease-in-out">
@@ -38,11 +38,11 @@
 
       </ul>
       <!-- Botão para fechar o menu -->
-      <button
+      <!-- <button
         class="absolute top-4 right-4 text-2xl text-gray-700"
-        onclick="toggleMenu()"
+        onclick=""
       >
         <i class="fa-solid fa-x"></i>
-      </button>
+      </button> -->
     </div>
 </navbar>

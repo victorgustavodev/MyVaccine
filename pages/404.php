@@ -16,7 +16,17 @@
     <title>404 - Página Não Encontrada</title>
   </head>
   <body class="overflow-x-hidden text-[#100E3D]">
-    <?php include "../view/layout/navbar-visit.php" ?>
+
+  <navbar class="px-[6%] h-[8vh] flex justify-between items-center shadow-lg navbar text-[#100E3D]">
+        <!-- logo -->
+        <a href="../index.php"><img src="../assets/img/logo.png" alt="logo" class="w-[190px]" /></a>
+        <!-- options -->
+        <div class="flex gap-[64px] text-[16px]">
+            <ul class="flex gap-4 transition-all duration-500 ease-in-out">
+                <li><a href="../index.php" class="hover:underline text-xs  md:text-base">Voltar para página principal</a></li>
+            </ul>
+        </div>
+    </navbar>
 
     <main class="w-full flex items-center flex-col">
       <section class="max-w-[1200px] flex flex-col items-center gap-6 my-10 text-center">
@@ -25,7 +35,7 @@
         </figure>
         <h1 class="text-[48px] font-bold text-[#d9534f] uppercase">404</h1>
         <p class="text-[20px]">Ops! A página que você está procurando não foi encontrada.</p>
-        <a href="/"
+        <a href="../index.php"
           class="bg-[#0B5FFF] text-white text-center font-semibold py-4 px-6 rounded-lg hover:bg-[#074DD2] cursor-pointer">
           Voltar para a página inicial
         </a>
