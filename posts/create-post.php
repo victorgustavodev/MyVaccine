@@ -1,7 +1,7 @@
 <?php
 // Inclui o arquivo de conexão com o banco de dados
 require_once '../routes/db-connection.php';
-require_once '../routes/authenticate-post.php';
+require_once '../routes/authenticate-adm.php';
 
 // Verifica se o usuário não está logado ou não tem o papel de 'admin'
 if (!isset($_SESSION['user_id']) || $_SESSION['user_role'] !== 'admin') {
@@ -21,7 +21,7 @@ if (!isset($_SESSION['user_id']) || $_SESSION['user_role'] !== 'admin') {
         $stmt->execute([$name, $address, $city, $state]);
 
         // Redireciona para a página de listagem de alunos após a inserção
-        header('Location: ../pages/adm.php');
+        header('Location: ../posts/read-post.php');
         }
 
 ?>

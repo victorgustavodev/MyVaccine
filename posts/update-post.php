@@ -1,7 +1,7 @@
 <?php
 // Inclui o arquivo de conexão com o banco de dados
 require_once '../routes/db-connection.php';
-require_once '../routes/authenticate-post.php';
+require_once '../routes/authenticate-adm.php';
 
 // Verifica se um ID foi passado via GET e se é um número válido
 if (!isset($_GET['id']) || !is_numeric($_GET['id'])) {

@@ -28,7 +28,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $_SESSION['user_role'] = $user['role'];
 
         if ($user['role'] == "admin") {
-            header('Location: ../pages/adm.php'); // Redireciona para a página inicial
+            header('Location: ../posts/read-post.php'); // Redireciona para a página inicial
         } else {
             header('Location: ../index.php');
         }

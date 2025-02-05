@@ -48,10 +48,12 @@ if ($posts) {
     <section class="w-[90vw] flex flex-col gap-[5vh] mt-[5vh] mx-[5vw]">
         <div class="flex justify-between">
             <h1 class="text-xl md:text-3xl">Painel</h1>
-            <a href="../posts/create-post.php"
-                class="bg-blue-500 text-white px-4 py-2 text-xs md:text-sm rounded-md hover:bg-blue-600">
-                Adicionar novo posto
-            </a>
+            <div class="flex gap-6">
+                <a href="../posts/create-post.php"
+                    class="bg-blue-500 text-white px-4 py-2 text-xs md:text-sm rounded-md hover:bg-blue-600">
+                    Cadastrar novo posto
+                </a>
+            </div>
         </div>
 
         <table class="min-w-full max-w-[100vw] bg-white border border-gray-200 shadow-md">
