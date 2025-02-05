@@ -28,7 +28,7 @@
                 <a href="./routes/logout.php" class="font-bold text-red-500">Sair da conta</a>
             </div>
             <?php else: ?>
-            <a href="./pages/login.php" class="font-bold">Login</a>
+            <a href="./pages/login.php" class="border-[1px] rounded-md border-black text-black px-4 py-2">Login</a>
             <?php endif; ?>
 
         </div>
@@ -56,7 +56,8 @@
             </div>
         </section>
 
-        <section class="max-w-[800px] 2xl:max-w-[1200px] flex justify-center items-center gap-[90px] 2xl:gap-[180px] my-10 transition-all">
+        <section
+            class="max-w-[800px] 2xl:max-w-[1200px] flex justify-center items-center gap-[90px] 2xl:gap-[180px] my-10 transition-all">
             <div
                 class="flex flex-col gap-2 px-4 py-2 2xl:px-8 2xl:py-6 text-center justify-center w-4/6 shadow-md rounded-[8px] h-[200px] border-[1px]">
                 <figure><i class="fa-solid fa-address-book text-[24px] 2xl:text-[40px]"></i></figure>
