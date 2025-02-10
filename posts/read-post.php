@@ -87,6 +87,8 @@ if ($posts) {
                         <!-- <button
                             class="bg-green-600 text-white px-3 py-1 text-xs md:text-sm rounded-md hover:bg-green-600">Gerenciar
                             Vacinas</button> -->
+                        <a href="../stocks/update-stock.php"
+                            class="bg-green-500 text-white px-3 py-1 text-xs md:text-sm rounded-md hover:bg-green-600">Gerenciar estoque</a>
                         <a href="../posts/update-post.php?id=<?= $post['id']; ?>"
                             class="bg-blue-500 text-white px-3 py-1 text-xs md:text-sm rounded-md hover:bg-blue-600">Editar</a>
                         <a href="../posts/delete-post.php?id=<?= $post['id']; ?>"
