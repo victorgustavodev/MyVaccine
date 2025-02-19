@@ -2,8 +2,6 @@
 
 session_start();
 
-
-
 require_once '../routes/db-connection.php';
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -110,14 +108,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
                     <div class="flex flex-col gap-2 w-1/2">
                         <label for="cpf">CPF:</label>
-                        <input type="text" name="cpf" id="cpf" class="border-2 p-2 2xl:p-3 rounded-lg"
+                        <input type="text" name="cpf" id="cpf" maxlength="11" class="border-2 p-2 2xl:p-3 rounded-lg"
                             placeholder="Digite seu CPF" oninput="formatCPF(this)" required />
                     </div>
 
                     <!-- Telefone -->
                     <div class="flex flex-col gap-2 w-1/2">
                         <label for="telephone">Telefone:</label>
-                        <input type="text" name="telephone" id="telephone" class="border-2 p-2 2xl:p-3 rounded-lg"
+                        <input type="text" name="telephone" maxlength="11" id="telephone" class="border-2 p-2 2xl:p-3 rounded-lg"
                             placeholder="(00) 00000-0000" required maxlength="15" oninput="formatPhone(this)" />
                     </div>
                 </div>
