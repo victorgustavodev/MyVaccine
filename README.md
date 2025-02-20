@@ -74,7 +74,6 @@ Este projeto está licenciado sob a Licença MIT. Consulte o arquivo [📜 LICEN
 - Hatus Luiz
 - Rafael José
 - Luiz Fernando
-- Jailson da Silva
 
 
 <!--Desenvolvido por [Victor Gustavo](https://github.com/victorgustavodev).-->
