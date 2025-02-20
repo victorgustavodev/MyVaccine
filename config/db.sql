@@ -21,7 +21,7 @@ CREATE TABLE posts (
     name VARCHAR(100) NOT NULL,
     address VARCHAR(100) NOT NULL,
     city VARCHAR(50) NOT NULL,
-    state VARCHAR(3) NOT NULL
+    state VARCHAR(2) NOT NULL
 );
 
 -- Tabela de vacinas
@@ -32,11 +32,7 @@ CREATE TABLE vaccines (
     max_age INT DEFAULT NULL, 
     validate DATE NOT NULL, 
     contraindications TEXT, 
-    created_by INT NOT NULL, 
-    updated_by INT, 
-    date_up TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (created_by) REFERENCES users(id),
-    FOREIGN KEY (updated_by) REFERENCES users(id) ON UPDATE CASCADE ON DELETE SET NULL
+    date_up TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
 -- Tabela de estoque de vacinas por posto

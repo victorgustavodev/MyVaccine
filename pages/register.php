@@ -11,8 +11,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $telephone = trim($_POST['telephone']);
     $dob = $_POST['dob'];
     $address = trim($_POST['address']);
-    $password = trim($_POST['password']);
+    $password = $_POST['password'];
     $confirm_password = trim($_POST['confirm-password']);
+    $hashed_password = password_hash($password, PASSWORD_BCRYPT);
 
     // Validação básica
     if (empty($name) || empty($email) || empty($cpf) || empty($telephone) || empty($dob) || empty($address) || empty($password) || empty($confirm_password)) {
@@ -49,7 +50,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     // Insere o novo usuário
     $stmt = $pdo->prepare("INSERT INTO users (name, email, cpf, password, dob, address, telephone) VALUES (?, ?, ?, ?, ?, ?, ?)");
-    if ($stmt->execute([$name, $email, $cpf, $password, $dob, $address, $telephone])) {
+    if ($stmt->execute([$name, $email, $cpf, $hashed_password, $dob, $address, $telephone])) {
         // echo "Cadastro realizado com sucesso!";
         echo "<script>
         alert('Cadastro realizado com sucesso!');
@@ -86,7 +87,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <div class="w-full h-full flex h-[92%]">
         <!-- left login -->
         <section class="flex justify-center items-center lg:w-1/2">
-            <form method="POST" class="text-[12px] 2xl:text-base flex flex-col gap-2 2xl:gap-3 w-full lg:w-4/6 justify-center my-10 2xl:my-[0px]">
+            <form method="POST"
+                class="text-[12px] 2xl:text-base flex flex-col gap-2 2xl:gap-3 w-full lg:w-4/6 justify-center my-10 2xl:my-[0px]">
                 <h1 class="text-xl 2xl:text-2xl font-semibold">Cadastro</h1>
 
                 <!-- Nome Completo -->
@@ -115,8 +117,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     <!-- Telefone -->
                     <div class="flex flex-col gap-2 w-1/2">
                         <label for="telephone">Telefone:</label>
-                        <input type="text" name="telephone" maxlength="11" id="telephone" class="border-2 p-2 2xl:p-3 rounded-lg"
-                            placeholder="(00) 00000-0000" required maxlength="15" oninput="formatPhone(this)" />
+                        <input type="text" name="telephone" maxlength="11" id="telephone"
+                            class="border-2 p-2 2xl:p-3 rounded-lg" placeholder="(00) 00000-0000" required
+                            maxlength="15" oninput="formatPhone(this)" />
                     </div>
                 </div>
 
@@ -143,8 +146,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 <!-- Confirmar Senha -->
                 <div class="flex flex-col gap-2">
                     <label for="confirm-password">Confirmar Senha:</label>
-                    <input type="password" name="confirm-password" id="confirm-password" class="border-2 p-2 2xl:p-3 rounded-lg"
-                        placeholder="Confirme sua senha" required />
+                    <input type="password" name="confirm-password" id="confirm-password"
+                        class="border-2 p-2 2xl:p-3 rounded-lg" placeholder="Confirme sua senha" required />
                 </div>
 
                 <!-- Botões -->
@@ -161,11 +164,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         </section>
 
         <!-- right login -->
-        <div class="flex lg:w-1/2 hidden lg:block" style="
-      background-image: url(../assets/img/bg-login.png);
-      background-repeat: no-repeat;
-      background-size: cover;
-    "></div>
+        <div class="flex lg:w-1/2 hidden lg:block bg-gradient-to-r from-blue-950 to-blue-900"></div>
     </div>
 
     <script src="../assets//script/script.js"></script>
