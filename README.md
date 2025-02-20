@@ -67,6 +67,8 @@ Este projeto está licenciado sob a Licença MIT. Consulte o arquivo [📜 LICEN
 
 ---
 
+![Link para o diagrama](https://excalidraw.com/#json=_x42p5K-MXuhpgIOF6DGf,DkcBQ9oXJ7mMeW2tELUQuw)
+
 ## 💼 Colaboradores
 
 - Victor Gustavo
