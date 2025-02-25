@@ -1,38 +1,51 @@
+CREATE DATABASE my_vaccine;
+USE my_vaccine;
+
+-- Tabela de usuários
 CREATE TABLE users (
-        US_ID INT AUTO_INCREMENT PRIMARY KEY,
-        US_NOME VARCHAR(100) NOT NULL,
-        US_CPF VARCHAR(14) UNIQUE NOT NULL,
-        US_EMAIL VARCHAR(100) NOT NULL,
-        US_SENHA VARCHAR(10) NOT NULL,
-        US_DATA_NASCIMENTO DATA,
-    );
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    role ENUM('admin', 'usuario') NOT NULL DEFAULT 'usuario',
+    name VARCHAR(100) NOT NULL,
+    cpf VARCHAR(14) NOT NULL UNIQUE,
+    password VARCHAR(255) NOT NULL,
+    email VARCHAR(100) NOT NULL UNIQUE,
+    dob DATE NOT NULL,
+    address VARCHAR(255) NOT NULL,
+    telephone VARCHAR(15) NOT NULL,
+    date_up TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
 
-    CREATE TABLE vacinas (
-        VC_ID INT AUTO_INCREMENT PRIMARY KEY,
-        VC_NOME VARCHAR(100) NOT NULL,
-        VC_DESCRICAO TEXT,
-        VC_FAIXA_ETARIA_MINIMA INT,
-        VC_FAIXA_ETARIA_MAXIMA INT,
-        VC_INTER_REFORCO INT,
-        VC_FAB VARCHAR(100) NOT NULL,
-        VC_CONTRA_INDICACAO TEXT
-    )
+-- Tabela de postos de vacinação
+CREATE TABLE posts (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    address VARCHAR(100) NOT NULL,
+    city VARCHAR(50) NOT NULL,
+    state VARCHAR(3) NOT NULL
+);
 
-    CREATE TABLE postos (
-        PS_ID INT AUTO_INCREMENT PRIMARY KEY,
-        PS_NOME VARCHAR(100) NOT NULL,
-        PS_ENDERECO TEXT,
-        PS_TELEFONE VARCHAR(45),
-    )
+-- Tabela de vacinas
+CREATE TABLE vaccines (
+    id INT AUTO_INCREMENT PRIMARY KEY, 
+    name VARCHAR(100) NOT NULL, 
+    min_age INT NOT NULL, 
+    max_age INT DEFAULT NULL, 
+    validate DATE NOT NULL, 
+    contraindications TEXT, 
+    created_by INT NOT NULL, 
+    updated_by INT, 
+    date_up TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (created_by) REFERENCES users(id),
+    FOREIGN KEY (updated_by) REFERENCES users(id) ON UPDATE CASCADE ON DELETE SET NULL
+);
 
-    CREATE TABLE historico_vacinas (
-        HVC_ID INT AUTO_INCREMENT PRIMARY KEY,
-        US_ID INT,
-        VC_ID INT,
-        HVC_DATA_APLICACAO DATE,
-        HVC_DATA_REFORCO DATE,
-        PS_ID INT,
-        FOREIGN KEY (US_ID) REFERENCES users(US_ID),
-        FOREIGN KEY (VC_ID) REFERENCES vacinas(VC_ID),
-        FOREIGN KEY (PS_ID) REFERENCES postos(PS_ID),
-    )
+-- Tabela de estoque de vacinas por posto
+CREATE TABLE stocks (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    post_id INT NOT NULL, -- Posto de vacinação
+    vaccine_id INT NOT NULL, -- Vacina armazenada
+    quantity INT NOT NULL DEFAULT 0, -- Quantidade disponível
+    last_updated TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP, -- Última atualização do estoque
+    FOREIGN KEY (post_id) REFERENCES posts(id) ON DELETE CASCADE,
+    FOREIGN KEY (vaccine_id) REFERENCES vaccines(id) ON DELETE CASCADE
+);
