@@ -2,6 +2,15 @@
 require_once "../routes/db-connection.php";
 session_start();
 
+if (isset($_SESSION['user_role']) && $_SESSION['user_role'] === 'admin') {
+    header('Location: ../posts/read-post.php');
+    exit;
+} elseif (!isset($_SESSION['user_id'])) {
+}
+
+
+// Verifica se o usuário não está logado ou não tem o papel de 'admin'
+
 $erroCpfEmailPassowrd = "<script>alert('CPF, Email ou senha incorretos!'); window.location.href = '';</script>";
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -27,10 +36,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 
     // Verifica a senha
-    // if (!password_verify($password, $user['password'])) {
-    //     echo $erroCpfEmailPassowrd;
-    //     exit;
-    // }
+    if (!password_verify($password, $user['password'])) {
+        echo $erroCpfEmailPassowrd;
+        exit;
+    }
 
     // Define as variáveis de sessão
     $_SESSION['user_id'] = $user['id'];
@@ -40,14 +49,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $_SESSION['user_role'] = $user['role'];
 
     // Redirecionamento com base na função do usuário
-    if ($user['role'] == "usuario") {
+    if ($user['role'] == "admin") {
+        header('Location: ../posts/read-post.php');
+    } else {
         header('Location: ../index.php');
-    exit;
-
-    } else if ($user['role'] = "admin") {
-        echo $erroCpfEmailPassowrd;
-    exit;
-
     }
     exit;
 }
@@ -64,7 +69,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <script src="https://kit.fontawesome.com/c8e307d42e.js" crossorigin="anonymous"></script>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet" />
     <link rel="icon" type="image/x-icon" href="./assets/img/icon.png">
-    <title>Login - My Vaccine</title>
+    <title>Login Admin - My Vaccine</title>
 </head>
 
 <body class="overflow-x-hidden h-screen">
@@ -76,14 +81,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <div class="w-full flex">
 
         <!-- Left login background (imagem) -->
-        <div class="hidden lg:flex lg:w-1/2 bg-gradient-to-r from-blue-900 to-blue-950">
+        <div class="hidden lg:flex lg:w-1/2 bg-gradient-to-r from-[#686E1A] to-[#3D130E]">
         </div>
 
         <!-- Right login form -->
         <section class="flex justify-center items-center w-full lg:w-1/2 h-[92vh]">
-            <form action="login.php" method="POST"
+            <form action="index.php" method="POST"
                 class="text-[12px] 2xl:text-base flex flex-col gap-2 2xl:gap-3 px-6 lg:px-[32px] w-full lg:w-4/6 justify-center">
-                <h1 class="text-xl 2xl:text-2xl font-semibold">Login</h1>
+                <h1 class="text-xl 2xl:text-2xl font-semibold">Login Admin</h1>
 
                 <!-- Campo Login (CPF ou Email) -->
                 <div class="flex flex-col gap-2">
