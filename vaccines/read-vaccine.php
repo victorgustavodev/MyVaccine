@@ -89,12 +89,12 @@ $vaccines = $stmt->fetchAll(PDO::FETCH_ASSOC); // Recupera todos os registros
             <table class="min-w-full max-w-[100vw] bg-white border border-gray-200 shadow-md text-nowrap">
                 <thead>
                     <tr class="bg-[#EEEEEE] text-left text-xs md:text-sm text-[#B5B7C0]">
-                        <th class="font-light py-3 px-6 text-center w-[10%] border-b">ID</th>
-                        <th class="font-light border-b">Nome</th>
+                        <th class="font-light px-6 py-2 border-b">Nome</th>
                         <th class="font-light px-6 py-2 border-b">Idade mín / max</th>
                         <th class="font-light px-6 py-2 border-b">Validade</th>
                         <th class="font-light px-6 py-2 border-b w-full">Contraindicações</th>
                         <th class="font-light px-6 py-2 border-b">Ações</th>
+                        <th class="font-light px-6 py-2 border-b">Data de cadastro</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -106,9 +106,8 @@ $vaccines = $stmt->fetchAll(PDO::FETCH_ASSOC); // Recupera todos os registros
 
                     <?php foreach ($vaccines as $vaccine): ?>
                     <tr class="hover:bg-gray-50 h-full">
-                        <td class="w-[10%] py-3 border-b text-center text-xs md:text-sm text-gray-800">
-                            <?= $vaccine['id'] ?></td>
-                        <td class="py-2 border-b text-xs md:text-sm text-gray-800"><?= $vaccine['name'] ?></td>
+
+                        <td class="py-2  px-6 border-b text-xs md:text-sm text-gray-800"><?= $vaccine['name'] ?></td>
                         <td class="px-6 border-b py-2 text-xs md:text-sm text-gray-800"><?= $vaccine['min_age'] ?>
                             ano(s) / <?= $vaccine['max_age'] ?> anos</td>
                         <td class="px-6 border-b py-2 text-xs md:text-sm text-gray-800"><?= $vaccine['validate'] ?></td>
@@ -126,6 +125,12 @@ $vaccines = $stmt->fetchAll(PDO::FETCH_ASSOC); // Recupera todos os registros
                                     Excluir <i class="fa-solid fa-trash"></i>
                                 </a>
                             </div>
+                        <td class="px-2 py-2 border-b text-xs md:text-sm text-gray-800">
+                            <?php 
+                                $lastUpdated = new DateTime($vaccine['date_up']);
+                                echo $lastUpdated->format('d/m/Y - H:i:s');
+                            ?>
+                        </td>
 
                         </td>
                     </tr>

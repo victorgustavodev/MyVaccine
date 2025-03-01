@@ -31,11 +31,13 @@ $stocks = $stmt_stocks->fetchAll(PDO::FETCH_ASSOC);
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $vaccine_id = $_POST['vaccine_id'];
     $quantity = $_POST['quantity'];
+    $batch = $_POST['batch'];
+    $expiration_date = $_POST['expiration_date'];
 
     // Verifica se os campos não estão vazios
     if (!empty($vaccine_id) && !empty($quantity)) {
-        $stmt = $pdo->prepare("INSERT INTO stocks (post_id, vaccine_id, quantity) VALUES (?, ?, ?)");
-        $stmt->execute([$post_id, $vaccine_id, $quantity]);
+        $stmt = $pdo->prepare("INSERT INTO stocks (post_id, vaccine_id, quantity, batch, expiration_date) VALUES (?, ?, ?, ?, ?)");
+        $stmt->execute([$post_id, $vaccine_id, $quantity, $batch, $expiration_date]);
 
         // Redireciona para a página de administração após a inserção
         header('Location: ../stocks/read-stock.php?id=' . $post_id);
@@ -92,6 +94,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 <!-- Quantidade -->
                 <label class="block text-sm font-medium text-gray-700">Quantidade</label>
                 <input type="number" class="w-full border p-2 rounded-md mb-3" name="quantity" min="1" required>
+
+                <!-- Numero do lote -->
+                <label class="block text-sm font-medium text-gray-700">Lote:</label>
+                <input type="text" class="w-full border p-2 rounded-md mb-3" name="batch" min="1" required>
+
+
+                <!-- Validade do Lote -->
+                <label class="block text-sm font-medium text-gray-700">Validade do lote:</label>
+                <input type="date" class="w-full border p-2 rounded-md mb-3" name="expiration_date" min="1" required>
 
                 <!-- Botão de Enviar -->
                 <div class="w-full flex justify-end">

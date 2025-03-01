@@ -27,12 +27,12 @@ if (isset($_SESSION['user_role']) && $_SESSION['user_role'] === 'admin') {
     <nav class="px-[6%] h-[8vh] flex justify-between items-center shadow-lg navbar text-[#100E3D]">
         <a href="/"><img src="./assets/img/logo.png" alt="logo" class="w-[190px]" /></a>
         <ul class="flex gap-12 uppercase text-[12px] transition-all">
-            
+
             <li class="flex flex-col items-center">
                 <a class="cursor-pointer font-semibold">home</a>
                 <span class="w-2 h-2 bg-blue-500 rounded-full"></span>
             </li>
-            <li class="cursor-pointer hover:font-semibold">postos</li>
+            <li class="cursor-pointer hover:font-semibold"><a href="./pages/posts.php">postos</a></li>
             <li class="cursor-pointer hover:font-semibold">histórico de vacinas</li>
             <li class="cursor-pointer hover:font-semibold">sobre</li>
         </ul>
