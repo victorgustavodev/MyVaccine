@@ -219,7 +219,7 @@ if ($posts) {
             <table class="min-w-full max-w-[100vw] bg-white border border-gray-200 shadow-md text-nowrap">
                 <thead>
                     <tr class="bg-[#EEEEEE] text-left text-xs md:text-sm text-[#B5B7C0]">
-                        <th class="font-light border-b p-2 w-1/2">Nome do Posto
+                        <th class="font-light border-b py-2 px-6">Nome do Posto
                         </th>
                         <th class="font-light p-2 border-b w-1/4">Rua</th>
                         <th class="font-light p-2 border-b w-1/4">Cidade</th>
@@ -234,10 +234,9 @@ if ($posts) {
                         <td colspan="6" class="px-4 py-4 text-center text-gray-400">Nenhum posto cadastrado!</td>
                     </tr>
                     <?php endif; ?>
-
                     <?php foreach ($posts as $post): ?>
                     <tr class="hover:bg-gray-50">
-                        <td class="px-2 py-2 border-b text-xs md:text-sm text-gray-800"><?= $post['name'] ?></td>
+                        <td class="px-6 py-2 border-b text-xs md:text-sm text-gray-800"><?= $post['name'] ?></td>
                         <td class="px-2 py-2 border-b text-xs md:text-sm text-gray-800"><?= $post['address'] ?></td>
                         <td class="px-2 py-2 border-b text-xs md:text-sm text-gray-800"><?= $post['city'] ?></td>
                         <td class="px-2 py-2 border-b text-xs md:text-sm text-gray-800"><?= $post['state'] ?></td>
@@ -260,7 +259,6 @@ if ($posts) {
                                 <i class="fa-solid fa-trash"></i>
                             </button>
                         </td>
-
                     </tr>
                     <?php endforeach; ?>
                 </tbody>

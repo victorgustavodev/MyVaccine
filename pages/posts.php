@@ -7,6 +7,10 @@ if (isset($_SESSION['user_role']) && $_SESSION['user_role'] === 'admin') {
     exit;
 }
 
+if (!isset($_SESSION['user_id'])) {
+    header('Location: ./login.php');
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -28,14 +32,13 @@ if (isset($_SESSION['user_role']) && $_SESSION['user_role'] === 'admin') {
         <a href="/"><img src="../assets/img/logo.png" alt="logo" class="w-[190px]" /></a>
         <ul class="flex gap-12 uppercase text-[12px] transition-all">
 
-                <a href="../index.php" class="cursor-pointer hover:font-semibold">home</a>
+            <a href="../index.php" class="cursor-pointer hover:font-semibold">home</a>
 
             <li class="flex flex-col items-center">
                 <a class="cursor-pointer font-semibold">postos</a>
                 <span class="w-2 h-2 bg-blue-500 rounded-full"></span>
             </li>
             <li class="cursor-pointer hover:font-semibold">histórico de vacinas</li>
-            <li class="cursor-pointer hover:font-semibold">sobre</li>
         </ul>
 
         <?php if(isset($_SESSION['user_id'])): ?>
@@ -56,20 +59,15 @@ if (isset($_SESSION['user_role']) && $_SESSION['user_role'] === 'admin') {
     </nav>
 
     <body>
-        <main class="h-[70vh] flex justify-center px-[6%] gap-[32px] my-[4rem">
+        <main class="h-[70vh] flex flex-col px-[6%] gap-[32px] my-[4rem] items-center">
 
-            <div class="flex flex-col justify-center gap-6 max-w-[640px]">
-                <h1 class="font-bold text-[40px]">Visualizar os postos de saúdes mais próximos!!!</h1>
-                <input class="p-3 border-2 border-black" type="text" name="" id=""> 
-               </div>
-
-            <div class="flex justify-center items-center">
-                <img src="../assets/img/vetor-main.jpg" alt="" class="max-w-[700px] max-h-[467px]">
+            <div class="w-[600px] flex flex-col gap-3">
+                <h1 class="text-[24px] text-center font-bold">Pesquisar postos de saúde</h1>
+                <input class="text-[16px] w-full p-3 border-[1px] rounded-[16px] border-black" type="text" placeholder="Insira o estado que deseja pesquisar. Ex: SP ">
             </div>
-        </main>
 
-
-    <script src="../assets/js/index.js"></script>
-</body>
+        </main <script src="../assets/js/index.js">
+        </script>
+    </body>
 
 </html>

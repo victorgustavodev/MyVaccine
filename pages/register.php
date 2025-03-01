@@ -79,12 +79,71 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 <body class="overflow-x-hidden 2xl:h-screen">
 
-    <nav class="px-[6%] h-[8vh] 2xl:h-[8%] flex justify-between items-center navbar text-[#100E3D] bg-white shadow-md">
-        <a href="../index.php"><img src="../assets/img/logo.png" alt="logo" class="w-[190px]" /></a>
+    <nav class="px-[6%] h-[8vh] flex justify-between items-center shadow-lg navbar text-[#100E3D] relative">
+        <a href="/"><img src="../assets/img/logo.png" alt="logo" class="w-[190px]" /></a>
+
+        <!-- Desktop Menu -->
+        <div class="hidden md:flex justify-between w-full">
+            <ul class="flex md:gap-12 items-center uppercase text-[12px] transition-all mx-auto">
+                <li class="cursor-pointer hover:font-semibold">
+                    <a class="cursor-pointer ">home</a>
+
+                </li>
+                <li class="cursor-pointer hover:font-semibold"><a href="./pages/posts.php">postos</a></li>
+                <li class="cursor-pointer hover:font-semibold">histórico de vacinas</li>
+                <li class="cursor-pointer hover:font-semibold">sobre</li>
+            </ul>
+
+            <?php if(isset($_SESSION['user_id'])): ?>
+            <div class="flex items-center gap-4">
+                <span class="text-gray-700 text-sm font-semibold">Olá,
+                    <?= htmlspecialchars($_SESSION['name']); ?>!</span>
+                <a href="./routes/logout.php"
+                    class="bg-red-500 text-white px-4 py-2 text-xs md:text-sm rounded-md hover:bg-red-600 cursor-pointer">
+                    Sair
+                </a>
+            </div>
+            <?php else: ?>
+            <a href="./pages/login.php"
+                class="bg-blue-500 text-white px-4 py-2 text-xs md:text-sm rounded-md hover:bg-blue-600 cursor-pointer">
+                Login
+            </a>
+            <?php endif; ?>
+        </div>
+
+        <!-- Mobile Menu Button -->
+        <button class="block md:hidden" onclick="toggleMenu()">
+            <i class="fa-solid fa-bars text-xl"></i>
+        </button>
+
+        <!-- Mobile Menu -->
+        <div id="mobileMenu"
+            class="hidden absolute top-[8vh] left-0 w-full bg-white shadow-md md:hidden flex flex-col items-center p-4">
+            <ul class="flex flex-col items-center gap-4 text-[14px]">
+                <li class="cursor-pointer font-semibold"><a href="#">Home</a></li>
+                <li class="cursor-pointer hover:font-semibold"><a href="./pages/posts.php">Postos</a></li>
+                <li class="cursor-pointer hover:font-semibold">Histórico de Vacinas</li>
+                <li class="cursor-pointer hover:font-semibold">Sobre</li>
+            </ul>
+
+            <!-- Espaço entre o menu e o botão -->
+            <div class="mt-4">
+                <?php if(isset($_SESSION['user_id'])): ?>
+                <a href="./routes/logout.php"
+                    class="bg-red-500 text-white px-4 py-2 text-sm rounded-md hover:bg-red-600 cursor-pointer">
+                    Sair
+                </a>
+                <?php else: ?>
+                <a href="./pages/login.php"
+                    class="bg-blue-500 text-white px-4 py-2 text-sm rounded-md hover:bg-blue-600 cursor-pointer">
+                    Login
+                </a>
+                <?php endif; ?>
+            </div>
+        </div>
     </nav>
 
-
-    <div class="w-full h-full flex h-[92%]">
+    <div class="w-full h-full flex h-[92%] justify-center">
         <!-- left login -->
         <section class="flex justify-center items-center lg:w-1/2">
             <form method="POST"
@@ -168,7 +227,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     </div>
 
     <script src="../assets//script/script.js"></script>
-
+    <script>
+    function toggleMenu() {
+        document.getElementById('mobileMenu').classList.toggle('hidden');
+    }
+    </script>
 </body>
 
 </html>

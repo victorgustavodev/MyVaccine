@@ -1,7 +1,6 @@
 // Recarregar página
-
-function reloadPage() {
-    window.location.reload();
+function toggleMenu() {
+    document.getElementById('mobileMenu').classList.toggle('hidden');
 }
 
 // FUNÇÃO DELETAR POSTO
