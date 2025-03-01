@@ -1,12 +1,12 @@
 <?php
-    session_start();
-    
-    
-if (!isset($_SESSION['user_id']) || $_SESSION['user_role'] === 'admin') {
+
+session_start();
+
+if (isset($_SESSION['user_role']) && $_SESSION['user_role'] === 'admin') {
     header('Location: ./admin');
-     exit;
- }
- 
+    exit;
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -17,6 +17,7 @@ if (!isset($_SESSION['user_id']) || $_SESSION['user_role'] === 'admin') {
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://kit.fontawesome.com/c8e307d42e.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="./assets/style/style.css">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet" />
     <link rel="icon" type="image/x-icon" href="./assets/img/icon.png">
     <title>My Vaccine</title>
@@ -25,73 +26,148 @@ if (!isset($_SESSION['user_id']) || $_SESSION['user_role'] === 'admin') {
 <body class="overflow-x-hidden text-[#100E3D]">
     <nav class="px-[6%] h-[8vh] flex justify-between items-center shadow-lg navbar text-[#100E3D]">
         <a href="/"><img src="./assets/img/logo.png" alt="logo" class="w-[190px]" /></a>
-        <div class="flex gap-[32px] text-[16px]">
-            <!-- NAVBAR -->
+        <ul class="flex gap-12 uppercase text-[12px] transition-all">
+            
+            <li class="flex flex-col items-center">
+                <a class="cursor-pointer font-semibold">home</a>
+                <span class="w-2 h-2 bg-blue-500 rounded-full"></span>
+            </li>
+            <li class="cursor-pointer hover:font-semibold">postos</li>
+            <li class="cursor-pointer hover:font-semibold">histórico de vacinas</li>
+            <li class="cursor-pointer hover:font-semibold">sobre</li>
+        </ul>
 
-            <?php if (isset($_SESSION['user_id'])): ?>
-            <div class="flex gap-4">
-                <p><i class="fa-solid fa-user"></i><span class="font-bold">
-                        <?= htmlspecialchars($_SESSION['name']); ?></span> </p>
-                <a href="./routes/logout.php" class="font-bold text-red-500">Sair da conta</a>
-            </div>
-            <?php else: ?>
-            <a href="./pages/login.php" class="border-[1px] rounded-md border-black text-black px-4 py-2">Login</a>
-            <?php endif; ?>
-
+        <?php if(isset($_SESSION['user_id'])): ?>
+        <div class="flex items-center gap-4">
+            <span class="text-gray-700 text-sm font-semibold">Olá,
+                <?= htmlspecialchars($_SESSION['name']); ?>!</span>
+            <a href="./routes/logout.php"
+                class="bg-red-500 text-white px-4 py-2 text-xs md:text-sm rounded-md hover:bg-red-600 cursor-pointer">
+                Sair
+            </a>
         </div>
+        <?php else: ?>
+        <a href="./pages/login.php"
+            class="bg-blue-500 text-white px-4 py-2 text-xs md:text-sm rounded-md hover:bg-blue-600 cursor-pointer">
+            Login
+        </a>
+        <?php endif; ?>
     </nav>
 
-    <main class="w-full flex items-center flex-col">
-        <section class="max-w-[1200px] flex justify-center items-center gap-[180px] my-10">
-            <div class="w-2/3 flex flex-col gap-[24px]">
-                <h1 class="text-[24px] 2xl:text-[58px] font-bold 2xl:mt-10 uppercase">conheça mais sobre nosso sistema
-                </h1>
+    <body>
+        <main class="h-[70vh] flex justify-center px-[6%] gap-[32px] my-[4rem">
 
-                <p class="text-4 2xl:text-[20px]">O <span class="font-bold">MyVaccine</span> é uma plataforma digital
-                    destinada a
-                    facilitar o acesso, o agendamento e o acompanhamento das vacinas públicas. O sistema visa otimizar a
-                    gestão de campanhas de vacinação, promovendo a educação em saúde e melhorando a comunicação entre
-                    cidadãos e unidades de saúde.</p>
-
+            <div class="flex flex-col justify-center gap-6 max-w-[640px]">
+                <h1 class="font-bold text-[40px]">Experienced <span class="text-blue-400">mobile and web</span>
+                    applications and website builders measuring.</h1>
+                <p class="text-gray-400">KODEX TECHNOLOGY (PVT) LTD is a team of experienced mobile and web applications
+                    and website builders measuring dozens of completed projects. We build and develop mobile
+                    applications for several top platforms, including Android & IOS.</p>
+                <div class="transition-all">
+                    <button
+                        class="bg-blue-500 text-white px-8 py-2 text-xs md:text-sm rounded-md hover:bg-white border-[1px] border-white hover:border-blue-500 hover:text-blue-500 cursor-pointer">Contact
+                        us</button>
+                </div>
             </div>
 
-            <div class="w-1/3 flex justify-center items-center">
-                <figure>
-                    <img src="./assets/img/zeGotinha.png" class="w-[200px] h-[200px] 2xl:w-[300px] 2xl:h-[300px]"
-                        alt="imagem do zé gotinha">
-                </figure>
+            <div class="flex justify-center items-center">
+                <img src="./assets/img/vetor-main.jpg" alt="" class="max-w-[700px] max-h-[467px]">
             </div>
+        </main>
+
+        <section class="px-[6%] py-[4rem]">
+            <ul class="flex gap-[80px] justify-center">
+
+                <li class="flex gap-4 justify-center items-center">
+                    <img src="./assets/img/check-heart-icon.png" alt="">
+                    <span class="flex flex-col gap-1">
+                        <p class="font-semibold text-[20px]">Web Application</p>
+                        <p class="text-[15px] text-gray-400">Web Application Web</p>
+                    </span>
+                </li>
+                <li class="flex gap-4 justify-center items-center">
+                    <img src="./assets/img/syringe-vaccine-icon.png" alt="">
+                    <span class="flex flex-col gap-1">
+                        <p class="font-semibold text-[20px]">Web Application</p>
+                        <p class="text-[15px] text-gray-400">Web Application Web</p>
+                    </span>
+                </li>
+                <li class="flex gap-4 justify-center items-center">
+                    <img src="./assets/img/health-check-icon.png" alt="">
+                    <span class="flex flex-col gap-1">
+                        <p class="font-semibold text-[20px]">Web Application</p>
+                        <p class="text-[15px] text-gray-400">Web Application Web</p>
+                    </span>
+                </li>
+            </ul>
         </section>
 
-        <section
-            class="max-w-[800px] 2xl:max-w-[1200px] flex justify-center items-center gap-[90px] 2xl:gap-[180px] my-10 transition-all">
-            <div
-                class="flex flex-col gap-2 px-4 py-2 2xl:px-8 2xl:py-6 text-center justify-center w-4/6 shadow-md rounded-[8px] h-[200px] border-[1px]">
-                <figure><i class="fa-solid fa-address-book text-[24px] 2xl:text-[40px]"></i></figure>
-                <h3 class="text-md 2xl:text-[20px] font-bold">Cadastro de Dependentes</h3>
-                <p class="text-xs">Cadastre seus dependentes e acompanhe suas vacinas.</p>
+        <!-- image in right -->
+
+        <section class="py-[2rem] flex justify-center">
+            <div class="w-[1252px] flex justify-between items-center">
+                <div class="flex flex-col gap-8 max-w-[516px] pr-8">
+                    <h1 class="font-bold text-[30px]"><span class="text-blue-400">Lorem Ipsum</span> is simply dummy
+                        text of
+                        the printing. </h1>
+                    <p class="text-[16px]">KODEX TECHNOLOGY (PVT) LTD is a team of experienced mobile and web
+                        applications
+                        and website builders
+                        measuring dozens of completed projects. We build and develop mobile applications for several top
+                        platforms, including Android & IOS. </p>
+                </div>
+
+                <img src="./assets/img/cellphone.png" alt="">
             </div>
 
-            <div
-                class="flex flex-col gap-2 px-4 py-2 2xl:px-8 2xl:py-6 text-center justify-center w-4/6 shadow-md rounded-[8px] h-[200px] border-[1px]">
-                <figure><i class="fa-regular fa-hospital text-[24px] 2xl:text-[40px]"></i></figure>
-                <h3 class="text-md 2xl:text-[20px] font-bold">Postos de vacinação</h3>
-                <p class="text-xs">Localização dos postos de saúde próximos da sua casa.</p>
-            </div>
-
-            <div
-                class="flex flex-col gap-2 px-4 py-2 2xl:px-8 2xl:py-6 text-center justify-center w-4/6 shadow-md rounded-[8px] h-[200px] border-[1px]">
-                <figure><i class="fa-solid fa-syringe text-[24px] 2xl:text-[40px]"></i></figure>
-                <h3 class="text-md 2xl:text-[20px] font-bold">Cartilha de Vacinação</h3>
-                <p class="text-xs">Informações sobre vacinas, sequência e datas de reforço.</p>
-            </div>
         </section>
 
-    </main>
+        <!-- image in left -->
 
-    <footer class="w-full text-center text-[10px]">Copyright © 2025. MyVaccine. Todos os direitos reservados.</footer>
+        <section class="py-[2rem] flex justify-center">
+            <div class="w-[1252px] flex justify-between items-center">
 
-    <script src="../../assets/js/script.js"></script>
+
+                <figure class="w-full"><img src="./assets/img/cellphone-2.png" alt=""></figure>
+
+                <div class="flex flex-col gap-8 max-w-[516px] pl-8">
+                    <h1 class="font-bold text-[30px]"><span class="text-blue-400">Lorem Ipsum</span> is simply dummy
+                        text of
+                        the printing. </h1>
+                    <p class="text-[16px]">KODEX TECHNOLOGY (PVT) LTD is a team of experienced mobile and web
+                        applications
+                        and website builders
+                        measuring dozens of completed projects. We build and develop mobile applications for several top
+                        platforms, including Android & IOS. </p>
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- image in right -->
+
+        <section class="py-[2rem] flex justify-center">
+            <div class="w-[1252px] flex justify-between items-center">
+                <div class="flex flex-col gap-8 max-w-[516px] pr-8">
+                    <h1 class="font-bold text-[30px]"><span class="text-blue-400">Lorem Ipsum</span> is simply dummy
+                        text of
+                        the printing. </h1>
+                    <p class="text-[16px]">KODEX TECHNOLOGY (PVT) LTD is a team of experienced mobile and web
+                        applications
+                        and website builders
+                        measuring dozens of completed projects. We build and develop mobile applications for several top
+                        platforms, including Android & IOS. </p>
+                </div>
+
+                <img src="./assets/img/cellphone.png" alt="">
+            </div>
+
+        </section>
+
+    </body>
+
+    <script src="./assets/js/index.js"></script>
 </body>
 
 </html>

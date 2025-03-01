@@ -71,7 +71,7 @@ if ($posts) {
             <span class="uppercase text-xs text-gray-300 font-semibold">config</span>
 
             <!-- configs -->
-            <a href="">
+            <a href="../config/config.php">
                 <i class="fa-solid fa-gear text-[20px] text-gray-400 hover:text-black transition all"></i>
             </a>
 
@@ -253,12 +253,12 @@ if ($posts) {
                             </a>
 
                             <button
-                                class="text-blue-500 border-blue-500 border-2 hover:bg-blue-500 hover:text-white px-3 py-1 rounded-md"
+                                class="h-full border-blue-500 border-2 text-blue-500 px-3 py-1 md:text-sm rounded-md transition all hover:bg-blue-500 hover:text-white flex gap-2 items-center"
                                 onclick="openEditModal(<?= $post['id']; ?>)">Editar <i class="fa-solid fa-pencil"></i>
                             </button>
 
                             <button
-                                class="border-red-500 border-2 text-red-500 hover:bg-red-500 hover:text-white px-3 py-1 rounded-md"
+                                class="h-full border-red-500 border-2 text-red-500 px-3 py-1 md:text-sm rounded-md transition all hover:bg-red-500 hover:text-white flex gap-2 items-center"
                                 onclick="excluirPost(<?=$post['id'];?>)">Excluir
                                 <i class="fa-solid fa-trash"></i>
                             </button>

@@ -9,22 +9,15 @@ if (!isset($_SESSION['user_id']) || $_SESSION['user_role'] !== 'admin') {
     exit;
 }
 
-$post_id = $_GET['id'];
+$post_id = $_GET['id']; // Obtém o ID do posto pela URL
 
-// Obtém o ID do posto pela URL
-if (!isset($_GET['id']) || !is_numeric($_GET['id'])) {
+// Verifica se o ID do posto é válido
+if (!isset($post_id) || !is_numeric($post_id)) {
     die("Posto não encontrado.");
 }
 
-$id = (int) $_GET['id']; // Converte para inteiro para evitar SQL Injection
-
-
-// Obtém o ID do post a partir da URL usando o método GET
-$id = $_GET['id'];
-
-
-// Busca o nome do posto
-$stmt_post = $pdo->prepare("SELECT name FROM posts WHERE id = ?");
+// Busca o posto de vacinação
+$stmt_post = $pdo->prepare("SELECT id, name FROM posts WHERE id = ?");
 $stmt_post->execute([$post_id]);
 $post = $stmt_post->fetch(PDO::FETCH_ASSOC);
 
@@ -35,7 +28,7 @@ if (!$post) {
 
 // Busca as vacinas disponíveis no posto
 $stmt_stocks = $pdo->prepare("
-    SELECT v.name AS vaccine_name, s.quantity 
+    SELECT v.name AS vaccine_name, s.quantity, s.batch, s.expiration_date 
     FROM stocks s
     INNER JOIN vaccines v ON s.vaccine_id = v.id
     WHERE s.post_id = ?
@@ -52,65 +45,49 @@ $stocks = $stmt_stocks->fetchAll(PDO::FETCH_ASSOC);
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="style.css" />
-    <script src="https://kit.fontawesome.com/c8e307d42e.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="../assets/style/style.css" />
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet" />
     <link rel="icon" type="image/x-icon" href="./assets/img/icon.png">
     <title>Estoque de Vacinas - <?= htmlspecialchars($post['name']) ?></title>
 </head>
 
-<body class="h-screen">
+<body class="bg-gray-100 h-screen flex">
 
-    <navbar class="px-[6%] h-[8%] flex justify-between items-center navbar text-[#100E3D] bg-white shadow-md">
-        <a href="../index.php"><img src="../assets/img/logo.png" alt="logo" class="w-[190px]" /></a>
-        <div class="flex gap-[64px] text-[16px]">
-            <ul class="flex gap-4">
-                <li>
-                    <p class="font-bold">Modo Admin</p>
-                </li>
-                <li><a href="../routes/logout.php" class="font-bold text-red-500">Sair</a></li>
-            </ul>
+    <nav class="flex flex-col justify-between p-5 items-center border-r-2">
+        <div class="flex flex-col items-center gap-4">
+            <a href="../posts/read-post.php"><img src="../assets/img/logo-mobile.png" class="w-[36px]" alt="logo my-vaccine"></a>
+            <!-- ... (menu de navegação) ... -->
         </div>
-    </navbar>
+        <a href="../admin/logout-admin.php">
+            <i class="fa-solid fa-arrow-right-from-bracket text-[20px] text-red-400 hover:text-red-600 transition all"></i>
+        </a>
+    </nav>
 
-    <main class="flex w-screen h-[92%] items-center justify-center">
-        <div class="bg-white w-[90%] md:w-[50%] p-6 rounded-lg shadow-lg">
-            <h2 class="text-lg font-bold mb-4">Estoque de Vacinas - <?= htmlspecialchars($post['name']) ?></h2>
-
-
-            <?php if (count($stocks) > 0): ?>
-            <table class="w-full border-collapse border border-gray-300">
+    <section class="w-[90vw] flex justify-center">
+        <div class="w-[70%] flex flex-col gap-[5vh] mt-[5vh] mx-[5vw]">
+            <h1 class="text-xl md:text-3xl">Gerenciar Estoque - <?= htmlspecialchars($post['name']) ?></h1>
+            <table>
                 <thead>
-                    <tr class="bg-gray-200">
-                        <th class="border border-gray-300 p-2 text-left w-1/2">Vacina</th>
-                        <th class="border border-gray-300 p-2 text-left w-1/2">Quantidade disponível</th>
+                    <tr class="flex flex-col text-left text-xs md:text-sm text-[#B5B7C0]">
+                        <th class="font-light pl-4 py-2">Vacina</th>
+                        <th class="font-light px-2 py-2">Quantidade</th>
+                        <th class="font-light px-2 py-2">Lote</th>
+                        <th class="font-light px-2 py-2">Data de Validade</th>
                     </tr>
                 </thead>
                 <tbody>
                     <?php foreach ($stocks as $stock): ?>
-                    <tr>
-                        <td class="border border-gray-300 p-2"><?= htmlspecialchars($stock['vaccine_name']); ?></td>
-                        <td class="border border-gray-300 p-2"><?= $stock['quantity']; ?></td>
-                    </tr>
+                        <tr class="flex flex-col text-sm">
+                            <td class="pl-4 py-2"><?= htmlspecialchars($stock['vaccine_name']) ?></td>
+                            <td class="px-2 py-2"><?= htmlspecialchars($stock['quantity']) ?></td>
+                            <td class="px-2 py-2"><?= htmlspecialchars($stock['batch']) ?></td>
+                            <td class="px-2 py-2"><?= htmlspecialchars($stock['expiration_date']) ?></td>
+                        </tr>
                     <?php endforeach; ?>
                 </tbody>
             </table>
-            <?php else: ?>
-            <p class="text-gray-600">Nenhuma vacina cadastrada neste posto.</p>
-            <?php endif; ?>
-
-            <div class="w-full flex justify-end mt-4 gap-3">
-                <a href="../posts/read-post.php" class="bg-red-500 text-white px-8 py-2 rounded-md hover:bg-red-600">
-                    Voltar
-                </a>
-
-                <a href="create-stock.php?id=<?= $post_id?>"
-                    class="bg-blue-500 text-white px-8 py-2 rounded-md hover:bg-blue-600">
-                    Adicionar Estoque
-                </a>
-            </div>
         </div>
-    </main>
+    </section>
 
 </body>
 

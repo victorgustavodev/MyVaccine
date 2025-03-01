@@ -6,7 +6,7 @@ function reloadPage() {
 
 // FUNÇÃO DELETAR POSTO
 function excluirPost(id) {
-    if (confirm("Tem certeza que deseja excluir este post?")) {
+    if (confirm("Todos os dados vinculados a ele serão apagados. Deseja cotinuar?")) {
         fetch(`delete-post.php?id=${id}`, { method: 'GET' })
         .then(response => response.text())
         .then(data => {
@@ -87,3 +87,4 @@ document.getElementById("editPostForm").addEventListener("submit", function (eve
     })
     .catch(error => console.error("Erro ao atualizar posto:", error));
 });
+

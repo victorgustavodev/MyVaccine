@@ -92,9 +92,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
                 <!-- Campo Login (CPF ou Email) -->
                 <div class="flex flex-col gap-2">
-                    <label for="login">CPF ou Email:</label>
+                    <label for="login">Email:</label>
                     <input type="text" name="login" id="login" class="border-2 p-2 2xl:p-3 rounded-lg"
-                        placeholder="Digite seu CPF ou Email" required />
+                        placeholder="Digite seu Email" required />
                 </div>
 
                 <!-- Campo Senha -->
@@ -113,11 +113,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                         class="bg-[#0B5FFF] text-[12px] 2xl:text-base text-white font-semibold py-2 px-8 2xl:py-4 2xl:px-10 rounded-lg hover:bg-[#074DD2] cursor-pointer">
                         Login
                     </button>
-
-                    <a href="register.php"
-                        class="bg-[#000A2E] text-[12px] 2xl:text-base text-white font-semibold py-2 px-8 2xl:py-4 2xl:px-10 rounded-lg hover:bg-[#1A2C6F]">
-                        Criar conta
-                    </a>
                 </div>
             </form>
         </section>

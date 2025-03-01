@@ -64,7 +64,7 @@ $vaccines = $stmt->fetchAll(PDO::FETCH_ASSOC); // Recupera todos os registros
             <span class="uppercase text-xs text-gray-300 font-semibold">config</span>
 
             <!-- configs -->
-            <a href="">
+            <a href="../config/config.php">
                 <i class="fa-solid fa-gear text-[20px] text-gray-400 hover:text-black transition all"></i>
             </a>
 
@@ -105,23 +105,28 @@ $vaccines = $stmt->fetchAll(PDO::FETCH_ASSOC); // Recupera todos os registros
                     <?php endif; ?>
 
                     <?php foreach ($vaccines as $vaccine): ?>
-                    <tr class="hover:bg-gray-50">
+                    <tr class="hover:bg-gray-50 h-full">
                         <td class="w-[10%] py-3 border-b text-center text-xs md:text-sm text-gray-800">
                             <?= $vaccine['id'] ?></td>
                         <td class="py-2 border-b text-xs md:text-sm text-gray-800"><?= $vaccine['name'] ?></td>
-                        <td class="px-6 border-b py-2 text-xs md:text-sm text-gray-800"><?= $vaccine['min_age'] ?> ano(s) / <?= $vaccine['max_age'] ?> anos</td>
+                        <td class="px-6 border-b py-2 text-xs md:text-sm text-gray-800"><?= $vaccine['min_age'] ?>
+                            ano(s) / <?= $vaccine['max_age'] ?> anos</td>
                         <td class="px-6 border-b py-2 text-xs md:text-sm text-gray-800"><?= $vaccine['validate'] ?></td>
                         <td class="px-6 border-b py-2 text-xs md:text-sm text-gray-800 w-full text-wrap">
-                            <?= $vaccine['contraindications'] ?> Não administrar em imunodeprimidos Não administrar em imunodeprimidos Não administrar em imunodeprimidos Não administrar em imunodeprimidosNão administrar em imunodeprimidosNão administrar em imunodeprimidosNão administrar em imunodeprimidos</td>
-                        <td class="px-2 py-2 border-b text-xs md:text-xs flex flex-col md:flex-row gap-2 items-center justify-center">
-                            <a href="../vaccines/update-vaccine.php?id=<?= $vaccine['id']; ?>"
-                                class="border-blue-500 border-2 text-blue-500 px-3 py-1 md:text-sm rounded-md transition all hover:bg-blue-500 hover:text-white flex gap-2 items-center">
-                                Editar <i class="fa-solid fa-pencil"></i>
-                            </a>
-                            <a href="../vaccines/delete-vaccine.php?id=<?= $vaccine['id']; ?>"
-                                class="border-red-500 border-2 text-red-500 hover:bg-red-500 hover:text-white px-3 py-1 rounded-md">
-                                Excluir <i class="fa-solid fa-trash"></i>
-                            </a>
+                            <?= $vaccine['contraindications'] ?> </td>
+
+                        <td class="px-2 py-2 border-b text-xs md:text-xs">
+                            <div class="flex flex-col md:flex-row gap-2"><a
+                                    href="../vaccines/update-vaccine.php?id=<?= $vaccine['id']; ?>"
+                                    class="h-full border-blue-500 border-2 text-blue-500 px-3 py-1 md:text-sm rounded-md transition all hover:bg-blue-500 hover:text-white flex gap-2 items-center">
+                                    Editar <i class="fa-solid fa-pencil"></i>
+                                </a>
+                                <a href="../vaccines/delete-vaccine.php?id=<?= $vaccine['id']; ?>"
+                                    class="h-full border-red-500 border-2 text-red-500 px-3 py-1 md:text-sm rounded-md transition all hover:bg-red-500 hover:text-white flex gap-2 items-center">
+                                    Excluir <i class="fa-solid fa-trash"></i>
+                                </a>
+                            </div>
+
                         </td>
                     </tr>
                     <?php endforeach; ?>

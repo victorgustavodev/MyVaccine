@@ -41,6 +41,8 @@ CREATE TABLE stocks (
     post_id INT NOT NULL, -- Posto de vacinação
     vaccine_id INT NOT NULL, -- Vacina armazenada
     quantity INT NOT NULL DEFAULT 0, -- Quantidade disponível
+    batch VARCHAR(50) NOT NULL, -- Lote da vacina
+    expiration_date DATE NOT NULL, -- Data de validade da vacina
     last_updated TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP, -- Última atualização do estoque
     FOREIGN KEY (post_id) REFERENCES posts(id) ON DELETE CASCADE,
     FOREIGN KEY (vaccine_id) REFERENCES vaccines(id) ON DELETE CASCADE

@@ -110,7 +110,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
                     <div class="flex flex-col gap-2 w-1/2">
                         <label for="cpf">CPF:</label>
-                        <input type="text" name="cpf" id="cpf" maxlength="11" class="border-2 p-2 2xl:p-3 rounded-lg"
+                        <input type="text" name="cpf" id="cpf" maxlength="14" class="border-2 p-2 2xl:p-3 rounded-lg"
                             placeholder="Digite seu CPF" oninput="formatCPF(this)" required />
                     </div>
 
