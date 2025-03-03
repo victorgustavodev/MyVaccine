@@ -1,3 +1,4 @@
+DROP DATABASE IF EXISTS my_vaccine;
 CREATE DATABASE my_vaccine;
 USE my_vaccine;
 
@@ -46,7 +47,6 @@ CREATE TABLE stocks (
     FOREIGN KEY (post_id) REFERENCES posts(id) ON DELETE CASCADE,
     FOREIGN KEY (vaccine_id) REFERENCES vaccines(id) ON DELETE CASCADE
 );
-
 
 -- Tabela de histórico de vacinação
 CREATE TABLE vaccination_history (
