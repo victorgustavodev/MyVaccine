@@ -35,7 +35,7 @@ if ($posts) {
     <link rel="stylesheet" href="../assets/style/style.css" />
     <script src="https://kit.fontawesome.com/c8e307d42e.js" crossorigin="anonymous"></script>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet" />
-    <link rel="icon" type="image/x-icon" href="./assets/img/icon.png">
+    <link rel="icon" type="image/x-icon" href="../assets/img/icon.png">
     <title>Gerenciamento de Postos</title>
 </head>
 
@@ -56,7 +56,7 @@ if ($posts) {
                     <i class="fa-solid fa-house-medical text-[20px] text-black"></i>
                 </a>
                 <!-- Pacientes -->
-                <a href="#">
+                <a href="../patients/index.php">
                     <i class="fa-solid fa-bed text-[20px] text-gray-400 hover:text-black transition all"></i>
                 </a>
                 <!-- Vacinas -->

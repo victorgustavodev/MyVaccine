@@ -16,7 +16,7 @@ require_once "../routes/db-connection.php";
     <link rel="stylesheet" href="../assets/style/style.css" />
     <script src="https://kit.fontawesome.com/c8e307d42e.js" crossorigin="anonymous"></script>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet" />
-    <link rel="icon" type="image/x-icon" href="./assets/img/icon.png">
+    <link rel="icon" type="image/x-icon" href="../assets/img/icon.png">
     <title>Gerenciamento de Postos</title>
 </head>
 
@@ -75,13 +75,43 @@ require_once "../routes/db-connection.php";
             </div>
 
             <section class="flex flex-col gap-3">
-                <button onclick="alert(`Funcionalidade desabilitada.`)" class="px-6 py-2 border-2 border-red-500 text-red-500 rounded-md hover:text-white hover:bg-red-500 transition-all">Apagar todos os postos</button>
-                <button onclick="alert(`Funcionalidade desabilitada.`)" class="px-6 py-2 border-2 border-red-500 text-red-500 rounded-md hover:text-white hover:bg-red-500 transition-all">Apagar todos os registros de vacina</button>
+                <button onclick="deleteData('delete_posts')"
+                    class="px-6 py-2 border-2 border-red-500 text-red-500 rounded-md hover:text-white hover:bg-red-500 transition-all">
+                    Apagar todos os postos
+                </button>
+                <button onclick="deleteData('delete_vaccination_records')"
+                    class="px-6 py-2 border-2 border-red-500 text-red-500 rounded-md hover:text-white hover:bg-red-500 transition-all">
+                    Apagar todos os registros de vacina
+                </button>
             </section>
+
 
         </div>
     </section>
     <script src="../assets/js/index.js"></script>
+    <script>
+    function deleteData(action) {
+        if (!confirm("Tem certeza que deseja apagar todos os dados? Essa ação não pode ser desfeita!")) {
+            return;
+        }
+
+        fetch("./delete-data.php", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/x-www-form-urlencoded"
+                },
+                body: `action=${action}`
+            })
+            .then(response => response.json())
+            .then(data => {
+                alert(data.message);
+                if (data.success) {
+                    location.reload();
+                }
+            })
+            .catch(error => console.error("Erro:", error));
+    }
+    </script>
 </body>
 
 </html>

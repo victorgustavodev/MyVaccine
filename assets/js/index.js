@@ -87,3 +87,24 @@ document.getElementById("editPostForm").addEventListener("submit", function (eve
     .catch(error => console.error("Erro ao atualizar posto:", error));
 });
 
+function deleteData(action) {
+    if (!confirm("Tem certeza que deseja apagar todos os dados? Essa ação não pode ser desfeita!")) {
+        return;
+    }
+
+    fetch("../config/delete-data.php", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/x-www-form-urlencoded"
+        },
+        body: `action=${action}`
+    })
+    .then(response => response.json())
+    .then(data => {
+        alert(data.message);
+        if (data.success) {
+            location.reload();
+        }
+    })
+    .catch(error => console.error("Erro:", error));
+}

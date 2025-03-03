@@ -3,10 +3,9 @@ USE my_vaccine;
 
 -- Tabela de usuários
 CREATE TABLE users (
-    id INT AUTO_INCREMENT PRIMARY KEY,
+    cpf VARCHAR(14) PRIMARY KEY,
     role ENUM('admin', 'usuario') NOT NULL DEFAULT 'usuario',
     name VARCHAR(100) NOT NULL,
-    cpf VARCHAR(14) NOT NULL UNIQUE,
     password VARCHAR(255) NOT NULL,
     email VARCHAR(100) NOT NULL UNIQUE,
     dob DATE NOT NULL,
@@ -46,4 +45,18 @@ CREATE TABLE stocks (
     last_updated TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP, -- Última atualização do estoque
     FOREIGN KEY (post_id) REFERENCES posts(id) ON DELETE CASCADE,
     FOREIGN KEY (vaccine_id) REFERENCES vaccines(id) ON DELETE CASCADE
+);
+
+
+-- Tabela de histórico de vacinação
+CREATE TABLE vaccination_history (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    user_cpf VARCHAR(14) NOT NULL, -- CPF do usuário (paciente) que recebeu a vacina
+    vaccine_id INT NOT NULL, -- Vacina aplicada
+    post_id INT NOT NULL, -- Posto onde foi aplicada a vacina
+    batch VARCHAR(50) NOT NULL, -- Lote da vacina aplicada
+    application_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP, -- Data da aplicação
+    FOREIGN KEY (user_cpf) REFERENCES users(cpf) ON DELETE CASCADE, -- Paciente
+    FOREIGN KEY (vaccine_id) REFERENCES vaccines(id) ON DELETE CASCADE, -- Id da vacina
+    FOREIGN KEY (post_id) REFERENCES posts(id) ON DELETE CASCADE -- Id do posto
 );

@@ -90,7 +90,7 @@ $vaccines = $stmt->fetchAll(PDO::FETCH_ASSOC); // Recupera todos os registros
                 <thead>
                     <tr class="bg-[#EEEEEE] text-left text-xs md:text-sm text-[#B5B7C0]">
                         <th class="font-light px-6 py-2 border-b">Nome</th>
-                        <th class="font-light px-6 py-2 border-b">Idade mín / max</th>
+                        <th class="font-light px-6 py-2 border-b">Faixa etária</th>
                         <th class="font-light px-6 py-2 border-b">Validade</th>
                         <th class="font-light px-6 py-2 border-b w-full">Contraindicações</th>
                         <th class="font-light px-6 py-2 border-b">Ações</th>
@@ -109,7 +109,7 @@ $vaccines = $stmt->fetchAll(PDO::FETCH_ASSOC); // Recupera todos os registros
 
                         <td class="py-2  px-6 border-b text-xs md:text-sm text-gray-800"><?= $vaccine['name'] ?></td>
                         <td class="px-6 border-b py-2 text-xs md:text-sm text-gray-800"><?= $vaccine['min_age'] ?>
-                            ano(s) / <?= $vaccine['max_age'] ?> anos</td>
+                            - <?= $vaccine['max_age'] ?> anos</td>
                         <td class="px-6 border-b py-2 text-xs md:text-sm text-gray-800"><?= $vaccine['validate'] ?></td>
                         <td class="px-6 border-b py-2 text-xs md:text-sm text-gray-800 w-full text-wrap">
                             <?= $vaccine['contraindications'] ?> </td>

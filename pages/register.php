@@ -73,7 +73,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <link rel="stylesheet" href="style.css" />
     <script src="https://kit.fontawesome.com/c8e307d42e.js" crossorigin="anonymous"></script>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet" />
-    <link rel="icon" type="image/x-icon" href="./assets/img/icon.png">
+    <link rel="icon" type="image/x-icon" href="../assets/img/icon.png">
     <title>Register - My Vaccine</title>
 </head>
 
@@ -104,7 +104,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 </a>
             </div>
             <?php else: ?>
-            <a href="./pages/login.php"
+            <a href="../pages/login.php"
                 class="bg-blue-500 text-white px-4 py-2 text-xs md:text-sm rounded-md hover:bg-blue-600 cursor-pointer">
                 Login
             </a>

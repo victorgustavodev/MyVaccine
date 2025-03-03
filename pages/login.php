@@ -70,7 +70,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 <body class="overflow-x-hidden h-screen">
 
     <nav class="px-[6%] h-[8vh] flex justify-between items-center shadow-lg navbar text-[#100E3D] relative">
-        <a href="/"><img src="../assets/img/logo.png" alt="logo" class="w-[190px]" /></a>
+        <a href="../index.php"><img src="../assets/img/logo.png" alt="logo" class="w-[190px]" /></a>
 
         <!-- Desktop Menu -->
         <ul class="flex gap-12 uppercase text-[12px] transition-all">
@@ -115,7 +115,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     Sair
                 </a>
                 <?php else: ?>
-                <a href="./pages/login.php"
+                <a href="../pages/login.php"
                     class="bg-blue-500 text-white px-4 py-2 text-sm rounded-md hover:bg-blue-600 cursor-pointer">
                     Login
                 </a>
