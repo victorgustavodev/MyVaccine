@@ -132,7 +132,7 @@ $stocks = $stmt_stocks->fetchAll(PDO::FETCH_ASSOC);
 
     </main>
 
-
+<script src="../assets/js/filter.js"></script>
 </body>
 
 </html>
