@@ -4,6 +4,10 @@ session_start();
 
 $erroCpfEmailPassowrd = "<script>alert('CPF, Email ou senha incorretos!'); window.location.href = '';</script>";
 
+if (isset($_SESSION['name'])) {
+    header ('Location: ../index.php');
+}
+
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $login = trim($_POST['login']); // Pode ser CPF ou email
     $password = $_POST['password'];
@@ -27,10 +31,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 
     // Verifica a senha
-    // if (!password_verify($password, $user['password'])) {
-    //     echo $erroCpfEmailPassowrd;
-    //     exit;
-    // }
+    if (!password_verify($password, $user['password'])) {
+        echo $erroCpfEmailPassowrd;
+        exit;
+    }
 
     // Define as variáveis de sessão
     $_SESSION['user_id'] = $user['id'];
@@ -69,7 +73,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 <body class="overflow-x-hidden h-screen">
 
-<nav class="px-[6%] h-[8vh] flex justify-between items-center shadow-lg navbar text-[#100E3D] relative">
+    <nav class="px-[6%] h-[8vh] flex justify-between items-center shadow-lg navbar text-[#100E3D] relative">
         <a href="/"><img src="../assets/img/logo.png" alt="logo" class="md:hidden w-[190px]" /></a>
 
 
@@ -77,7 +81,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         <div class="hidden md:block w-full">
 
             <div class="flex w-full justify-between">
-                <a href="../index.php"><img src="../assets/img/logo.png" alt="logo" class="hidden md:block w-[190px]" /></a>
+                <a href="../index.php"><img src="../assets/img/logo.png" alt="logo"
+                        class="hidden md:block w-[190px]" /></a>
                 <ul class="flex gap-12 uppercase text-[12px] transition-all">
                     <li class="flex flex-col items-center">
                         <a href="./index.php" class="cursor-pointer font-semibold">home</a>
@@ -87,7 +92,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     <li class="cursor-pointer hover:font-semibold">histórico de vacinas</li>
                 </ul>
 
-                <?php if(isset($_SESSION['user_id'])): ?>
+                <?php if(isset($_SESSION['cpf'])): ?>
                 <div class="flex items-center gap-4">
                     <span class="text-gray-700 text-sm font-semibold">Olá,
                         <?= htmlspecialchars($_SESSION['name']); ?>!</span>
@@ -120,7 +125,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 <li class="cursor-pointer hover:font-semibold">Sobre</li>
             </ul>
             <div class="mt-4">
-                <?php if(isset($_SESSION['user_id'])): ?>
+                <?php if(isset($_SESSION['cpf'])): ?>
                 <a href="./routes/logout.php"
                     class="bg-red-500 text-white px-4 py-2 text-sm rounded-md hover:bg-red-600 cursor-pointer">
                     Sair

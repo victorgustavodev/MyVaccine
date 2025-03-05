@@ -7,7 +7,7 @@ if (isset($_SESSION['user_role']) && $_SESSION['user_role'] === 'admin') {
     exit;
 }
 
-if (!isset($_SESSION['user_id'])) {
+if (!isset($_SESSION['cpf'])) {
     header('Location: ./login.php');
 }
 
@@ -54,16 +54,18 @@ if ($posts) {
                         class="hidden md:block w-[190px]" /></a>
                 <ul class="flex gap-12 uppercase text-[12px] transition-all">
                     <li class="cursor-pointer hover:font-semibold">
-                        <a href="./index.php" class="cursor-pointer font-semibold">home</a>
+                        <a href="../index.php" class="cursor-pointer">home</a>
                     </li>
                     <li class="flex flex-col items-center">
-                        <a href="./pages/posts.php" class="cursor-pointer hover:font-semibold">postos de vacinação</a>
+                        <a href="./pages/posts.php" class="cursor-pointer font-semibold">postos de vacinação</a>
                         <span class="w-2 h-2 bg-blue-500 rounded-full"></span>
                     </li>
-                    <li class="cursor-pointer hover:font-semibold">histórico de vacinas</li>
+                    <li class="cursor-pointer hover:font-semibold">
+                        <a href="./vaccines.php" class="cursor-pointer">Histórico de vacinas</a>
+                    </li>
                 </ul>
 
-                <?php if(isset($_SESSION['user_id'])): ?>
+                <?php if(isset($_SESSION['cpf'])): ?>
                 <div class="flex items-center gap-4">
                     <span class="text-gray-700 text-sm font-semibold">Olá,
                         <?= htmlspecialchars($_SESSION['name']); ?>!</span>
@@ -96,7 +98,7 @@ if ($posts) {
                 <li class="cursor-pointer hover:font-semibold">Sobre</li>
             </ul>
             <div class="mt-4">
-                <?php if(isset($_SESSION['user_id'])): ?>
+                <?php if(isset($_SESSION['cpf'])): ?>
                 <a href="./routes/logout.php"
                     class="bg-red-500 text-white px-4 py-2 text-sm rounded-md hover:bg-red-600 cursor-pointer">
                     Sair

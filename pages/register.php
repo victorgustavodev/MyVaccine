@@ -97,7 +97,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     <li class="cursor-pointer hover:font-semibold">histórico de vacinas</li>
                 </ul>
 
-                <?php if(isset($_SESSION['user_id'])): ?>
+                <?php if(isset($_SESSION['cpf'])): ?>
                 <div class="flex items-center gap-4">
                     <span class="text-gray-700 text-sm font-semibold">Olá,
                         <?= htmlspecialchars($_SESSION['name']); ?>!</span>
@@ -130,7 +130,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 <li class="cursor-pointer hover:font-semibold">Sobre</li>
             </ul>
             <div class="mt-4">
-                <?php if(isset($_SESSION['user_id'])): ?>
+                <?php if(isset($_SESSION['cpf'])): ?>
                 <a href="./routes/logout.php"
                     class="bg-red-500 text-white px-4 py-2 text-sm rounded-md hover:bg-red-600 cursor-pointer">
                     Sair

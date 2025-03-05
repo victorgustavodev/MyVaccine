@@ -2,9 +2,8 @@
 
 session_start();
 
-if (isset($_SESSION['user_role']) && $_SESSION['user_role'] === 'admin') {
+if (isset($_SESSION['user_id']) && $_SESSION['user_role'] === 'admin') {
     header('Location: ./admin');
-    exit;
 }
 
 ?>
@@ -33,24 +32,25 @@ if (isset($_SESSION['user_role']) && $_SESSION['user_role'] === 'admin') {
         <div class="hidden md:block w-full">
 
             <div class="flex w-full justify-between">
-                <a href="/"><img src="./assets/img/logo.png" alt="logo" class="hidden md:block w-[190px]" /></a>
+                <a href=""><img src="./assets/img/logo.png" alt="logo" class="hidden md:block w-[190px]" /></a>
                 <ul class="flex gap-12 uppercase text-[12px] transition-all">
                     <li class="flex flex-col items-center">
-                        <a href="./index.php" class="cursor-pointer font-semibold">home</a>
+                        <a href="" class="cursor-pointer font-semibold">home</a>
                         <span class="w-2 h-2 bg-blue-500 rounded-full"></span>
                     </li>
                     <a href="./pages/posts.php" class="cursor-pointer hover:font-semibold">postos de vacinação</a>
                     <li class="cursor-pointer hover:font-semibold">histórico de vacinas</li>
                 </ul>
 
-                <?php if(isset($_SESSION['user_id'])): ?>
+                <?php if (isset($_SESSION['cpf'])): ?>
                 <div class="flex items-center gap-4">
                     <span class="text-gray-700 text-sm font-semibold">Olá,
-                        <?= htmlspecialchars($_SESSION['name']); ?>
-                        <a href="./routes/logout.php"
-                            class="bg-red-500 text-white px-4 py-2 text-xs md:text-sm rounded-md hover:bg-red-600 cursor-pointer">
-                            Sair
-                        </a>
+                        <?= ($_SESSION['name']); ?>
+                    </span>
+                    <a href="./routes/logout.php"
+                        class="bg-red-500 text-white px-4 py-2 text-xs md:text-sm rounded-md hover:bg-red-600 cursor-pointer">
+                        Sair
+                    </a>
                 </div>
                 <?php else: ?>
                 <a href="./pages/login.php"
@@ -58,6 +58,7 @@ if (isset($_SESSION['user_role']) && $_SESSION['user_role'] === 'admin') {
                     Login
                 </a>
                 <?php endif; ?>
+
             </div>
         </div>
 
@@ -76,7 +77,7 @@ if (isset($_SESSION['user_role']) && $_SESSION['user_role'] === 'admin') {
                 <li class="cursor-pointer hover:font-semibold">Sobre</li>
             </ul>
             <div class="mt-4">
-                <?php if(isset($_SESSION['user_id'])): ?>
+                <?php if(isset($_SESSION['cpf'])): ?>
                 <a href="./routes/logout.php"
                     class="bg-red-500 text-white px-4 py-2 text-sm rounded-md hover:bg-red-600 cursor-pointer">
                     Sair
@@ -92,7 +93,7 @@ if (isset($_SESSION['user_role']) && $_SESSION['user_role'] === 'admin') {
     </nav>
 
     <main
-        class="md:h-[70vh] flex flex-col md:flex-row justify-center px-[6%] gap-[32px] md:gap-[64px] lg:gap-[120px] my-[4rem]">
+        class="md:h-[70vh] flex flex-col md:flex-row justify-center px-[6%] gap-[32px] md:gap-[64px] lg:gap-[120px] mt-[4rem]">
         <div class="flex flex-col justify-center gap-2 md:gap-6 max-w-[640px]">
             <h1 class="font-bold text-[16px] md:text-[40px]">Encontre <span class="text-blue-400">postos de
                     vacinação</span> perto de você.</h1>
@@ -109,24 +110,25 @@ if (isset($_SESSION['user_role']) && $_SESSION['user_role'] === 'admin') {
         </div>
 
         <div class="flex justify-center items-center">
-            <img src="./assets/img/vetor-main.jpg" alt="Vacinação" class="w-[250px] max-w-[500px]">
+            <img src="./assets/img/vetor-main.jpg" alt="Vacinação" class="w-[250px]  md:w-[500px]">
         </div>
     </main>
 
-    <section class="px-[6%] pb-[2rem]">
+    <section class="px-[6%] pb-[2rem] md:pb-[4rem] border-b-[1px] border-[#EEE]">
         <ul class="flex justify-evenly flex-col md:flex-row gap-6 md:gap-[40px] justify-center px-[6%]">
             <li class="flex gap-2 md:gap-4 justify-center items-center">
                 <img src="./assets/img/check-heart-icon.png" alt="" class="w-[40px]">
-                <span class="flex flex-col gap-1">
-                    <p class="font-semibold text-[8px] md:text-[14px]">Imunização Segura</p>
+                <span class="flex flex-col">
+                    <p class="font-semibold text-[8px] md:text-[16px]">Imunização Segura</p>
                     <p class="text-[8px] md:text-[12px] text-gray-400">Encontre vacinas recomendadas para você.</p>
                 </span>
             </li>
 
             <li class="flex gap-2 md:gap-4 justify-center items-center">
                 <img src="./assets/img/health-check-icon.png" alt="" class="w-[40px]">
-                <span class="flex flex-col gap-1">
-                    <p class="font-semibold text-[8px] md:text-[14px]">Gestão Inteligente</p>
+
+                <span class="flex flex-col">
+                    <p class="font-semibold text-[8px] md:text-[16px]">Gestão Inteligente</p>
                     <p class="text-[8px] md:text-[12px] text-gray-400">Postos podem atualizar estoques em tempo real.
                     </p>
                 </span>
@@ -134,10 +136,12 @@ if (isset($_SESSION['user_role']) && $_SESSION['user_role'] === 'admin') {
 
             <li class="flex gap-2 md:gap-4 justify-center items-center">
                 <img src="./assets/img/syringe-vaccine-icon.png" alt="" class="w-[40px]">
-                <span class="flex flex-col gap-1">
-                    <p class="font-semibold text-[8px] md:text-[14px]">Histórico de Vacinas</p>
-                    <p class="text-[8px] md:text-[12px] text-gray-400">Acompanhe suas doses e próximas aplicações.</p>
+                <span class="flex flex-col">
+                    <p class="font-semibold text-[8px] md:text-[16px]">Histórico de Vacinas</p>
+                    <p class="text-[8px] md:text-[12px] text-gray-400">Acompanhe suas doses e próximas aplicações.
+                    </p>
                 </span>
+
             </li>
         </ul>
 

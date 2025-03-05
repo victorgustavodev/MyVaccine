@@ -52,7 +52,7 @@ $stocks = $stmt_stocks->fetchAll(PDO::FETCH_ASSOC);
 <body class="overflow-x-hidden text-[#100E3D]">
 
 
-<nav class="px-[6%] h-[8vh] flex justify-between items-center shadow-lg navbar text-[#100E3D] relative">
+    <nav class="px-[6%] h-[8vh] flex justify-between items-center shadow-lg navbar text-[#100E3D] relative">
         <a href="/"><img src="../assets/img/logo.png" alt="logo" class="md:hidden w-[190px]" /></a>
 
 
@@ -60,7 +60,8 @@ $stocks = $stmt_stocks->fetchAll(PDO::FETCH_ASSOC);
         <div class="hidden md:block w-full">
 
             <div class="flex w-full justify-between">
-                <a href="../index.php"><img src="../assets/img/logo.png" alt="logo" class="hidden md:block w-[190px]" /></a>
+                <a href="../index.php"><img src="../assets/img/logo.png" alt="logo"
+                        class="hidden md:block w-[190px]" /></a>
                 <ul class="flex gap-12 uppercase text-[12px] transition-all">
                     <li class="flex flex-col items-center">
                         <a href="./index.php" class="cursor-pointer font-semibold">home</a>
@@ -70,7 +71,7 @@ $stocks = $stmt_stocks->fetchAll(PDO::FETCH_ASSOC);
                     <li class="cursor-pointer hover:font-semibold">histórico de vacinas</li>
                 </ul>
 
-                <?php if(isset($_SESSION['user_id'])): ?>
+                <?php if(isset($_SESSION['cpf'])): ?>
                 <div class="flex items-center gap-4">
                     <span class="text-gray-700 text-sm font-semibold">Olá,
                         <?= htmlspecialchars($_SESSION['name']); ?>!</span>
@@ -103,7 +104,7 @@ $stocks = $stmt_stocks->fetchAll(PDO::FETCH_ASSOC);
                 <li class="cursor-pointer hover:font-semibold">Sobre</li>
             </ul>
             <div class="mt-4">
-                <?php if(isset($_SESSION['user_id'])): ?>
+                <?php if(isset($_SESSION['cpf'])): ?>
                 <a href="./routes/logout.php"
                     class="bg-red-500 text-white px-4 py-2 text-sm rounded-md hover:bg-red-600 cursor-pointer">
                     Sair
@@ -168,7 +169,7 @@ $stocks = $stmt_stocks->fetchAll(PDO::FETCH_ASSOC);
 
     </main>
 
-<script src="../assets/js/filter.js"></script>
+    <script src="../assets/js/filter.js"></script>
 </body>
 
 </html>
