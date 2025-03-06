@@ -2,9 +2,11 @@
 
 O **MyVaccine** é uma plataforma digital destinada a facilitar o acesso, o agendamento e o acompanhamento das vacinas públicas. O sistema visa otimizar a gestão de campanhas de vacinação, promovendo a educação em saúde e melhorando a comunicação entre cidadãos e unidades de saúde.
 
+<!--
 <br><br>
 ![image](https://github.com/user-attachments/assets/745a28de-c486-42d9-893f-6f59a072f7e8)
 <br><br>
+ -->
 
 ## 🛠️ Tecnologias Utilizadas
 [![Techonologies](https://skillicons.dev/icons?i=php,mysql,tailwindcss,js,html,css,figma,git,vscode)](https://skillicons.dev)
