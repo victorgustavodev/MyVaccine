@@ -79,7 +79,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 <body class="overflow-x-hidden 2xl:h-screen">
 
-<nav class="px-[6%] h-[8vh] flex justify-between items-center shadow-lg navbar text-[#100E3D] relative">
+    <nav class="px-[6%] h-[8vh] flex justify-between items-center shadow-lg navbar text-[#100E3D] relative">
         <a href="/"><img src="../assets/img/logo.png" alt="logo" class="md:hidden w-[190px]" /></a>
 
 
@@ -87,14 +87,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         <div class="hidden md:block w-full">
 
             <div class="flex w-full justify-between">
-                <a href="../index.php"><img src="../assets/img/logo.png" alt="logo" class="hidden md:block w-[190px]" /></a>
+                <a href="../index.php"><img src="../assets/img/logo.png" alt="logo"
+                        class="hidden md:block w-[190px]" /></a>
                 <ul class="flex gap-12 uppercase text-[12px] transition-all">
                     <li class="flex flex-col items-center">
-                        <a href="./index.php" class="cursor-pointer font-semibold">home</a>
+                        <a href="../index.php" class="cursor-pointer font-semibold">home</a>
                         <span class="w-2 h-2 bg-blue-500 rounded-full"></span>
                     </li>
-                    <a href="./pages/posts.php" class="cursor-pointer hover:font-semibold">postos de vacinação</a>
-                    <li class="cursor-pointer hover:font-semibold">histórico de vacinas</li>
+                    <li><a href="./posts.php" class="cursor-pointer hover:font-semibold">postos de vacinação</a></li>
+                    <li class="cursor-pointer hover:font-semibold"><a href="./vaccines.php">histórico de vacinas</a>
+                    </li>
                 </ul>
 
                 <?php if(isset($_SESSION['cpf'])): ?>
@@ -147,9 +149,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     <div class="w-full h-full flex h-[92%] justify-center">
         <!-- left login -->
-        <section class="flex justify-center items-center lg:w-1/2">
+        <section class="flex md:justify-center md:items-center w-full lg:w-1/2 h-[92vh]">
             <form method="POST"
-                class="text-[12px] 2xl:text-base flex flex-col gap-2 2xl:gap-3 w-full lg:w-4/6 justify-center my-10 2xl:my-[0px]">
+                class="text-[12px] 2xl:text-base flex flex-col gap-2 2xl:gap-3 px-6 lg:px-[32px] w-full lg:w-4/6 pt-[3rem] md:pt-[0] md:justify-center">
                 <h1 class="text-xl 2xl:text-2xl font-semibold">Cadastro</h1>
 
                 <!-- Nome Completo -->
@@ -168,7 +170,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
                 <div class="flex gap-1 2xl:gap-3 w-full">
                     <!-- CPF -->
-
                     <div class="flex flex-col gap-2 w-1/2">
                         <label for="cpf">CPF:</label>
                         <input type="text" name="cpf" id="cpf" maxlength="14" class="border-2 p-2 2xl:p-3 rounded-lg"
@@ -212,17 +213,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 </div>
 
                 <!-- Botões -->
-
                 <div class="flex w-full text-xs md:text-base text-center sm:text-start mt-5">
-
                     <button type="submit"
                         class="bg-[#0B5FFF] text-[12px] 2xl:text-base text-white font-semibold py-2 px-8 2xl:py-4 2xl:px-10 rounded-lg hover:bg-[#074DD2] cursor-pointer">
                         Cadastrar
                     </button>
-
                 </div>
             </form>
         </section>
+
 
         <!-- right login -->
         <div class="flex lg:w-1/2 hidden lg:block bg-gradient-to-r from-blue-950 to-blue-900"></div>

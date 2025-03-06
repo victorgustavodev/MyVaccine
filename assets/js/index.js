@@ -9,7 +9,7 @@ function excluirPost(id) {
         fetch(`delete-post.php?id=${id}`, { method: 'GET' })
         .then(response => response.text())
         .then(data => {
-            alert("Post excluído com sucesso!");
+            alert("Posto excluído com sucesso!");
             location.reload(); // Atualiza a página sem redirecionar
         })
         .catch(error => console.error('Erro ao excluir:', error));

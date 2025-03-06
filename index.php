@@ -95,8 +95,8 @@ if (isset($_SESSION['user_id']) && $_SESSION['user_role'] === 'admin') {
     <main
         class="md:h-[70vh] flex flex-col md:flex-row justify-center px-[6%] gap-[32px] md:gap-[64px] lg:gap-[120px] mt-[4rem]">
         <div class="flex flex-col justify-center gap-2 md:gap-6 max-w-[640px]">
-            <h1 class="font-bold text-[16px] md:text-[40px]">Encontre <span class="text-blue-400">postos de
-                    vacinação</span> perto de você.</h1>
+            <h1 class="font-bold text-[24px] lg:text-[40px]">Encontre <span class="text-blue-400">postos de
+                    vacinação</span> próximos a você.</h1>
             <p class="text-[10px] md:text-base text-gray-400">O My Vaccine facilita o acesso à vacinação, permitindo que
                 você
                 encontre postos de saúde, consulte vacinas disponíveis e gerencie seu histórico de imunização de forma
@@ -110,35 +110,35 @@ if (isset($_SESSION['user_id']) && $_SESSION['user_role'] === 'admin') {
         </div>
 
         <div class="flex justify-center items-center">
-            <img src="./assets/img/vetor-main.jpg" alt="Vacinação" class="w-[250px]  md:w-[500px]">
+            <img src="./assets/img/vetor-main.jpg" alt="Vacinação" class="w-[250px]  md:w-[500px] md:min-w-[400px]">
         </div>
     </main>
 
-    <section class="px-[6%] pb-[2rem] md:pb-[4rem] border-b-[1px] border-[#EEE]">
+    <section class="px-[6%] py-[2rem] md:pb-[4rem] border-b-[1px] border-[#EEE]">
         <ul class="flex justify-evenly flex-col md:flex-row gap-6 md:gap-[40px] justify-center px-[6%]">
             <li class="flex gap-2 md:gap-4 justify-center items-center">
-                <img src="./assets/img/check-heart-icon.png" alt="" class="w-[40px]">
+                <img src="./assets/img/check-heart-icon.png" alt="" class="w-[30px] md:w-[40px]">
                 <span class="flex flex-col">
                     <p class="font-semibold text-[8px] md:text-[16px]">Imunização Segura</p>
-                    <p class="text-[8px] md:text-[12px] text-gray-400">Encontre vacinas recomendadas para você.</p>
+                    <p class="text-[8px] md:text-[12px] text-gray-400 min-w-[200px]">Encontre vacinas recomendadas para você.</p>
                 </span>
             </li>
 
             <li class="flex gap-2 md:gap-4 justify-center items-center">
-                <img src="./assets/img/health-check-icon.png" alt="" class="w-[40px]">
+                <img src="./assets/img/health-check-icon.png" alt="" class="w-[30px] md:w-[40px]">
 
                 <span class="flex flex-col">
                     <p class="font-semibold text-[8px] md:text-[16px]">Gestão Inteligente</p>
-                    <p class="text-[8px] md:text-[12px] text-gray-400">Postos podem atualizar estoques em tempo real.
+                    <p class="text-[8px] md:text-[12px] text-gray-400 min-w-[200px]">Postos podem atualizar estoques em tempo real.
                     </p>
                 </span>
             </li>
 
             <li class="flex gap-2 md:gap-4 justify-center items-center">
-                <img src="./assets/img/syringe-vaccine-icon.png" alt="" class="w-[40px]">
+                <img src="./assets/img/syringe-vaccine-icon.png" alt="" class="w-[30px] md:w-[40px]">
                 <span class="flex flex-col">
                     <p class="font-semibold text-[8px] md:text-[16px]">Histórico de Vacinas</p>
-                    <p class="text-[8px] md:text-[12px] text-gray-400">Acompanhe suas doses e próximas aplicações.
+                    <p class="text-[8px] md:text-[12px] text-gray-400 min-w-[200px]">Acompanhe suas doses e próximas aplicações.
                     </p>
                 </span>
 
@@ -151,14 +151,14 @@ if (isset($_SESSION['user_id']) && $_SESSION['user_role'] === 'admin') {
     <section class="py-[2rem] flex justify-center">
         <div class="px-[6%] md:w-[1252px] flex flex-col md:flex-row justify-between items-center">
             <div class="flex flex-col gap-3 md:gap-8 min-w-[150px] max-w-[516px] pr-8">
-                <h1 class="font-bold text-[16px] md:text-[30px]"><span class="text-blue-400">Lorem Ipsum</span> is
-                    simply dummy text of the printing.</h1>
-                <p class="text-[10px] md:text-[16px]">KODEX TECHNOLOGY (PVT) LTD is a team of experienced mobile and
-                    web applications and website builders measuring dozens of completed projects. We build and
-                    develop mobile applications for several top platforms, including Android & IOS.</p>
+                <h1 class="font-bold text-[16px] md:text-[30px]">Dados seguros e sempre <span
+                        class="text-blue-400">disponíveis.</span></h1>
+                <p class="text-[10px] md:text-[16px]">O My Vaccine protege suas informações com segurança e
+                    confiabilidade. Todos os dados são armazenados de forma segura, garantindo que você tenha acesso
+                    rápido e confiável sempre que precisar.</p>
             </div>
             <figure>
-                <img src="./assets/img/cellphone.png" alt="" class="w-[150px] md:w-[500px]"">
+                <img src="./assets/img/vetor-section-1.jpg" alt="" class="w-[150px] md:w-[500px]"">
                 </figure>
             </div>
         </section>
@@ -167,17 +167,14 @@ if (isset($_SESSION['user_id']) && $_SESSION['user_role'] === 'admin') {
         <section class=" py-[2rem] flex justify-center">
                 <div class="px-[6%] md:w-[1252px] flex flex-col-reverse md:flex-row justify-between items-center">
                     <figure class="w-1/2 md:w-auto">
-                        <img src="./assets/img/cellphone.png" alt="" class="w-[150px] md:w-[500px]">
+                        <img src="./assets/img/vetor-section-2.png" alt="" class="w-[150px] md:w-[500px]">
                     </figure>
                     <div class="flex flex-col gap-3 md:gap-8 min-w-[150px] max-w-[516px]">
-                        <h1 class="font-bold text-[16px] md:text-[30px]"><span class="text-blue-400">Lorem
-                                Ipsum</span> is
-                            simply dummy text of the printing.</h1>
-                        <p class="text-[10px] md:text-[16px]">KODEX TECHNOLOGY (PVT) LTD is a team of experienced
-                            mobile and
-                            web applications and website builders measuring dozens of completed projects. We build
-                            and
-                            develop mobile applications for several top platforms, including Android & IOS.</p>
+                        <h1 class="font-bold text-[16px] md:text-[30px]">Acompanhe a disponibilidade de vacinas em<span
+                                class="text-blue-400"> tempo real.</span> </h1>
+                        <p class="text-[10px] md:text-[16px]">Com o My Vaccine, você pode consultar rapidamente a
+                            disponibilidade de vacinas em diferentes postos de saúde. Acesse informações atualizadas
+                            sobre estoques e planeje sua vacinação de forma prática e sem complicações.</p>
                     </div>
                 </div>
     </section>
@@ -186,14 +183,14 @@ if (isset($_SESSION['user_id']) && $_SESSION['user_role'] === 'admin') {
     <section class="py-[2rem] flex justify-center">
         <div class="px-[6%] md:w-[1252px] flex flex-col md:flex-row justify-between items-center">
             <div class="flex flex-col gap-3 md:gap-8 min-w-[150px] max-w-[516px] pr-8">
-                <h1 class="font-bold text-[16px] md:text-[30px]"><span class="text-blue-400">Lorem Ipsum</span> is
-                    simply dummy text of the printing.</h1>
-                <p class="text-[10px] md:text-[16px]">KODEX TECHNOLOGY (PVT) LTD is a team of experienced mobile and
-                    web applications and website builders measuring dozens of completed projects. We build and
-                    develop mobile applications for several top platforms, including Android & IOS.</p>
+                <h1 class="font-bold text-[16px] md:text-[30px]">Localize
+                    postos de saúde com <span class="text-blue-400">facilidade.</span></h1>
+                <p class="text-[10px] md:text-[16px]">Com nossa ferramenta de busca, você encontra rapidamente os postos
+                    de vacinação mais próximos da sua localização. Visualize endereços, horários de funcionamento e
+                    vacinas disponíveis de forma simples e acessível.</p>
             </div>
             <figure>
-                <img src="./assets/img/cellphone.png" alt="" class="w-[150px] md:w-[500px]"">
+                <img src="./assets/img/vetor-section-3.png" alt="" class="w-[150px] md:w-[500px]"">
                 </figure>
             </div>
     </section>

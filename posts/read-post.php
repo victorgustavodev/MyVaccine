@@ -5,7 +5,7 @@ require_once "../routes/db-connection.php";
 
 // Verifica se o usuário não está logado ou não tem o papel de 'admin'
 
-if (!isset($_SESSION['user_id']) || $_SESSION['user_role'] !== 'admin') {
+if (!isset($_SESSION['name']) || $_SESSION['user_role'] !== 'admin') {
    echo "Acesso restrito. Você precisa ser administrador para acessar esta página.";
     exit;
 }

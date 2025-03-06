@@ -69,7 +69,7 @@ if ($posts) {
                 <div class="flex items-center gap-4">
                     <span class="text-gray-700 text-sm font-semibold">Olá,
                         <?= htmlspecialchars($_SESSION['name']); ?>!</span>
-                    <a href="./routes/logout.php"
+                    <a href="../routes/logout.php"
                         class="bg-red-500 text-white px-4 py-2 text-xs md:text-sm rounded-md hover:bg-red-600 cursor-pointer">
                         Sair
                     </a>

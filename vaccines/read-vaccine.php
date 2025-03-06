@@ -5,7 +5,7 @@ require_once "../routes/db-connection.php";
 
 // Verifica se o usuário não está logado ou não tem o papel de 'admin'
 
-if (!isset($_SESSION['user_id']) || $_SESSION['user_role'] !== 'admin') {
+if (!isset($_SESSION['name']) || $_SESSION['user_role'] !== 'admin') {
    echo "Acesso restrito. Você precisa ser administrador para acessar esta página.";
     exit;
 }
@@ -80,10 +80,10 @@ $vaccines = $stmt->fetchAll(PDO::FETCH_ASSOC); // Recupera todos os registros
         <div class="w-[70%] flex flex-col gap-[5vh] mt-[5vh] mx-[5vw]">
             <div class="flex justify-between">
                 <h1 class="text-xl md:text-3xl">Painel de vacinas</h1>
-                <a href="../vaccines/create-vaccine.php"
+                <button id="openModal"
                     class="bg-blue-500 text-white px-4 py-2 text-xs md:text-sm rounded-md hover:bg-blue-600">
                     Cadastrar nova vacina
-                </a>
+                </button>
             </div>
 
             <table class="min-w-full max-w-[100vw] bg-white border border-gray-200 shadow-md text-nowrap">
@@ -91,10 +91,10 @@ $vaccines = $stmt->fetchAll(PDO::FETCH_ASSOC); // Recupera todos os registros
                     <tr class="bg-[#EEEEEE] text-left text-xs md:text-sm text-[#B5B7C0]">
                         <th class="font-light px-6 py-2 border-b">Nome</th>
                         <th class="font-light px-6 py-2 border-b">Faixa etária</th>
-                        <th class="font-light px-6 py-2 border-b">Validade</th>
                         <th class="font-light px-6 py-2 border-b w-full">Contraindicações</th>
-                        <th class="font-light px-6 py-2 border-b">Ações</th>
                         <th class="font-light px-6 py-2 border-b">Data de cadastro</th>
+                        <th class="font-light px-6 py-2 border-b">Ações</th>
+
                     </tr>
                 </thead>
                 <tbody>
@@ -110,9 +110,14 @@ $vaccines = $stmt->fetchAll(PDO::FETCH_ASSOC); // Recupera todos os registros
                         <td class="py-2  px-6 border-b text-xs md:text-sm text-gray-800"><?= $vaccine['name'] ?></td>
                         <td class="px-6 border-b py-2 text-xs md:text-sm text-gray-800"><?= $vaccine['min_age'] ?>
                             - <?= $vaccine['max_age'] ?> anos</td>
-                        <td class="px-6 border-b py-2 text-xs md:text-sm text-gray-800"><?= $vaccine['validate'] ?></td>
                         <td class="px-6 border-b py-2 text-xs md:text-sm text-gray-800 w-full text-wrap">
                             <?= $vaccine['contraindications'] ?> </td>
+                        <td class="px-2 py-2 border-b text-xs md:text-sm text-gray-800">
+                            <?php 
+                                $lastUpdated = new DateTime($vaccine['date_up']);
+                                echo $lastUpdated->format('d/m/Y - H:i:s');
+                            ?>
+                        </td>
 
                         <td class="px-2 py-2 border-b text-xs md:text-xs">
                             <div class="flex flex-col md:flex-row gap-2"><a
@@ -125,14 +130,8 @@ $vaccines = $stmt->fetchAll(PDO::FETCH_ASSOC); // Recupera todos os registros
                                     Excluir <i class="fa-solid fa-trash"></i>
                                 </a>
                             </div>
-                        <td class="px-2 py-2 border-b text-xs md:text-sm text-gray-800">
-                            <?php 
-                                $lastUpdated = new DateTime($vaccine['date_up']);
-                                echo $lastUpdated->format('d/m/Y - H:i:s');
-                            ?>
                         </td>
 
-                        </td>
                     </tr>
                     <?php endforeach; ?>
                 </tbody>
@@ -140,7 +139,47 @@ $vaccines = $stmt->fetchAll(PDO::FETCH_ASSOC); // Recupera todos os registros
         </div>
     </section>
 
+    <!-- Modal -->
+    <div id="modal" class="hidden fixed inset-0 bg-gray-900 bg-opacity-50 flex justify-center items-center">
+        <div class="bg-white p-6 rounded-lg w-[90%] md:w-[50%] shadow-lg">
+            <h2 class="text-lg font-semibold mb-4">Cadastrar Nova Vacina</h2>
 
+            <!-- Formulário -->
+            <form id="vaccineForm">
+                <div class="mb-4">
+                    <label class="block text-sm font-medium text-gray-700">Nome:</label>
+                    <input type="text" name="name" required class="w-full p-2 border rounded" />
+                </div>
+
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700">Idade mínima:</label>
+                        <input type="number" name="min_age" required class="w-full p-2 border rounded" />
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700">Idade máxima:</label>
+                        <input type="number" name="max_age" class="w-full p-2 border rounded" />
+                    </div>
+                </div>
+
+                <div class="mb-4">
+                    <label class="block text-sm font-medium text-gray-700">Contraindicações:</label>
+                    <textarea name="contraindications" class="w-full p-2 border rounded"></textarea>
+                </div>
+
+                <div class="flex justify-end gap-2">
+                    <button type="button" id="closeModal" class="px-4 py-2 bg-gray-500 text-white rounded">
+                        Cancelar
+                    </button>
+                    <button type="submit" class="px-4 py-2 bg-blue-500 text-white rounded">
+                        Cadastrar
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="../assets/js/vaccines.js"></script>
 </body>
 
 </html>

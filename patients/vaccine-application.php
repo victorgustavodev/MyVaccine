@@ -3,10 +3,10 @@ session_start();
 require_once "../routes/db-connection.php";
 
 // Verifica se o usuário está autenticado como admin
-if (!isset($_SESSION['user_id']) || $_SESSION['user_role'] !== 'admin') {
+if (!isset($_SESSION['name']) || $_SESSION['user_role'] !== 'admin') {
     echo "Acesso restrito. Você precisa ser administrador para acessar esta página.";
-    exit;
-}
+     exit;
+ }
 
 // Busca os postos de vacinação
 $stmt = $pdo->prepare("SELECT * FROM posts");

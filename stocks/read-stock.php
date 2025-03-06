@@ -4,16 +4,22 @@ require_once '../routes/db-connection.php';
 require_once '../routes/authenticate-adm.php';
 
 // Verifica se o usuário tem permissão para acessar a página
-if (!isset($_SESSION['user_id']) || $_SESSION['user_role'] !== 'admin') {
+if (!isset($_SESSION['name']) || $_SESSION['user_role'] !== 'admin') {
     echo "Acesso restrito. Você precisa ser administrador para acessar esta página.";
-    exit;
-}
+     exit;
+ }
 
 // Verifica se o ID do posto foi passado pela URL e se é um valor numérico válido
 $stock_id = isset($_GET['id']) ? $_GET['id'] : null;
+
 if (!$stock_id || !is_numeric($stock_id)) {
     die("Posto não encontrado.");
 }
+
+// Busca todas as vacinas disponíveis
+$stmt_vaccines = $pdo->prepare("SELECT id, name FROM vaccines");
+$stmt_vaccines->execute();
+$vaccines = $stmt_vaccines->fetchAll(PDO::FETCH_ASSOC);
 
 // Busca o posto de vacinação
 $stmt_post = $pdo->prepare("SELECT id, name FROM posts WHERE id = ?");
@@ -104,11 +110,10 @@ $stocks = $stmt_stocks->fetchAll(PDO::FETCH_ASSOC);
             <div class="flex justify-between">
                 <h1 class="text-xl md:text-3xl">Gerenciar Estoque - <?= htmlspecialchars($stock['name']) ?></h1>
 
-
-                <a href="./create-stock.php?id=<?= $stock['id'];?>"
+                <button id="openModal"
                     class="bg-blue-500 text-white px-4 py-2 text-xs md:text-sm rounded-md hover:bg-blue-600">
                     Cadastrar novo lote
-                </a>
+                </button>
             </div>
 
             <table class="min-w-full max-w-[100vw] bg-white border border-gray-200 shadow-md text-nowrap">
@@ -127,7 +132,8 @@ $stocks = $stmt_stocks->fetchAll(PDO::FETCH_ASSOC);
 
                     <?php if (empty($stocks)): ?>
                     <tr>
-                        <td colspan="6" class="px-4 py-4 text-center text-gray-400">Nenhuma vacina cadastrada nesse posto!</td>
+                        <td colspan="6" class="px-4 py-4 text-center text-gray-400">Nenhuma vacina cadastrada nesse
+                            posto!</td>
                     </tr>
                     <?php endif; ?>
 
@@ -153,9 +159,9 @@ $stocks = $stmt_stocks->fetchAll(PDO::FETCH_ASSOC);
                         </td>
                         <td class="px-2 py-2 border-b text-xs md:text-sm text-gray-800">
                             <?php 
-        $lastUpdated = new DateTime($stock['last_updated']);
-        echo $lastUpdated->format('d/m/Y - H:i:s');
-    ?>
+                                $lastUpdated = new DateTime($stock['last_updated']);
+                                echo $lastUpdated->format('d/m/Y - H:i:s');
+                            ?>
                         </td>
                     </tr>
                     <?php endforeach; ?>
@@ -164,6 +170,67 @@ $stocks = $stmt_stocks->fetchAll(PDO::FETCH_ASSOC);
         </div>
     </section>
 
+    <!-- Modal -->
+    <div id="modal" class="hidden fixed inset-0 bg-gray-900 bg-opacity-50 flex justify-center items-center">
+        <div class="bg-white p-6 rounded-lg w-[90%] md:w-[50%] shadow-lg">
+            <h2 class="text-lg font-semibold mb-4">Cadastrar Novo Estoque</h2>
+
+            <!-- Formulário -->
+            <form id="stockForm">
+                <!-- Posto de Vacinação -->
+                <div class="mb-4 hidden">
+                    <label class="block text-sm font-medium text-gray-700">Posto de Vacinação:</label>
+                    <select name="post_id" required class="w-full p-2 border rounded">
+                        <option aria-placeholder="<?=$stock_id?>"><?= $stock_id;?></option>
+                        <!-- Opções serão preenchidas dinamicamente via JavaScript -->
+                    </select>
+                </div>
+
+
+                <!-- Vacina -->
+                <!-- Vacina -->
+                <div class="mb-4">
+                    <label class="block text-sm font-medium text-gray-700">Vacina:</label>
+                    <select name="vaccine_id" required class="w-full p-2 border rounded">
+                        <option value="">Selecione uma vacina</option>
+                        <?php foreach ($vaccines as $vaccine): ?>
+                        <option value="<?= $vaccine['id'] ?>"><?= htmlspecialchars($vaccine['name']) ?></option>
+                        <?php endforeach; ?>
+                    </select>
+                </div>
+
+                <!-- Quantidade -->
+                <div class="mb-4">
+                    <label class="block text-sm font-medium text-gray-700">Quantidade:</label>
+                    <input type="number" name="quantity" required class="w-full p-2 border rounded" />
+                </div>
+
+                <!-- Lote -->
+                <div class="mb-4">
+                    <label class="block text-sm font-medium text-gray-700">Lote:</label>
+                    <input type="text" name="batch" required class="w-full p-2 border rounded" />
+                </div>
+
+                <!-- Data de Validade -->
+                <div class="mb-4">
+                    <label class="block text-sm font-medium text-gray-700">Data de Validade:</label>
+                    <input type="date" name="expiration_date" required class="w-full p-2 border rounded" />
+                </div>
+
+                <!-- Botões -->
+                <div class="flex justify-end gap-2">
+                    <button type="button" id="closeModal" class="px-4 py-2 bg-gray-500 text-white rounded">
+                        Cancelar
+                    </button>
+                    <button type="submit" class="px-4 py-2 bg-blue-500 text-white rounded">
+                        Cadastrar
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="../assets/js/stocks.js"></script>
 
 </body>
 

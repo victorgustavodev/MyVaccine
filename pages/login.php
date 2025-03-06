@@ -2,10 +2,11 @@
 require_once "../routes/db-connection.php";
 session_start();
 
-$erroCpfEmailPassowrd = "<script>alert('CPF, Email ou senha incorretos!'); window.location.href = '';</script>";
+$erroCpfEmailPassowrd = "<script>alert('CPF, Email ou senha incorretos!'); window.location.href = './login.php';</script>";
 
 if (isset($_SESSION['name'])) {
-    header ('Location: ../index.php');
+    header('Location: ../index.php');
+    exit;
 }
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -24,14 +25,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $stmt->execute([$login]);
     $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
-    // Se não encontrou o usuário
-    if (!$user) {
-        echo $erroCpfEmailPassowrd;
-        exit;
-    }
-
-    // Verifica a senha
-    if (!password_verify($password, $user['password'])) {
+    // Verifica se usuário existe e se a senha está correta
+    if (!$user || !password_verify($password, $user['password'])) {
         echo $erroCpfEmailPassowrd;
         exit;
     }
@@ -44,18 +39,19 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $_SESSION['user_role'] = $user['role'];
 
     // Redirecionamento com base na função do usuário
-    if ($user['role'] == "usuario") {
+    if ($user['role'] === "usuario") {
         header('Location: ../index.php');
-    exit;
-
-    } else if ($user['role'] = "admin") {
-        echo $erroCpfEmailPassowrd;
-    exit;
-
+        exit;
+    } else if ($user['role'] === "admin") {
+        echo $erroCpfEmailPassowrd; // exibe msg de erro
+        session_destroy(); // destroi a sessão para que não seja iniciada, mesmo após o erro.
+        exit;
     }
+
     exit;
 }
 ?>
+
 
 
 <!DOCTYPE html>
@@ -85,11 +81,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                         class="hidden md:block w-[190px]" /></a>
                 <ul class="flex gap-12 uppercase text-[12px] transition-all">
                     <li class="flex flex-col items-center">
-                        <a href="./index.php" class="cursor-pointer font-semibold">home</a>
+                        <a href="../index.php" class="cursor-pointer font-semibold">home</a>
                         <span class="w-2 h-2 bg-blue-500 rounded-full"></span>
                     </li>
-                    <a href="./pages/posts.php" class="cursor-pointer hover:font-semibold">postos de vacinação</a>
-                    <li class="cursor-pointer hover:font-semibold">histórico de vacinas</li>
+                    <li><a href="./posts.php" class="cursor-pointer hover:font-semibold">postos de vacinação</a></li>
+                    <li class="cursor-pointer hover:font-semibold"><a href="./vaccines.php">histórico de vacinas</a></li>
                 </ul>
 
                 <?php if(isset($_SESSION['cpf'])): ?>
@@ -147,9 +143,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         </div>
 
         <!-- Right login form -->
-        <section class="flex justify-center items-center w-full lg:w-1/2 h-[92vh]">
+        <section class="flex md:justify-center md:items-center w-full lg:w-1/2 h-[92vh]">
             <form action="login.php" method="POST"
-                class="text-[12px] 2xl:text-base flex flex-col gap-2 2xl:gap-3 px-6 lg:px-[32px] w-full lg:w-4/6 justify-center">
+                class="text-[12px] 2xl:text-base flex flex-col gap-2 2xl:gap-3 px-6 lg:px-[32px] w-full lg:w-4/6 pt-[3rem] md:pt-[0] md:justify-center">
                 <h1 class="text-xl 2xl:text-2xl font-semibold">Login</h1>
 
                 <!-- Campo Login (CPF ou Email) -->
