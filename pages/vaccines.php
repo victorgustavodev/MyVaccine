@@ -63,12 +63,14 @@ $stocks = $stmt_stocks->fetchAll(PDO::FETCH_ASSOC);
                 <a href="../index.php"><img src="../assets/img/logo.png" alt="logo"
                         class="hidden md:block w-[190px]" /></a>
                 <ul class="flex gap-12 uppercase text-[12px] transition-all">
+                    <a href="../index.php" class="cursor-pointer hover:font-semibold">Home</a>
+
+                    <a href="./posts.php" class="cursor-pointer hover:font-semibold">postos de vacinação</a>
                     <li class="flex flex-col items-center">
-                        <a href="./index.php" class="cursor-pointer font-semibold">home</a>
+                        <a href="./vaccines-history.php" class="cursor-pointer font-semibold">histórico de vacinas</a>
                         <span class="w-2 h-2 bg-blue-500 rounded-full"></span>
                     </li>
-                    <a href="./pages/posts.php" class="cursor-pointer hover:font-semibold">postos de vacinação</a>
-                    <li class="cursor-pointer hover:font-semibold">histórico de vacinas</li>
+
                 </ul>
 
                 <?php if(isset($_SESSION['cpf'])): ?>

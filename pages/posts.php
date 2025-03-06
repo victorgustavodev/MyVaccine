@@ -57,11 +57,13 @@ if ($posts) {
                         <a href="../index.php" class="cursor-pointer">home</a>
                     </li>
                     <li class="flex flex-col items-center">
-                        <a href="./pages/posts.php" class="cursor-pointer font-semibold">postos de vacinação</a>
+                        <a href="./posts.php" class="cursor-pointer font-semibold">postos de vacinação</a>
                         <span class="w-2 h-2 bg-blue-500 rounded-full"></span>
                     </li>
                     <li class="cursor-pointer hover:font-semibold">
-                        <a href="./vaccines.php" class="cursor-pointer">Histórico de vacinas</a>
+                        <a href="./vaccines-history.php" class="cursor-pointer hover:font-semibold">histórico de
+                            vacinas</a>
+
                     </li>
                 </ul>
 

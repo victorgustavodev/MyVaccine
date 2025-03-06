@@ -95,7 +95,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                         <span class="w-2 h-2 bg-blue-500 rounded-full"></span>
                     </li>
                     <li><a href="./posts.php" class="cursor-pointer hover:font-semibold">postos de vacinação</a></li>
-                    <li class="cursor-pointer hover:font-semibold"><a href="./vaccines.php">histórico de vacinas</a>
+                    <a href="./vaccines-history.php" class="cursor-pointer hover:font-semibold">histórico de vacinas</a>
                     </li>
                 </ul>
 

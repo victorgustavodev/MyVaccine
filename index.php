@@ -39,7 +39,8 @@ if (isset($_SESSION['user_id']) && $_SESSION['user_role'] === 'admin') {
                         <span class="w-2 h-2 bg-blue-500 rounded-full"></span>
                     </li>
                     <a href="./pages/posts.php" class="cursor-pointer hover:font-semibold">postos de vacinação</a>
-                    <li class="cursor-pointer hover:font-semibold">histórico de vacinas</li>
+                    <a href="./vaccines-history.php" class="cursor-pointer hover:font-semibold">histórico de vacinas</a>
+
                 </ul>
 
                 <?php if (isset($_SESSION['cpf'])): ?>
@@ -120,7 +121,8 @@ if (isset($_SESSION['user_id']) && $_SESSION['user_role'] === 'admin') {
                 <img src="./assets/img/check-heart-icon.png" alt="" class="w-[30px] md:w-[40px]">
                 <span class="flex flex-col">
                     <p class="font-semibold text-[8px] md:text-[16px]">Imunização Segura</p>
-                    <p class="text-[8px] md:text-[12px] text-gray-400 min-w-[200px]">Encontre vacinas recomendadas para você.</p>
+                    <p class="text-[8px] md:text-[12px] text-gray-400 min-w-[200px]">Encontre vacinas recomendadas para
+                        você.</p>
                 </span>
             </li>
 
@@ -129,7 +131,8 @@ if (isset($_SESSION['user_id']) && $_SESSION['user_role'] === 'admin') {
 
                 <span class="flex flex-col">
                     <p class="font-semibold text-[8px] md:text-[16px]">Gestão Inteligente</p>
-                    <p class="text-[8px] md:text-[12px] text-gray-400 min-w-[200px]">Postos podem atualizar estoques em tempo real.
+                    <p class="text-[8px] md:text-[12px] text-gray-400 min-w-[200px]">Postos podem atualizar estoques em
+                        tempo real.
                     </p>
                 </span>
             </li>
@@ -138,7 +141,8 @@ if (isset($_SESSION['user_id']) && $_SESSION['user_role'] === 'admin') {
                 <img src="./assets/img/syringe-vaccine-icon.png" alt="" class="w-[30px] md:w-[40px]">
                 <span class="flex flex-col">
                     <p class="font-semibold text-[8px] md:text-[16px]">Histórico de Vacinas</p>
-                    <p class="text-[8px] md:text-[12px] text-gray-400 min-w-[200px]">Acompanhe suas doses e próximas aplicações.
+                    <p class="text-[8px] md:text-[12px] text-gray-400 min-w-[200px]">Acompanhe suas doses e próximas
+                        aplicações.
                     </p>
                 </span>
 
