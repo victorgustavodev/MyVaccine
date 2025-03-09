@@ -6,7 +6,8 @@ require_once '../routes/authenticate-adm.php';
 // Verifica se o ID do posto foi passado pela URL e se é um valor numérico válido
 $stock_id = isset($_GET['id']) ? $_GET['id'] : null;
 if (!$stock_id || !is_numeric($stock_id)) {
-    die("Posto não encontrado.");
+    header('Location: ./404.php');
+    exit;
 }
 
 // Busca o posto de vacinação
@@ -49,7 +50,7 @@ $stocks = $stmt_stocks->fetchAll(PDO::FETCH_ASSOC);
     <title>Estoque de vacinas</title>
 </head>
 
-<body class="overflow-x-hidden text-[#100E3D]">
+<body class="overflow-x-hidden flex flex-col text-[#100E3D] min-h-screen">
 
 
     <nav class="px-[6%] h-[8vh] flex justify-between items-center shadow-lg navbar text-[#100E3D] relative">
@@ -63,21 +64,25 @@ $stocks = $stmt_stocks->fetchAll(PDO::FETCH_ASSOC);
                 <a href="../index.php"><img src="../assets/img/logo.png" alt="logo"
                         class="hidden md:block w-[190px]" /></a>
                 <ul class="flex gap-12 uppercase text-[12px] transition-all">
-                    <a href="../index.php" class="cursor-pointer hover:font-semibold">Home</a>
-
-                    <a href="./posts.php" class="cursor-pointer hover:font-semibold">postos de vacinação</a>
+                    <li class="cursor-pointer hover:font-semibold">
+                        <a href="../index.php" class="cursor-pointer">home</a>
+                    </li>
                     <li class="flex flex-col items-center">
-                        <a href="./vaccines-history.php" class="cursor-pointer font-semibold">histórico de vacinas</a>
+                        <a href="./posts.php" class="cursor-pointer font-semibold">postos de vacinação</a>
                         <span class="w-2 h-2 bg-blue-500 rounded-full"></span>
                     </li>
+                    <li class="cursor-pointer hover:font-semibold">
+                        <a href="./vaccines.php" class="cursor-pointer hover:font-semibold">histórico de
+                            vacinas</a>
 
+                    </li>
                 </ul>
 
                 <?php if(isset($_SESSION['cpf'])): ?>
                 <div class="flex items-center gap-4">
                     <span class="text-gray-700 text-sm font-semibold">Olá,
                         <?= htmlspecialchars($_SESSION['name']); ?>!</span>
-                    <a href="./routes/logout.php"
+                    <a href="../routes/logout.php"
                         class="bg-red-500 text-white px-4 py-2 text-xs md:text-sm rounded-md hover:bg-red-600 cursor-pointer">
                         Sair
                     </a>
@@ -121,7 +126,7 @@ $stocks = $stmt_stocks->fetchAll(PDO::FETCH_ASSOC);
         </div>
     </nav>
 
-    <main class="h-[70vh] flex flex-col px-[6%] gap-[32px] my-[4rem] items-center">
+    <main class="flex flex-col px-[6%] gap-[32px] my-[4rem] grow items-center">
 
         <div class="w-[600px] flex flex-col gap-3">
             <h1 class="text-[24px] text-center font-bold">Filtrar vacinas</h1>
@@ -132,11 +137,11 @@ $stocks = $stmt_stocks->fetchAll(PDO::FETCH_ASSOC);
 
         <table class="min-w-full max-w-[100vw] bg-white border border-gray-200 shadow-md text-nowrap">
             <thead>
-                <tr class="bg-[#EEEEEE] text-left text-xs md:text-sm text-[#B5B7C0]">
-                    <th class="font-light py-3 px-2 w-1/5 border-b">Vacina</th>
+                <tr class="bg-[#100E3D] text-left text-xs md:text-sm text-white">
+                    <th class="font-light py-3 px-2 p w-1/5 border-b rounded-tl-lg">Vacina</th>
                     <th class="font-light px-2 py-2 border-b w-1/5">Quantidade em estoque</th>
                     <th class="font-light px-2 py-2 border-b w-1/5">Faixa Etária</th>
-                    <th class="font-light px-2 py-2 border-b w-1/5">Contraindicações</th>
+                    <th class="font-light px-2 py-2 border-b w-1/5 rounded-tr-lg">Contraindicações</th>
 
                 </tr>
             </thead>
@@ -170,6 +175,36 @@ $stocks = $stmt_stocks->fetchAll(PDO::FETCH_ASSOC);
         </table>
 
     </main>
+
+    <footer class=" bg-[#100E3D] text-white py-8 md:mt-12 px-[6%]">
+        <div class="container mx-auto flex flex-col md:flex-row justify-between items-center">
+            <!-- Logo e Nome -->
+            <div class="flex flex-col items-center md:items-start">
+                <img src="../assets/img/logo-white.png" alt="Logo My Vaccine" class="w-40 mb-2">
+                <p class="text-sm text-gray-400">Facilitando o acesso à vacinação.</p>
+            </div>
+
+            <!-- Links -->
+            <div class="flex flex-wrap justify-center gap-6 mt-6 md:mt-0">
+                <a href="../index.php" class="text-sm hover:underline">Home</a>
+                <a href="./posts.php" class="text-sm hover:underline">Postos de Vacinação</a>
+                <a href="./history-vaccine.php" class="text-sm hover:underline">Histórico de Vacinas</a>
+            </div>
+
+            <!-- Redes Sociais -->
+            <div class="flex gap-4 mt-6 md:mt-0">
+                <button href="" class="text-gray-400 hover:text-white text-xl"><i class="fab fa-facebook"></i></button>
+                <button href="" class="text-gray-400 hover:text-white text-xl"><i class="fab fa-instagram"></i></button>
+                <button href="" class="text-gray-400 hover:text-white text-xl"><i class="fab fa-twitter"></i></button>
+            </div>
+        </div>
+
+        <!-- Direitos Autorais -->
+        <div class="text-center text-gray-400 text-xs mt-6 border-t border-gray-600 pt-4">
+            &copy; 2025 My Vaccine. Todos os direitos reservados.
+        </div>
+
+    </footer>
 
     <script src="../assets/js/filter.js"></script>
 </body>

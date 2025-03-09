@@ -2,50 +2,53 @@
 session_start();
 require_once "../routes/db-connection.php";
 
-// Verifica se o usuário está autenticado como admin
 if (!isset($_SESSION['name']) || $_SESSION['user_role'] !== 'admin') {
     echo "Acesso restrito. Você precisa ser administrador para acessar esta página.";
-     exit;
- }
+    exit;
+}
 
-// Busca os postos de vacinação
-$stmt = $pdo->prepare("SELECT * FROM posts");
-$stmt->execute();
+// 🔽 Adicionado: busca de postos e vacinas
+$stmt = $pdo->query("SELECT id, name FROM posts");
 $posts = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-// Busca as vacinas disponíveis no estoque
-$stmt = $pdo->prepare("SELECT vaccines.id, vaccines.name FROM stocks INNER JOIN vaccines ON stocks.vaccine_id = vaccines.id WHERE stocks.quantity > 0");
-$stmt->execute();
+$stmt = $pdo->query("SELECT id, name FROM vaccines");
 $vacinas = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $cpf = $_POST['cpf'];
-    $post_id = $_POST['post_id'];
     $vaccine_id = $_POST['vaccine_id'];
-    
-    // Verifica se o CPF existe no banco
-    $stmt = $pdo->prepare("SELECT id FROM users WHERE cpf = ?");
-    $stmt->execute([$cpf]);
-    $user = $stmt->fetch(PDO::FETCH_ASSOC);
-    
-    
-    if (!$user) {
-        $error_message = "CPF não encontrado.";
-    } else {
-        $user_id = $user['id'];
-        
-        // Registra a aplicação da vacina
-        $stmt = $pdo->prepare("INSERT INTO vaccination_history (user_id, vaccine_id, post_id, date_applied) VALUES (?, ?, ?, NOW())");
-        $stmt->execute([$user_id, $vaccine_id, $post_id]);
-        
-        // Atualiza o estoque
-        $stmt = $pdo->prepare("UPDATE stocks SET quantity = quantity - 1 WHERE vaccine_id = ? AND post_id = ?");
+    $post_id = $_POST['post_id'];
+
+    try {
+        // Buscar lote da vacina no estoque
+        $stmt = $pdo->prepare("SELECT batch FROM stocks WHERE vaccine_id = ? AND post_id = ? LIMIT 1");
         $stmt->execute([$vaccine_id, $post_id]);
+        $stock = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        if (!$stock) {
+            $error_message = "Estoque não encontrado para esta vacina neste posto.";
+        } else {
+            $batch = $stock['batch'];
+
+            // Inserir no histórico de vacinação
+            $stmt = $pdo->prepare("INSERT INTO vaccination_history (user_cpf, vaccine_id, post_id, batch, application_date) VALUES (?, ?, ?, ?, NOW())");
+            $stmt->execute([$cpf, $vaccine_id, $post_id, $batch]);
+
+            // Atualizar o estoque
+            $stmt = $pdo->prepare("UPDATE stocks SET quantity = quantity - 1 WHERE vaccine_id = ? AND post_id = ?");
+            $stmt->execute([$vaccine_id, $post_id]);
+
+            $success_message = "Vacina aplicada com sucesso!";
+        }
+    } catch (PDOException $e) {
+        echo "Erro: " . $e->getMessage();
         
-        $success_message = "Vacina aplicada com sucesso!";
     }
 }
 ?>
+
+
+
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -87,15 +90,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 </a>
             </div>
 
-            <!-- barrinha -->
-            <span class="h-[1px] w-full bg-gray-300 rounded-full"></span>
-
-            <span class="uppercase text-xs text-gray-300 font-semibold">config</span>
-
-            <!-- configs -->
-            <a href="../config/config.php">
-                <i class="fa-solid fa-gear text-[20px] text-gray-400 hover:text-black transition all"></i>
-            </a>
+            
 
         </div>
 
@@ -113,7 +108,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
             <form method="POST" action="./vaccine-application.php">
                 <label class="block mb-2">CPF do Paciente:</label>
-                <input type="text" name="cpf" required class="w-full border p-2 rounded mb-4">
+                <input type="text" name="cpf" required pattern="\d{3}\.?\d{3}\.?\d{3}-?\d{2}"
+                    placeholder="Ex: 123.456.789-00" class="w-full border p-2 rounded mb-4">
 
                 <label class="block mb-2">Posto de Vacinação:</label>
                 <select name="post_id" required class="w-full border p-2 rounded mb-4">

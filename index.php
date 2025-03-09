@@ -24,74 +24,79 @@ if (isset($_SESSION['user_id']) && $_SESSION['user_role'] === 'admin') {
 </head>
 
 <body class="overflow-x-hidden text-[#100E3D]">
-    <nav class="px-[6%] h-[8vh] flex justify-between items-center shadow-lg navbar text-[#100E3D] relative">
-        <a href="/"><img src="./assets/img/logo.png" alt="logo" class="md:hidden w-[190px]" /></a>
+    
+    <header>
+        <nav class="px-[6%] h-[8vh] flex justify-between items-center shadow-lg navbar text-[#100E3D] relative">
+            <a href="/"><img src="./assets/img/logo.png" alt="logo" class="md:hidden w-[190px]" /></a>
 
 
-        <!-- Desktop Menu -->
-        <div class="hidden md:block w-full">
+            <!-- Desktop Menu -->
+            <div class="hidden md:block w-full">
 
-            <div class="flex w-full justify-between">
-                <a href=""><img src="./assets/img/logo.png" alt="logo" class="hidden md:block w-[190px]" /></a>
-                <ul class="flex gap-12 uppercase text-[12px] transition-all">
-                    <li class="flex flex-col items-center">
-                        <a href="" class="cursor-pointer font-semibold">home</a>
-                        <span class="w-2 h-2 bg-blue-500 rounded-full"></span>
+                <div class="flex w-full justify-between">
+                    <a href=""><img src="./assets/img/logo.png" alt="logo" class="hidden md:block w-[190px]" /></a>
+                    <ul class="flex gap-12 uppercase text-[12px] transition-all">
+                        <li class="flex flex-col items-center">
+                            <a href="" class="cursor-pointer font-semibold">home</a>
+                            <span class="w-2 h-2 bg-blue-500 rounded-full"></span>
+                        </li>
+                        <a href="./pages/posts.php" class="cursor-pointer hover:font-semibold">postos de vacinação</a>
+                        <a href="./pages/history-vaccine.php" class="cursor-pointer hover:font-semibold">histórico de
+                            vacinas</a>
+
+                    </ul>
+
+                    <?php if (isset($_SESSION['cpf'])): ?>
+                    <div class="flex items-center gap-4">
+                        <span class="text-gray-700 text-sm font-semibold">Olá,
+                            <?= ($_SESSION['name']); ?>
+                        </span>
+                        <a href="./routes/logout.php"
+                            class="bg-red-500 text-white px-4 py-2 text-xs md:text-sm rounded-md hover:bg-red-600 cursor-pointer">
+                            Sair
+                        </a>
+                    </div>
+                    <?php else: ?>
+                    <a href="./pages/login.php"
+                        class="bg-blue-500 text-white px-4 py-2 text-xs md:text-sm rounded-md hover:bg-blue-600 cursor-pointer">
+                        Login
+                    </a>
+                    <?php endif; ?>
+
+                </div>
+            </div>
+
+            <!-- Mobile Menu Button -->
+            <button class="block md:hidden" onclick="toggleMenu()">
+                <i class="fa-solid fa-bars text-xl"></i>
+            </button>
+
+            <!-- Mobile Menu -->
+            <div id="mobileMenu"
+                class="hidden absolute top-[8vh] left-0 w-full bg-white shadow-md md:hidden flex flex-col items-center p-4">
+                <ul class="flex flex-col items-center gap-4 text-[14px]">
+                    <li class="cursor-pointer font-semibold"><a href="#">Home</a></li>
+                    <li class="cursor-pointer hover:font-semibold"><a href="./pages/posts.php">Postos de Vacinação</a>
                     </li>
-                    <a href="./pages/posts.php" class="cursor-pointer hover:font-semibold">postos de vacinação</a>
-                    <a href="./vaccines-history.php" class="cursor-pointer hover:font-semibold">histórico de vacinas</a>
-
+                    <li class="cursor-pointer hover:font-semibold">Histórico de Vacinas</li>
+                    <li class="cursor-pointer hover:font-semibold">Sobre</li>
                 </ul>
-
-                <?php if (isset($_SESSION['cpf'])): ?>
-                <div class="flex items-center gap-4">
-                    <span class="text-gray-700 text-sm font-semibold">Olá,
-                        <?= ($_SESSION['name']); ?>
-                    </span>
+                <div class="mt-4">
+                    <?php if(isset($_SESSION['cpf'])): ?>
                     <a href="./routes/logout.php"
-                        class="bg-red-500 text-white px-4 py-2 text-xs md:text-sm rounded-md hover:bg-red-600 cursor-pointer">
+                        class="bg-red-500 text-white px-4 py-2 text-sm rounded-md hover:bg-red-600 cursor-pointer">
                         Sair
                     </a>
+                    <?php else: ?>
+                    <a href="./pages/login.php"
+                        class="bg-blue-500 text-white px-4 py-2 text-sm rounded-md hover:bg-blue-600 cursor-pointer">
+                        Login
+                    </a>
+                    <?php endif; ?>
                 </div>
-                <?php else: ?>
-                <a href="./pages/login.php"
-                    class="bg-blue-500 text-white px-4 py-2 text-xs md:text-sm rounded-md hover:bg-blue-600 cursor-pointer">
-                    Login
-                </a>
-                <?php endif; ?>
-
             </div>
-        </div>
-
-        <!-- Mobile Menu Button -->
-        <button class="block md:hidden" onclick="toggleMenu()">
-            <i class="fa-solid fa-bars text-xl"></i>
-        </button>
-
-        <!-- Mobile Menu -->
-        <div id="mobileMenu"
-            class="hidden absolute top-[8vh] left-0 w-full bg-white shadow-md md:hidden flex flex-col items-center p-4">
-            <ul class="flex flex-col items-center gap-4 text-[14px]">
-                <li class="cursor-pointer font-semibold"><a href="#">Home</a></li>
-                <li class="cursor-pointer hover:font-semibold"><a href="./pages/posts.php">Postos de Vacinação</a></li>
-                <li class="cursor-pointer hover:font-semibold">Histórico de Vacinas</li>
-                <li class="cursor-pointer hover:font-semibold">Sobre</li>
-            </ul>
-            <div class="mt-4">
-                <?php if(isset($_SESSION['cpf'])): ?>
-                <a href="./routes/logout.php"
-                    class="bg-red-500 text-white px-4 py-2 text-sm rounded-md hover:bg-red-600 cursor-pointer">
-                    Sair
-                </a>
-                <?php else: ?>
-                <a href="./pages/login.php"
-                    class="bg-blue-500 text-white px-4 py-2 text-sm rounded-md hover:bg-blue-600 cursor-pointer">
-                    Login
-                </a>
-                <?php endif; ?>
-            </div>
-        </div>
-    </nav>
+        </nav>
+    </header>
 
     <main
         class="md:h-[70vh] flex flex-col md:flex-row justify-center px-[6%] gap-[32px] md:gap-[64px] lg:gap-[120px] mt-[4rem]">
@@ -211,16 +216,14 @@ if (isset($_SESSION['user_id']) && $_SESSION['user_role'] === 'admin') {
                     <div class="flex flex-wrap justify-center gap-6 mt-6 md:mt-0">
                         <a href="./index.php" class="text-sm hover:underline">Home</a>
                         <a href="./pages/posts.php" class="text-sm hover:underline">Postos de Vacinação</a>
-                        <a href="./pages/historico.php" class="text-sm hover:underline">Histórico de Vacinas</a>
-                        <a href="./pages/sobre.php" class="text-sm hover:underline">Sobre</a>
-                        <a href="./pages/contato.php" class="text-sm hover:underline">Contato</a>
+                        <a href="./pages/history-vaccine.php" class="text-sm hover:underline">Histórico de Vacinas</a>
                     </div>
 
                     <!-- Redes Sociais -->
                     <div class="flex gap-4 mt-6 md:mt-0">
-                        <a href="#" class="text-gray-400 hover:text-white text-xl"><i class="fab fa-facebook"></i></a>
-                        <a href="#" class="text-gray-400 hover:text-white text-xl"><i class="fab fa-instagram"></i></a>
-                        <a href="#" class="text-gray-400 hover:text-white text-xl"><i class="fab fa-twitter"></i></a>
+                        <button href="" class="text-gray-400 hover:text-white text-xl"><i class="fab fa-facebook"></i></button>
+                        <button href="" class="text-gray-400 hover:text-white text-xl"><i class="fab fa-instagram"></i></button>
+                        <button href="" class="text-gray-400 hover:text-white text-xl"><i class="fab fa-twitter"></i></button>
                     </div>
                 </div>
 
@@ -229,10 +232,9 @@ if (isset($_SESSION['user_id']) && $_SESSION['user_role'] === 'admin') {
                     &copy; 2025 My Vaccine. Todos os direitos reservados.
                 </div>
 
-                </footer>
+    </footer>
 
 </body>
-
 
 <script src=" ./assets/js/index.js"></script>
 

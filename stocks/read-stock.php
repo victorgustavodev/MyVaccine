@@ -85,15 +85,8 @@ $stocks = $stmt_stocks->fetchAll(PDO::FETCH_ASSOC);
                 </a>
             </div>
 
-            <!-- barrinha -->
-            <span class="h-[1px] w-full bg-gray-300 rounded-full"></span>
 
-            <span class="uppercase text-xs text-gray-300 font-semibold">config</span>
-
-            <!-- configs -->
-            <a href="../config/config.php">
-                <i class="fa-solid fa-gear text-[20px] text-gray-400 hover:text-black transition all"></i>
-            </a>
+           
 
         </div>
 

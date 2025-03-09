@@ -52,7 +52,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if ($user['role'] == "admin") {
         header('Location: ../posts/read-post.php');
     } else {
-        header('Location: ../index.php');
+        header('Location: ../routes/logout.php');
     }
     exit;
 }
