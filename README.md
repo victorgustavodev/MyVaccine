@@ -18,43 +18,75 @@ O **MyVaccine** é uma plataforma digital destinada a facilitar o acesso, o agen
 
 ## 🌟 Funcionalidades Principais
 
-- **Cadastro de Usuários**: Cadastro de cidadãos com informações pessoais e de contato.
-- **Cadastro de Dependentes**: Cadastro de dependentes.
-- **Login Seguro**: Acesso via CPF e senha, com recuperação de senha.
-- **Cartilha de Vacinação**: Informações sobre vacinas, sequência e datas de reforço.
-- **Geolocalização**: Localização de postos de saúde próximos para facilitar o agendamento.
-- **Dependentes**: Gerenciamento das vacinas de todos os membros da família em um único perfil.
-- **Página Inicial (Home)**: Painel com a situação vacinal e alertas para o usuário.
+- **Cadastro de Usuários**: Cadastro de cidadãos com informações pessoais e de contato;
+- **Login Seguro**: Acesso via CPF e senha, com recuperação de senha;
+- **Histórico de Vacinação**: Registro das vacinas aplicadas no usuário;
+- **Localização dos postos de saúde**: É possivel filtrar e buscar os postos pelo Estado e Cidade.
+- **Painel de controle (Admin)**: O adm tem total controle da criação e edição de postos e vacinas;
+- **Gerenciamento de estoque (Admin)**: Através do painel é possivel gerenciar os estoque e adicionar vacinas por lote;
+- **Aplicação de vacina (Admin)**: Com o cpf do usuário é possivel aplicar a vacina e automaticamente remover do estoque.
 
 
-## 🚀 Como Executar o Projeto
+# Como Executar o Projeto
 
-1. 🔄 Clone este repositório:
-   ```bash
-   git clone https://github.com/seuusuario/myvaccine.git
-   ```
+## Utilizando o XAMPP
+ <img src="https://img.shields.io/badge/Xampp-F37623?style=for-the-badge&logo=xampp&logoColor=white" />   
 
-2. 📂 Navegue até o diretório do projeto:
-   ```bash
-   cd myvaccine
-   ```
+1.  **Clone este repositório:**
+    Abra o terminal ou prompt de comando e execute o comando:
+    ```bash
+    git clone [https://github.com/](https://github.com/)[seu_usuario]/myvaccine.git
+    ```
 
-3. ⚙️ Instale as dependências necessárias para o 🐘 PHP:
-   ```bash
-   composer install
-   ```
+2.  **Abra o XAMPP e inicie os módulos Apache e MySQL.**
 
-4. 🛠️ Configure o banco de dados no arquivo `.env`.
+3.  **Mova o repositório clonado para a pasta `htdocs` do seu diretório do XAMPP:**
+    O caminho normalmente é `C:\xampp\htdocs` (no Windows) ou `/opt/lampp/htdocs` (no Linux/Mac).
 
-5. ▶️ Inicie o servidor de desenvolvimento:
-   ```bash
-   php -S localhost:8080
-   ```
+4.  **Importe o banco de dados:**
+    * Abra o phpMyAdmin acessando `http://localhost/phpmyadmin/`.
+    * Crie um novo banco de dados ou use um já existente.
+    * Importe o arquivo `db.sql`, que está localizado na pasta `config/` do seu projeto.
 
-6. 🌐 Acesse a aplicação pelo navegador no endereço:
-   ```
-   http://localhost:8000
-   ```
+5.  **Acesse a URL de administração e faça login:**
+    * Abra o navegador e acesse `http://localhost/my-vaccine/admin`.
+    * Use o usuário e senha definidos por padrão no banco de dados (ou altere-os diretamente no MySQL).
+
+6.  **Acesse a aplicação:**
+    No navegador, vá para:
+    ```perl
+    http://localhost/my-vaccine/index.php
+    ```
+
+## Sem o XAMPP
+
+1.  **Clone este repositório:**
+    Abra o terminal ou prompt de comando e execute o comando:
+    ```bash
+    git clone [https://github.com/](https://github.com/)[seu_usuario]/myvaccine.git
+    ```
+
+2.  **Instale as dependências necessárias:**
+    * Instale o PHP no seu sistema.
+    * Instale o MySQL ou use outro banco de dados compatível.
+
+3.  **Configure o banco de dados:**
+    * Crie um banco de dados no MySQL.
+    * Importe o arquivo `db.sql`, localizado na pasta `config/` do seu projeto.
+    * Altere as configurações de banco de dados no arquivo `config/db.php`:
+        * Defina as credenciais de conexão do banco de dados.
+
+4.  **Acesse a aplicação:**
+    * Inicie o servidor PHP com o comando:
+        ```nginx
+        php -S localhost:8000
+        ```
+    * No navegador, acesse:
+        ```bash
+        http://localhost:8000/index.php
+        ```
+
+Isso deve ser o suficiente para rodar o projeto em ambas as formas. Se tiver alguma dúvida ou algo não funcionar, é só avisar!
 
 ## 📂 Estrutura do Projeto
 
