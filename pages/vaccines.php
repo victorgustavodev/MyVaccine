@@ -72,7 +72,7 @@ $stocks = $stmt_stocks->fetchAll(PDO::FETCH_ASSOC);
                         <span class="w-2 h-2 bg-blue-500 rounded-full"></span>
                     </li>
                     <li class="cursor-pointer hover:font-semibold">
-                        <a href="./vaccines.php" class="cursor-pointer hover:font-semibold">histórico de
+                        <a href="./history-vaccine.php" class="cursor-pointer hover:font-semibold">histórico de
                             vacinas</a>
 
                     </li>
@@ -130,9 +130,12 @@ $stocks = $stmt_stocks->fetchAll(PDO::FETCH_ASSOC);
 
         <div class="w-[600px] flex flex-col gap-3">
             <h1 class="text-[24px] text-center font-bold">Filtrar vacinas</h1>
-            <input id="searchInput" class="text-[16px] w-full p-3 border-[1px] rounded-[16px] border-black" type="text"
-                placeholder="Insira o nome da vacina">
-
+            <div class="flex items-center gap-3">
+                <a href='posts.php'>
+                    <img src="../assets/img/seta.png" class="cursor-pointer w-6 h-6">
+                </a>
+        <input id="searchInput" class="text-[16px] w-full p-3 border-[1px] rounded-[16px] border-black flex" type="text" placeholder="Insira o nome da vacina">
+    </div>
         </div>
 
         <table class="min-w-full max-w-[100vw] bg-white border border-gray-200 shadow-md text-nowrap">
