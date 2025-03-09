@@ -56,7 +56,7 @@ if ($posts) {
                     <i class="fa-solid fa-house-medical text-[20px] text-black"></i>
                 </a>
                 <!-- Pacientes -->
-                <a href="../patients/index.php">
+                <a href="../patients/vaccine-application.php">
                     <i class="fa-solid fa-bed text-[20px] text-gray-400 hover:text-black transition all"></i>
                 </a>
                 <!-- Vacinas -->

@@ -49,7 +49,7 @@ $vaccines = $stmt->fetchAll(PDO::FETCH_ASSOC); // Recupera todos os registros
                     <i class="fa-solid fa-house-medical text-[20px] text-gray-400 hover:text-black"></i>
                 </a>
                 <!-- Pacientes -->
-                <a href="#">
+                <a href="../patients/vaccine-application.php">
                     <i class="fa-solid fa-bed text-[20px] text-gray-400 hover:text-black transition all"></i>
                 </a>
                 <!-- Vacinas -->
