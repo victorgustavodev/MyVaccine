@@ -132,7 +132,7 @@ $stocks = $stmt_stocks->fetchAll(PDO::FETCH_ASSOC);
             <h1 class="text-[24px] text-center font-bold">Filtrar vacinas</h1>
             <div class="flex items-center gap-3">
                 <a href='posts.php'>
-                    <img src="../assets/img/seta.png" class="cursor-pointer w-6 h-6">
+                    <i class="fa-solid fa-arrow-left text-[24px]"></i>
                 </a>
         <input id="searchInput" class="text-[16px] w-full p-3 border-[1px] rounded-[16px] border-black flex" type="text" placeholder="Insira o nome da vacina">
     </div>

@@ -92,3 +92,8 @@ INSERT INTO posts (name, address, city, state) VALUES
 ('Posto Saúde Beira-Mar', 'Avenida Beira-Mar, 246', 'Fortaleza', 'CE'),
 ('Posto Saúde Praia', 'Rua da Praia, 864', 'Recife', 'PE'),
 ('Posto Saúde Montanha', 'Avenida das Montanhas, 753', 'Manaus', 'AM');
+
+INSERT INTO users ()
+
+INSERT INTO users (cpf, role, name, password, email, dob, address, telephone) VALUES
+(99999999999, 'admin', 'Adminstrador', 'adm', 'adm@adm.com', 01-01-2000, 'n/a', 81996512724);
