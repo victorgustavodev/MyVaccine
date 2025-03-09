@@ -65,7 +65,7 @@ if ($posts) {
                         <li class="cursor-pointer hover:font-semibold">
                             <a href="./history-vaccine.php" class="cursor-pointer hover:font-semibold">histórico de
                                 vacinas</a>
-
+    
                         </li>
                     </ul>
 
