@@ -38,14 +38,14 @@ if ($posts) {
     <link rel="stylesheet" href="../assets/style/style.css">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet" />
     <link rel="icon" type="image/x-icon" href="../assets/img/icon.png">
-    <title>My Vaccine</title>
+    <title>Postos de vacinação - My Vaccine</title>
 </head>
 
 <body class="overflow-x-hidden min-h-screen text-[#100E3D] flex flex-col min-h-screen">
 
     <header>
         <nav class="px-[6%] h-[8vh] flex justify-between items-center shadow-lg navbar text-[#100E3D] relative">
-            <a href="/"><img src="../assets/img/logo.png" alt="logo" class="md:hidden w-[190px]" /></a>
+            <a href="../index.php"><img src="../assets/img/logo.png" alt="logo" class="md:hidden w-[190px]" /></a>
 
 
             <!-- Desktop Menu -->
@@ -94,70 +94,72 @@ if ($posts) {
 
             <!-- Mobile Menu -->
             <div id="mobileMenu"
-                class="hidden absolute top-[8vh] left-0 w-full bg-white shadow-md md:hidden flex flex-col items-center p-4">
+                class="hidden absolute top-[8vh] right-0 w-2/3 rounded-br-lg rounded-bl-lg bg-white shadow-md md:hidden flex flex-col items-center p-4">
                 <ul class="flex flex-col items-center gap-4 text-[14px]">
-                    <li class="cursor-pointer font-semibold"><a href="#">Home</a></li>
-                    <li class="cursor-pointer hover:font-semibold"><a href="./pages/posts.php">Postos de Vacinação</a>
+                    <li class="cursor-pointer hover:font-semibold"><a href="../index.php">Home</a></li>
+                    <li class="cursor-pointer hover:font-semibold"><a href="./posts.php">Postos de Vacinação</a>
                     </li>
-                    <li class="cursor-pointer hover:font-semibold">Histórico de Vacinas</li>
-                    <li class="cursor-pointer hover:font-semibold">Sobre</li>
+                    <li class="cursor-pointer hover:font-semibold"><a href="./history-vaccine.php">Histórico de
+                            vacinação</a></li>
                 </ul>
-                <div class="mt-4">
+                <div class="mt-6 mb-3">
                     <?php if(isset($_SESSION['cpf'])): ?>
                     <a href="../routes/logout.php"
                         class="bg-red-500 text-white px-4 py-2 text-sm rounded-md hover:bg-red-600 cursor-pointer">
                         Sair
                     </a>
                     <?php else: ?>
-                    <a href="./pages/login.php"
+                    <a href="./login.php"
                         class="bg-blue-500 text-white px-4 py-2 text-sm rounded-md hover:bg-blue-600 cursor-pointer">
                         Login
                     </a>
                     <?php endif; ?>
                 </div>
+
             </div>
+
         </nav>
     </header>
 
     <main class="grow flex flex-col grow px-[6%] gap-[32px] my-[4rem] items-center">
 
-        <div class="w-[600px] flex flex-col gap-3">
-            <h1 class="text-[24px] text-center font-bold">Pesquisar postos de saúde</h1>
-            <input id="searchInput" class="text-[16px] w-full p-3 border-[1px] rounded-[16px] border-black" type="text"
-                placeholder="Insira a cidade que deseja pesquisar. Ex: Salvador">
+        <div class="w-full md:w-[600px] flex flex-col">
+            <h1 class="text-sm md:text-[24px] text-center font-bold">Pesquisar postos de saúde</h1>
+            <input id="searchInput"
+                class="text-[12px] md:text-[16px] mt-4 w-full p-3 border-[1px] rounded-[16px] border-black" type="text"
+                placeholder="Insira o estado que deseja pesquisar. Ex: PE">
 
         </div>
 
 
-        <table class="min-w-full max-w-[100vw] bg-white border border-gray-200 shadow-md text-nowrap ">
-            <thead class="">
+        <table class="hidden md:block min-w-full bg-white border border-gray-200 shadow-md text-nowrap">
+            <thead>
                 <tr class="bg-[#100E3D] text-left text-xs md:text-sm text-white">
-                    <th class="font-light border-b py-2 px-6 rounded-tl-lg">Nome do Posto
-                    </th>
-                    <th class="font-light p-2 border-b w-1/4">Rua</th>
-                    <th class="font-light p-2 border-b w-1/4">Cidade</th>
-                    <th class="font-light p-2 ">Estado</th>
-                    <th class="font-light p-2 rounded-tr-lg">Ações</th>
+                    <th class="font-light border-b py-2 px-4 md:px-6 rounded-tl-lg w-1/5">Nome do Posto</th>
+                    <th class="font-light p-2 border-b w-full">Rua</th>
+                    <th class="font-light p-2 border-b w-1/5">Cidade</th>
+                    <th class="font-light p-2 w-1/5">Estado</th>
+                    <th class="font-light p-2 rounded-tr-lg w-1/5">Ações</th>
                 </tr>
             </thead>
             <tbody>
-
                 <?php if (empty($posts)): ?>
                 <tr>
-                    <td colspan="6" class="px-4 py-4 text-center text-gray-400">Nenhum posto cadastrado!</td>
+                    <td colspan="5" class="px-4 py-4 text-center text-gray-400">Nenhum posto cadastrado!</td>
                 </tr>
                 <?php endif; ?>
+
                 <?php foreach ($posts as $post): ?>
                 <tr class="hover:bg-gray-50">
-                    <td class="px-6 py-2 border-b text-xs md:text-sm text-gray-800"><?= $post['name'] ?></td>
+                    <td class="px-4 md:px-6 py-2 border-b text-xs md:text-sm text-gray-800"><?= $post['name'] ?>
+                    </td>
                     <td class="px-2 py-2 border-b text-xs md:text-sm text-gray-800"><?= $post['address'] ?></td>
                     <td class="px-2 py-2 border-b text-xs md:text-sm text-gray-800"><?= $post['city'] ?></td>
                     <td class="px-2 py-2 border-b text-xs md:text-sm text-gray-800"><?= $post['state'] ?></td>
-                    <td class="px-2 py-2 border-b text-xs md:text-xs flex gap-2 flex-col md:flex-row">
-
+                    <td class="px-2 py-2 border-b text-xs flex gap-2 flex-col md:flex-row">
                         <a href="./vaccines.php?id=<?= $post['id']; ?>"
-                            class="border-blue-500 border-2 text-blue-500 px-3 py-1 md:text-sm rounded-md transition all hover:bg-blue-500 hover:text-white flex gap-2 items-center">Visualizar
-                            vacinas
+                            class="border-blue-500 border-2 text-blue-500 px-3 py-1 text-xs md:text-sm rounded-md transition-all hover:bg-blue-500 hover:text-white flex gap-2 items-center">
+                            Visualizar vacinas
                             <i class="fa-solid fa-syringe"></i>
                         </a>
                     </td>
@@ -165,6 +167,40 @@ if ($posts) {
                 <?php endforeach; ?>
             </tbody>
         </table>
+
+        <!-- table mobile -->
+        <!-- Mobile cards (postos) -->
+        <section class="block md:hidden grid grid-cols-1 gap-4 w-full">
+            <?php foreach ($posts as $post): ?>
+            <div class="post-card shadow-md p-3 rounded-lg flex flex-col gap-2 text-black text-xs"
+                data-state="<?= strtolower($post['state']) ?>">
+                <div class="flex justify-between w-full">
+                    <span class="font-semibold">Nome:</span>
+                    <span><?= $post['name'] ?></span>
+                </div>
+                <div class="flex justify-between w-full">
+                    <span class="font-semibold">Endereço:</span>
+                    <span><?= $post['address'] ?></span>
+                </div>
+                <div class="flex justify-between w-full">
+                    <span class="font-semibold">Cidade:</span>
+                    <span><?= $post['city'] ?></span>
+                </div>
+                <div class="flex justify-between w-full">
+                    <span class="font-semibold">Estado:</span>
+                    <span><?= $post['state'] ?></span>
+                </div>
+                <div class="flex w-full">
+                    <a href="./vaccines.php?id=<?= $post['id']; ?>"
+                        class="w-full border-blue-500 font-semibold border-[1px] text-[10px] text-blue-500 text-center flex justify-center px-3 py-1 rounded-md transition-all hover:bg-blue-500 hover:text-white flex gap-2 items-center">
+                        Visualizar vacinas
+                        <i class="fa-solid fa-syringe"></i>
+                    </a>
+                </div>
+            </div>
+            <?php endforeach; ?>
+        </section>
+
 
     </main>
 
@@ -201,31 +237,33 @@ if ($posts) {
     <script>
     document.addEventListener("DOMContentLoaded", function() {
         const searchInput = document.getElementById("searchInput");
-        const rows = document.querySelectorAll("table tbody tr");
+
+        const tableRows = document.querySelectorAll("table tbody tr");
+        const mobileCards = document.querySelectorAll(".post-card");
 
         searchInput.addEventListener("input", function() {
             const searchValue = searchInput.value.trim().toLowerCase();
 
-            let foundResults = false;
+            let foundInTable = false;
+            let foundInCards = false;
 
-            rows.forEach(row => {
-                const stateCell = row.cells[2]; // Acessa a 4ª coluna (estado)
-
+            // --- Filtro para tabela (desktop) ---
+            tableRows.forEach(row => {
+                const stateCell = row.cells[2]; // Acessa a 3ª coluna (Estado)
                 if (stateCell) {
                     const stateText = stateCell.textContent.trim().toLowerCase();
-
                     if (stateText.includes(searchValue)) {
-                        row.style.display = ""; // Exibe a linha
-                        foundResults = true;
+                        row.style.display = "";
+                        foundInTable = true;
                     } else {
-                        row.style.display = "none"; // Oculta a linha
+                        row.style.display = "none";
                     }
                 }
             });
 
-            // Exibe ou esconde a linha de "Nenhum posto encontrado!"
+            // Remove ou adiciona "Nenhum posto encontrado!" na tabela
             const noResultsRow = document.querySelector(".no-results");
-            if (!foundResults) {
+            if (!foundInTable) {
                 if (!noResultsRow) {
                     const noResults = document.createElement("tr");
                     noResults.classList.add("no-results");
@@ -233,21 +271,32 @@ if ($posts) {
                         '<td colspan="5" class="px-4 py-4 text-center text-gray-400">Nenhum posto encontrado!</td>';
                     document.querySelector("table tbody").appendChild(noResults);
                 }
-            } else {
-                const noResults = document.querySelector(".no-results");
-                if (noResults) {
-                    noResults.remove(); // Remove a linha de "Nenhum posto encontrado!"
-                }
+            } else if (noResultsRow) {
+                noResultsRow.remove();
             }
+
+            // --- Filtro para cards (mobile) ---
+            mobileCards.forEach(card => {
+                const state = card.dataset.state;
+                if (state.includes(searchValue)) {
+                    card.style.display = "";
+                    foundInCards = true;
+                } else {
+                    card.style.display = "none";
+                }
+            });
+
+            // Opcional: mostrar mensagem no mobile se quiser (ex: <div id="noMobileResults">Nenhum posto encontrado</div>)
+            // Basta adicionar e usar `document.getElementById('noMobileResults').style.display = foundInCards ? 'none' : 'block';`
         });
     });
-
 
     function toggleMenu() {
         document.getElementById('mobileMenu').classList.toggle('hidden');
     }
     </script>
 
-    </main>
+
+</body>
 
 </html>

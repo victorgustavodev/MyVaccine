@@ -27,7 +27,7 @@ if (isset($_SESSION['user_id']) && $_SESSION['user_role'] === 'admin') {
     
     <header>
         <nav class="px-[6%] h-[8vh] flex justify-between items-center shadow-lg navbar text-[#100E3D] relative">
-            <a href="/"><img src="./assets/img/logo.png" alt="logo" class="md:hidden w-[190px]" /></a>
+            <a href=""><img src="./assets/img/logo.png" alt="logo" class="md:hidden w-[190px]" /></a>
 
 
             <!-- Desktop Menu -->
@@ -73,15 +73,14 @@ if (isset($_SESSION['user_id']) && $_SESSION['user_role'] === 'admin') {
 
             <!-- Mobile Menu -->
             <div id="mobileMenu"
-                class="hidden absolute top-[8vh] left-0 w-full bg-white shadow-md md:hidden flex flex-col items-center p-4">
+                class="hidden absolute top-[8vh] right-0 w-2/3 rounded-br-lg rounded-bl-lg bg-white shadow-md md:hidden flex flex-col items-center p-4">
                 <ul class="flex flex-col items-center gap-4 text-[14px]">
                     <li class="cursor-pointer font-semibold"><a href="#">Home</a></li>
                     <li class="cursor-pointer hover:font-semibold"><a href="./pages/posts.php">Postos de Vacinação</a>
                     </li>
-                    <li class="cursor-pointer hover:font-semibold">Histórico de Vacinas</li>
-                    <li class="cursor-pointer hover:font-semibold">Sobre</li>
+                    <li class="cursor-pointer hover:font-semibold"><a href="./pages/history-vaccine.php">Histórico de vacinação</a></li>
                 </ul>
-                <div class="mt-4">
+                <div class="mt-6 mb-3">
                     <?php if(isset($_SESSION['cpf'])): ?>
                     <a href="./routes/logout.php"
                         class="bg-red-500 text-white px-4 py-2 text-sm rounded-md hover:bg-red-600 cursor-pointer">
@@ -94,6 +93,7 @@ if (isset($_SESSION['user_id']) && $_SESSION['user_role'] === 'admin') {
                     </a>
                     <?php endif; ?>
                 </div>
+
             </div>
         </nav>
     </header>

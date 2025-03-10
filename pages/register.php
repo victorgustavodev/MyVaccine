@@ -74,13 +74,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <script src="https://kit.fontawesome.com/c8e307d42e.js" crossorigin="anonymous"></script>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet" />
     <link rel="icon" type="image/x-icon" href="../assets/img/icon.png">
-    <title>Register - My Vaccine</title>
+    <title>Cadastro - My Vaccine</title>
 </head>
 
 <body class="overflow-x-hidden 2xl:h-screen">
 
     <nav class="px-[6%] h-[8vh] flex justify-between items-center shadow-lg navbar text-[#100E3D] relative">
-        <a href="/"><img src="../assets/img/logo.png" alt="logo" class="md:hidden w-[190px]" /></a>
+    <a href="../index.php"><img src="../assets/img/logo.png" alt="logo" class="md:hidden w-[190px]" /></a>
 
 
         <!-- Desktop Menu -->
@@ -124,27 +124,30 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
         <!-- Mobile Menu -->
         <div id="mobileMenu"
-            class="hidden absolute top-[8vh] left-0 w-full bg-white shadow-md md:hidden flex flex-col items-center p-4">
+            class="hidden absolute top-[8vh] right-0 w-2/3 rounded-br-lg rounded-bl-lg bg-white shadow-md md:hidden flex flex-col items-center p-4">
             <ul class="flex flex-col items-center gap-4 text-[14px]">
-                <li class="cursor-pointer font-semibold"><a href="#">Home</a></li>
-                <li class="cursor-pointer hover:font-semibold"><a href="./pages/posts.php">Postos de Vacinação</a></li>
-                <li class="cursor-pointer hover:font-semibold">Histórico de Vacinas</li>
-                <li class="cursor-pointer hover:font-semibold">Sobre</li>
+                <li class="cursor-pointer hover:font-semibold"><a href="../index.php">Home</a></li>
+                <li class="cursor-pointer hover:font-semibold"><a href="./posts.php">Postos de Vacinação</a>
+                </li>
+                <li class="cursor-pointer hover:font-semibold"><a href="./history-vaccine.php">Histórico de
+                        vacinação</a></li>
             </ul>
-            <div class="mt-4">
+            <div class="mt-6 mb-3">
                 <?php if(isset($_SESSION['cpf'])): ?>
-                <a href="./routes/logout.php"
+                <a href="../routes/logout.php"
                     class="bg-red-500 text-white px-4 py-2 text-sm rounded-md hover:bg-red-600 cursor-pointer">
                     Sair
                 </a>
                 <?php else: ?>
-                <a href="./pages/login.php"
+                <a href="./login.php"
                     class="bg-blue-500 text-white px-4 py-2 text-sm rounded-md hover:bg-blue-600 cursor-pointer">
                     Login
                 </a>
                 <?php endif; ?>
             </div>
+
         </div>
+
     </nav>
 
     <div class="w-full h-full flex h-[92%] justify-center">

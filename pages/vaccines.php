@@ -47,14 +47,14 @@ $stocks = $stmt_stocks->fetchAll(PDO::FETCH_ASSOC);
     <script src="https://kit.fontawesome.com/c8e307d42e.js" crossorigin="anonymous"></script>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet" />
     <link rel="icon" type="image/x-icon" href="../assets/img/icon.png">
-    <title>Estoque de vacinas</title>
+    <title>Estoque de vacinas - My Vaccine</title>
 </head>
 
 <body class="overflow-x-hidden flex flex-col text-[#100E3D] min-h-screen">
 
 
     <nav class="px-[6%] h-[8vh] flex justify-between items-center shadow-lg navbar text-[#100E3D] relative">
-        <a href="/"><img src="../assets/img/logo.png" alt="logo" class="md:hidden w-[190px]" /></a>
+        <a href="../index.php"><img src="../assets/img/logo.png" alt="logo" class="md:hidden w-[190px]" /></a>
 
 
         <!-- Desktop Menu -->
@@ -103,66 +103,67 @@ $stocks = $stmt_stocks->fetchAll(PDO::FETCH_ASSOC);
 
         <!-- Mobile Menu -->
         <div id="mobileMenu"
-            class="hidden absolute top-[8vh] left-0 w-full bg-white shadow-md md:hidden flex flex-col items-center p-4">
+            class="hidden absolute top-[8vh] right-0 w-2/3 rounded-br-lg rounded-bl-lg bg-white shadow-md md:hidden flex flex-col items-center p-4">
             <ul class="flex flex-col items-center gap-4 text-[14px]">
-                <li class="cursor-pointer font-semibold"><a href="#">Home</a></li>
-                <li class="cursor-pointer hover:font-semibold"><a href="./pages/posts.php">Postos de Vacinação</a></li>
-                <li class="cursor-pointer hover:font-semibold">Histórico de Vacinas</li>
-                <li class="cursor-pointer hover:font-semibold">Sobre</li>
+                <li class="cursor-pointer hover:font-semibold"><a href="../index.php">Home</a></li>
+                <li class="cursor-pointer hover:font-semibold"><a href="./posts.php">Postos de Vacinação</a>
+                </li>
+                <li class="cursor-pointer hover:font-semibold"><a href="./history-vaccine.php">Histórico de
+                        vacinação</a></li>
             </ul>
-            <div class="mt-4">
+            <div class="mt-6 mb-3">
                 <?php if(isset($_SESSION['cpf'])): ?>
-                <a href="./routes/logout.php"
+                <a href="../routes/logout.php"
                     class="bg-red-500 text-white px-4 py-2 text-sm rounded-md hover:bg-red-600 cursor-pointer">
                     Sair
                 </a>
                 <?php else: ?>
-                <a href="./pages/login.php"
+                <a href="./login.php"
                     class="bg-blue-500 text-white px-4 py-2 text-sm rounded-md hover:bg-blue-600 cursor-pointer">
                     Login
                 </a>
                 <?php endif; ?>
             </div>
+
         </div>
     </nav>
 
     <main class="flex flex-col px-[6%] gap-[32px] my-[4rem] grow items-center">
 
-        <div class="w-[600px] flex flex-col gap-3">
-            <h1 class="text-[24px] text-center font-bold">Filtrar vacinas</h1>
+        <div class="w-full md:w-[600px] flex flex-col gap-3">
+            <h1 class="text-[16px] md:text-[24px] text-center font-bold">Filtrar vacinas</h1>
             <div class="flex items-center gap-3">
                 <a href='posts.php'>
-                    <i class="fa-solid fa-arrow-left text-[24px]"></i>
+                    <i class="fa-solid fa-arrow-left text-[20px] md:text-[24px]"></i>
                 </a>
-                <input id="searchInput" class="text-[16px] w-full p-3 border-[1px] rounded-[16px] border-black flex"
+                <input id="searchInput"
+                    class="text-[12px] md:text-[16px] w-full p-3 border-[1px] rounded-[16px] border-black flex"
                     type="text" placeholder="Insira o nome da vacina">
             </div>
         </div>
 
-        <table class="min-w-full max-w-[100vw] bg-white border border-gray-200 shadow-md text-nowrap">
+        <!-- Tabela Desktop -->
+        <table class="hidden md:table min-w-full max-w-[100vw] bg-white border border-gray-200 shadow-md text-nowrap">
             <thead>
                 <tr class="bg-[#100E3D] text-left text-xs md:text-sm text-white">
-                    <th class="font-light py-3 px-2 p w-1/5 border-b rounded-tl-lg">Vacina</th>
+                    <th class="font-light py-3 px-2 w-1/5 border-b rounded-tl-lg">Vacina</th>
                     <th class="font-light px-2 py-2 border-b w-1/5">Quantidade em estoque</th>
                     <th class="font-light px-2 py-2 border-b w-1/5">Faixa Etária</th>
                     <th class="font-light px-2 py-2 border-b w-1/5 rounded-tr-lg">Contraindicações</th>
-
                 </tr>
             </thead>
 
             <tbody>
-
                 <?php if (empty($stocks)): ?>
                 <tr>
-                    <td colspan="6" class="px-4 py-4 text-center text-gray-400">Nenhuma vacina cadastrada nesse
-                        posto!</td>
+                    <td colspan="4" class="px-4 py-4 text-center text-gray-400">Nenhuma vacina cadastrada nesse posto!
+                    </td>
                 </tr>
                 <?php endif; ?>
 
                 <?php foreach ($stocks as $stock): ?>
                 <tr class="hover:bg-gray-50">
-                    <td class="px-2 py-2 border-b text-xs md:text-sm text-gray-800"><?= $stock['vaccine_name'] ?>
-                    </td>
+                    <td class="px-2 py-2 border-b text-xs md:text-sm text-gray-800"><?= $stock['vaccine_name'] ?></td>
                     <td class="px-2 py-2 border-b text-xs md:text-sm text-gray-800"><?= $stock['quantity'] ?></td>
                     <td class="px-2 py-2 border-b text-xs md:text-sm text-gray-800">
                         <?= $stock['min_age'] ?> - <?= $stock['max_age'] ?? 'Sem limite' ?> anos
@@ -170,15 +171,39 @@ $stocks = $stmt_stocks->fetchAll(PDO::FETCH_ASSOC);
                     <td class="px-2 py-2 border-b text-xs md:text-sm text-gray-800">
                         <?= $stock['contraindications'] ?: 'Nenhuma' ?>
                     </td>
-
-
                 </tr>
                 <?php endforeach; ?>
-
             </tbody>
         </table>
 
+        <!-- Mobile cards -->
+        <section class="block md:hidden grid grid-cols-1 gap-4 w-full">
+            <?php foreach ($stocks as $stock): ?>
+            <div class="vaccine-card shadow-md p-3 rounded-lg flex flex-col gap-2 text-black text-xs"
+                data-name="<?= strtolower($stock['vaccine_name']) ?>">
+                <div class="flex justify-between w-full">
+                    <span class="font-semibold">Vacina:</span>
+                    <span><?= $stock['vaccine_name'] ?></span>
+                </div>
+                <div class="flex justify-between w-full">
+                    <span class="font-semibold">Quantidade:</span>
+                    <span><?= $stock['quantity'] ?></span>
+                </div>
+                <div class="flex justify-between w-full">
+                    <span class="font-semibold">Faixa Etária:</span>
+                    <span><?= $stock['min_age'] ?> - <?= $stock['max_age'] ?? 'Sem limite' ?> anos</span>
+                </div>
+                <div class="flex justify-between w-full">
+                    <span class="font-semibold">Contraindicações:</span>
+                    <span><?= $stock['contraindications'] ?: 'Nenhuma' ?></span>
+                </div>
+            </div>
+            <?php endforeach; ?>
+        </section>
+
+
     </main>
+
 
     <footer class=" bg-[#100E3D] text-white py-8 md:mt-12 px-[6%]">
         <div class="container mx-auto flex flex-col md:flex-row justify-between items-center">
@@ -209,34 +234,35 @@ $stocks = $stmt_stocks->fetchAll(PDO::FETCH_ASSOC);
         </div>
 
     </footer>
-
     <script>
     document.addEventListener("DOMContentLoaded", function() {
         const searchInput = document.getElementById("searchInput");
-        const rows = document.querySelectorAll("table tbody tr");
+
+        const tableRows = document.querySelectorAll("table tbody tr");
+        const mobileCards = document.querySelectorAll(".vaccine-card");
 
         searchInput.addEventListener("input", function() {
             const searchValue = searchInput.value.trim().toLowerCase();
-            let foundResults = false;
+            let foundInTable = false;
+            let foundInCards = false;
 
-            rows.forEach(row => {
-                const vaccineCell = row.cells[0]; // Acessa a 1ª coluna (vacina)
-
+            // --- Filtro para tabela (desktop) ---
+            tableRows.forEach(row => {
+                const vaccineCell = row.cells[0];
                 if (vaccineCell) {
                     const vaccineText = vaccineCell.textContent.trim().toLowerCase();
-
                     if (vaccineText.includes(searchValue)) {
-                        row.style.display = ""; // Exibe a linha
-                        foundResults = true;
+                        row.style.display = "";
+                        foundInTable = true;
                     } else {
-                        row.style.display = "none"; // Oculta a linha
+                        row.style.display = "none";
                     }
                 }
             });
 
-            // Exibe ou esconde a linha de "Nenhuma vacina encontrada!"
+            // Remove linha "nenhuma vacina encontrada" (desktop)
             const noResultsRow = document.querySelector(".no-results");
-            if (!foundResults) {
+            if (!foundInTable) {
                 if (!noResultsRow) {
                     const noResults = document.createElement("tr");
                     noResults.classList.add("no-results");
@@ -244,15 +270,27 @@ $stocks = $stmt_stocks->fetchAll(PDO::FETCH_ASSOC);
                         '<td colspan="4" class="px-4 py-4 text-center text-gray-400">Nenhuma vacina encontrada!</td>';
                     document.querySelector("table tbody").appendChild(noResults);
                 }
-            } else {
-                const noResults = document.querySelector(".no-results");
-                if (noResults) {
-                    noResults.remove(); // Remove a linha de "Nenhuma vacina encontrada!"
-                }
+            } else if (noResultsRow) {
+                noResultsRow.remove();
             }
+
+            // --- Filtro para cards (mobile) ---
+            mobileCards.forEach(card => {
+                const name = card.dataset.name;
+                if (name.includes(searchValue)) {
+                    card.style.display = "";
+                    foundInCards = true;
+                } else {
+                    card.style.display = "none";
+                }
+            });
+
+            // Opcional: pode exibir mensagem no mobile também se quiser
+            // (exemplo: criar uma div com texto e mostrar/esconder com JS)
         });
     });
     </script>
+
 </body>
 
 </html>
