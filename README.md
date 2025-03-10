@@ -105,11 +105,12 @@ Este projeto está licenciado sob a Licença MIT. Consulte o arquivo [📜 LICEN
 
 ## 💼 Colaboradores
 
-- Victor Gustavo
-- Camila Lídia
-- Hatus Luiz
-- Rafael José
-- Luiz Fernando
+- Camila Lídia ( Prototipação )
+- Hatus Luiz ( Product Owner )
+- Luiz Fernando ( Scrum Master )
+- Rafael José ( Front-End )
+- Victor Gustavo ( Full-Stack )
+
 
 
 <!--Desenvolvido por [Victor Gustavo](https://github.com/victorgustavodev).-->
