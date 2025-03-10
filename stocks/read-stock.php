@@ -85,9 +85,6 @@ $stocks = $stmt_stocks->fetchAll(PDO::FETCH_ASSOC);
                 </a>
             </div>
 
-
-           
-
         </div>
 
         <a href="../admin/logout-admin.php">

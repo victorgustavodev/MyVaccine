@@ -14,7 +14,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $password = $_POST['password'];
 
     // Verifica se o input é um CPF (somente números)
-    if (preg_match('/^[0-9]{11}$/', $login)) {
+    
+    if (!preg_match('/@/', $login)){
+        $login_verify = preg_replace('/[^0-9]/', '', $login);
+    } else {
+        $login_verify = $login;
+    }
+
+    if (preg_match('/^[0-9]{11}$/', $login_verify)) {
         $query = "SELECT * FROM users WHERE cpf = ?";
     } else {
         $query = "SELECT * FROM users WHERE email = ?";
@@ -22,7 +29,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     // Prepara e executa a query
     $stmt = $pdo->prepare($query);
-    $stmt->execute([$login]);
+    $stmt->execute([$login_verify]);
     $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
     // Verifica se usuário existe e se a senha está correta

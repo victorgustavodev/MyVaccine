@@ -134,8 +134,9 @@ $stocks = $stmt_stocks->fetchAll(PDO::FETCH_ASSOC);
                 <a href='posts.php'>
                     <i class="fa-solid fa-arrow-left text-[24px]"></i>
                 </a>
-        <input id="searchInput" class="text-[16px] w-full p-3 border-[1px] rounded-[16px] border-black flex" type="text" placeholder="Insira o nome da vacina">
-    </div>
+                <input id="searchInput" class="text-[16px] w-full p-3 border-[1px] rounded-[16px] border-black flex"
+                    type="text" placeholder="Insira o nome da vacina">
+            </div>
         </div>
 
         <table class="min-w-full max-w-[100vw] bg-white border border-gray-200 shadow-md text-nowrap">
@@ -209,7 +210,49 @@ $stocks = $stmt_stocks->fetchAll(PDO::FETCH_ASSOC);
 
     </footer>
 
-    <script src="../assets/js/filter.js"></script>
+    <script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const searchInput = document.getElementById("searchInput");
+        const rows = document.querySelectorAll("table tbody tr");
+
+        searchInput.addEventListener("input", function() {
+            const searchValue = searchInput.value.trim().toLowerCase();
+            let foundResults = false;
+
+            rows.forEach(row => {
+                const vaccineCell = row.cells[0]; // Acessa a 1ª coluna (vacina)
+
+                if (vaccineCell) {
+                    const vaccineText = vaccineCell.textContent.trim().toLowerCase();
+
+                    if (vaccineText.includes(searchValue)) {
+                        row.style.display = ""; // Exibe a linha
+                        foundResults = true;
+                    } else {
+                        row.style.display = "none"; // Oculta a linha
+                    }
+                }
+            });
+
+            // Exibe ou esconde a linha de "Nenhuma vacina encontrada!"
+            const noResultsRow = document.querySelector(".no-results");
+            if (!foundResults) {
+                if (!noResultsRow) {
+                    const noResults = document.createElement("tr");
+                    noResults.classList.add("no-results");
+                    noResults.innerHTML =
+                        '<td colspan="4" class="px-4 py-4 text-center text-gray-400">Nenhuma vacina encontrada!</td>';
+                    document.querySelector("table tbody").appendChild(noResults);
+                }
+            } else {
+                const noResults = document.querySelector(".no-results");
+                if (noResults) {
+                    noResults.remove(); // Remove a linha de "Nenhuma vacina encontrada!"
+                }
+            }
+        });
+    });
+    </script>
 </body>
 
 </html>

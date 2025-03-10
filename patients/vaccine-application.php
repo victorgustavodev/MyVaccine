@@ -16,6 +16,7 @@ $vacinas = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $cpf = $_POST['cpf'];
+    $cpf_numerico = preg_replace('/[^0-9]/', '', $cpf);
     $vaccine_id = $_POST['vaccine_id'];
     $post_id = $_POST['post_id'];
 
@@ -32,7 +33,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
             // Inserir no histórico de vacinação
             $stmt = $pdo->prepare("INSERT INTO vaccination_history (user_cpf, vaccine_id, post_id, batch, application_date) VALUES (?, ?, ?, ?, NOW())");
-            $stmt->execute([$cpf, $vaccine_id, $post_id, $batch]);
+            $stmt->execute([$cpf_numerico, $vaccine_id, $post_id, $batch]);
 
             // Atualizar o estoque
             $stmt = $pdo->prepare("UPDATE stocks SET quantity = quantity - 1 WHERE vaccine_id = ? AND post_id = ?");
@@ -41,7 +42,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             $success_message = "Vacina aplicada com sucesso!";
         }
     } catch (PDOException $e) {
-        echo "Erro: " . $e->getMessage();
+        // echo "Erro: " . $e->getMessage();
+        $error_message = "CPF incorreto. Verifique e tente novamente!";
         
     }
 }
@@ -103,13 +105,13 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     <main class="flex justify-center items-center w-screen">
         <div class="bg-white p-8 rounded shadow-md w-96">
             <h2 class="text-xl font-bold mb-4">Aplicar Vacina</h2>
-            <?php if (isset($error_message)) echo "<p class='text-red-500'>$error_message</p>"; ?>
-            <?php if (isset($success_message)) echo "<p class='text-green-500'>$success_message</p>"; ?>
+            <?php if (isset($error_message)) echo "<p class='text-red-500 pb-4'>$error_message</p>"; ?>
+            <?php if (isset($success_message)) echo "<p class='text-green-500  pb-4'>$success_message</p>"; ?>
 
             <form method="POST" action="./vaccine-application.php">
                 <label class="block mb-2">CPF do Paciente:</label>
                 <input type="text" name="cpf" required pattern="\d{3}\.?\d{3}\.?\d{3}-?\d{2}"
-                    placeholder="Ex: 123.456.789-00" class="w-full border p-2 rounded mb-4">
+                    placeholder="Ex: 123.456.789.10" class="w-full border p-2 rounded mb-4">
 
                 <label class="block mb-2">Posto de Vacinação:</label>
                 <select name="post_id" required class="w-full border p-2 rounded mb-4">

@@ -41,7 +41,7 @@ if ($posts) {
     <title>My Vaccine</title>
 </head>
 
-<body class="overflow-x-hidden min-h-screen text-[#100E3D]">
+<body class="overflow-x-hidden min-h-screen text-[#100E3D] flex flex-col min-h-screen">
 
     <header>
         <nav class="px-[6%] h-[8vh] flex justify-between items-center shadow-lg navbar text-[#100E3D] relative">
@@ -65,7 +65,7 @@ if ($posts) {
                         <li class="cursor-pointer hover:font-semibold">
                             <a href="./history-vaccine.php" class="cursor-pointer hover:font-semibold">histórico de
                                 vacinas</a>
-    
+
                         </li>
                     </ul>
 
@@ -119,12 +119,12 @@ if ($posts) {
         </nav>
     </header>
 
-    <main class="h-[70vh] flex flex-col grow px-[6%] gap-[32px] my-[4rem] items-center">
+    <main class="grow flex flex-col grow px-[6%] gap-[32px] my-[4rem] items-center">
 
         <div class="w-[600px] flex flex-col gap-3">
             <h1 class="text-[24px] text-center font-bold">Pesquisar postos de saúde</h1>
             <input id="searchInput" class="text-[16px] w-full p-3 border-[1px] rounded-[16px] border-black" type="text"
-                placeholder="Insira o estado que deseja pesquisar. Ex: SP">
+                placeholder="Insira a cidade que deseja pesquisar. Ex: Salvador">
 
         </div>
 
@@ -198,8 +198,56 @@ if ($posts) {
 
     </footer>
 
-    <script src="../assets/js/index.js"></script>
-    <script src="../assets/js/filter.js"></script>
+    <script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const searchInput = document.getElementById("searchInput");
+        const rows = document.querySelectorAll("table tbody tr");
+
+        searchInput.addEventListener("input", function() {
+            const searchValue = searchInput.value.trim().toLowerCase();
+
+            let foundResults = false;
+
+            rows.forEach(row => {
+                const stateCell = row.cells[2]; // Acessa a 4ª coluna (estado)
+
+                if (stateCell) {
+                    const stateText = stateCell.textContent.trim().toLowerCase();
+
+                    if (stateText.includes(searchValue)) {
+                        row.style.display = ""; // Exibe a linha
+                        foundResults = true;
+                    } else {
+                        row.style.display = "none"; // Oculta a linha
+                    }
+                }
+            });
+
+            // Exibe ou esconde a linha de "Nenhum posto encontrado!"
+            const noResultsRow = document.querySelector(".no-results");
+            if (!foundResults) {
+                if (!noResultsRow) {
+                    const noResults = document.createElement("tr");
+                    noResults.classList.add("no-results");
+                    noResults.innerHTML =
+                        '<td colspan="5" class="px-4 py-4 text-center text-gray-400">Nenhum posto encontrado!</td>';
+                    document.querySelector("table tbody").appendChild(noResults);
+                }
+            } else {
+                const noResults = document.querySelector(".no-results");
+                if (noResults) {
+                    noResults.remove(); // Remove a linha de "Nenhum posto encontrado!"
+                }
+            }
+        });
+    });
+
+
+    function toggleMenu() {
+        document.getElementById('mobileMenu').classList.toggle('hidden');
+    }
+    </script>
+
     </main>
 
 </html>
