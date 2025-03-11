@@ -240,7 +240,7 @@ if (isset($_SESSION['user_id']) && $_SESSION['user_role'] === 'admin') {
 
 <script>
 function toggleMenu() {
-    document.getElementById('mobileMenu').classList.toggle('hidden');
+    document.getElementById('mobileMenu').classList.toggleMenu('hidden');
 }
 </script>
 </body>

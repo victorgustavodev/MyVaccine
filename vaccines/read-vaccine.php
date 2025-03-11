@@ -58,9 +58,9 @@ $vaccines = $stmt->fetchAll(PDO::FETCH_ASSOC); // Recupera todos os registros
                 </a>
             </div>
 
-           
 
-           
+
+
 
         </div>
 
@@ -114,16 +114,11 @@ $vaccines = $stmt->fetchAll(PDO::FETCH_ASSOC); // Recupera todos os registros
                         </td>
 
                         <td class="px-2 py-2 border-b text-xs md:text-xs">
-                            <div class="flex flex-col md:flex-row gap-2"><a
-                                    href="../vaccines/update-vaccine.php?id=<?= $vaccine['id']; ?>"
-                                    class="h-full border-blue-500 border-2 text-blue-500 px-3 py-1 md:text-sm rounded-md transition all hover:bg-blue-500 hover:text-white flex gap-2 items-center">
-                                    Editar <i class="fa-solid fa-pencil"></i>
-                                </a>
                                 <a href="../vaccines/delete-vaccine.php?id=<?= $vaccine['id']; ?>"
+                                    onclick="return confirm('Tem certeza que deseja excluir esta vacina?');"
                                     class="h-full border-red-500 border-2 text-red-500 px-3 py-1 md:text-sm rounded-md transition all hover:bg-red-500 hover:text-white flex gap-2 items-center">
                                     Excluir <i class="fa-solid fa-trash"></i>
                                 </a>
-                            </div>
                         </td>
 
                     </tr>

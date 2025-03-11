@@ -23,7 +23,8 @@ CREATE TABLE posts (
     name VARCHAR(100) NOT NULL,
     address VARCHAR(100) NOT NULL,
     city VARCHAR(50) NOT NULL,
-    state VARCHAR(2) NOT NULL
+    state VARCHAR(2) NOT NULL,
+    status ENUM('ativo', 'inativo') NOT NULL DEFAULT 'ativo'
 );
 
 -- Tabela de vacinas

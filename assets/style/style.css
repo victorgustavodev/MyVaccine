@@ -3,3 +3,12 @@
 * {
     font-family: "Poppins", serif;
   }
+
+
+.isOpen {
+ left: 55px;
+}
+
+.isClosed {
+  left: 0px;
+}

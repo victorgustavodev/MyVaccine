@@ -41,7 +41,7 @@ if ($posts) {
 
 <body class="bg-gray-100 h-screen flex">
 
-    <nav class="flex flex-col justify-between p-5 items-center border-r-2">
+    <nav id="mobileMenu" class="flex flex-col justify-between transition-all relative p-5 items-center border-r-2">
         <div class="flex flex-col items-center gap-4">
             <a href="../posts/read-post.php"><img src="../assets/img/logo-mobile.png" class="w-[36px]"
                     alt="logo my-vaccine"></a>
@@ -64,11 +64,6 @@ if ($posts) {
                     <i class="fa-solid fa-syringe text-[20px] text-gray-400 hover:text-black transition all"></i>
                 </a>
             </div>
-
-            
-
-           
-
         </div>
 
         <a href="../admin/logout-admin.php">
@@ -77,6 +72,11 @@ if ($posts) {
         </a>
 
     </nav>
+
+    <button id="btn" onclick="toggleMenu()"
+        class="block sm:hidden fixed p-2 bg-white top-3 rounded-md left-[50px] transition-all">
+        <i id="icon-arrow" class="fa-solid fa-xmark block text-[16px]"></i>
+    </button>
 
     <!-- Modal Cadastrar posto -->
     <div id="modal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
@@ -213,53 +213,88 @@ if ($posts) {
             <table class="min-w-full max-w-[100vw] bg-white border border-gray-200 shadow-md text-nowrap">
                 <thead>
                     <tr class="bg-[#EEEEEE] text-left text-xs md:text-sm text-[#B5B7C0]">
-                        <th class="font-light border-b py-2 px-6">Nome do Posto
-                        </th>
+                        <th class="font-light border-b py-2 px-6">Nome do Posto</th>
                         <th class="font-light p-2 border-b w-1/4">Rua</th>
                         <th class="font-light p-2 border-b w-1/4">Cidade</th>
-                        <th class="font-light p-2 ">Estado</th>
+                        <th class="font-light p-2">Estado</th>
                         <th class="font-light p-2">Ações</th>
+                        <th class="font-light p-2">Status</th> <!-- A célula de Status deve ficar no final da linha -->
                     </tr>
                 </thead>
                 <tbody>
 
                     <?php if (empty($posts)): ?>
                     <tr>
-                        <td colspan="6" class="px-4 py-4 text-center text-gray-400">Nenhum posto cadastrado!</td>
+                        <td colspan="6" class="px-4 py-3 text-center text-gray-400">Nenhum posto cadastrado!</td>
                     </tr>
                     <?php endif; ?>
                     <?php foreach ($posts as $post): ?>
                     <tr class="hover:bg-gray-50">
-                        <td class="px-6 py-2 border-b text-xs md:text-sm text-gray-800"><?= $post['name'] ?></td>
-                        <td class="px-2 py-2 border-b text-xs md:text-sm text-gray-800"><?= $post['address'] ?></td>
-                        <td class="px-2 py-2 border-b text-xs md:text-sm text-gray-800"><?= $post['city'] ?></td>
-                        <td class="px-2 py-2 border-b text-xs md:text-sm text-gray-800"><?= $post['state'] ?></td>
-                        <td class="px-2 py-2 border-b text-xs md:text-xs flex gap-2 flex-col md:flex-row">
-
+                        <td class="px-6 py-3 border-b text-xs md:text-sm text-gray-800"><?= $post['name'] ?></td>
+                        <td class="px-2 py-3 border-b text-xs md:text-sm text-gray-800"><?= $post['address'] ?></td>
+                        <td class="px-2 py-3 border-b text-xs md:text-sm text-gray-800"><?= $post['city'] ?></td>
+                        <td class="px-2 py-3 border-b text-xs md:text-sm text-gray-800"><?= $post['state'] ?></td>
+                        <td class="pl-2 pr-4 py-3 border-b text-xs md:text-xs flex gap-2 flex-col md:flex-row">
                             <a href="../stocks/read-stock.php?id=<?= $post['id']; ?>"
                                 class="border-green-500 border-2 text-green-500 px-3 py-1 md:text-sm rounded-md transition all hover:bg-green-500 hover:text-white flex gap-2 items-center">Gerenciar
-                                estoque
-                                <i class="fa-solid fa-suitcase-medical"></i>
-                            </a>
+                                estoque <i class="fa-solid fa-suitcase-medical"></i></a>
 
                             <button
                                 class="h-full border-blue-500 border-2 text-blue-500 px-3 py-1 md:text-sm rounded-md transition all hover:bg-blue-500 hover:text-white flex gap-2 items-center"
-                                onclick="openEditModal(<?= $post['id']; ?>)">Editar <i class="fa-solid fa-pencil"></i>
-                            </button>
-
-                            <button
+                                onclick="openEditModal(<?= $post['id']; ?>)">Editar <i
+                                    class="fa-solid fa-pencil"></i></button>
+                            <?php if ($post['status'] === 'ativo'): ?>
+                            <a href="./disable-post.php?id=<?= $post['id']; ?>"
                                 class="h-full border-red-500 border-2 text-red-500 px-3 py-1 md:text-sm rounded-md transition all hover:bg-red-500 hover:text-white flex gap-2 items-center"
-                                onclick="excluirPost(<?=$post['id'];?>)">Excluir
-                                <i class="fa-solid fa-trash"></i>
-                            </button>
+                                onclick="return confirm('Tem certeza que deseja desativar este posto?');">
+                                Desativar posto <i class="fa-solid fa-power-off"></i>
+                            </a>
+                            <?php elseif ($post['status'] === 'inativo'): ?>
+                            <a href="./active-post.php?id=<?= $post['id']; ?>"
+                                class="h-full border-green-500 border-2 text-green-500 px-3 py-1 md:text-sm rounded-md transition all hover:bg-green-500 hover:text-white flex gap-2 items-center"
+                                onclick="return confirm('Tem certeza que deseja ativar este posto?');">
+                                Ativar posto <i class="fa-solid fa-power-off"></i>
+                            </a>
+                            <?php endif; ?>
+
+
+
                         </td>
+
+                        <td class="p-2 py-3 border-b text-xs md:text-xs text-center uppercase">
+                            <?= $post['status'] ?>
+                        </td>
+
                     </tr>
                     <?php endforeach; ?>
                 </tbody>
             </table>
+
+
         </div>
     </section>
+
+
     <script src="../assets/js/index.js"></script>
+    <script>
+    let icon = document.getElementById('icon-arrow');
+    let btn = document.getElementById('btn');
+
+    function toggleMenu() {
+        const menu = document.getElementById('mobileMenu');
+        menu.classList.toggle('hidden');
+
+        if (icon.classList.contains("fa-xmark")) {
+            icon.classList.remove("fa-xmark");
+            icon.classList.add("fa-bars");
+            btn.classList.add("left-[20px]");
+        } else {
+            icon.classList.remove("fa-bars");
+            icon.classList.add("fa-xmark");
+            btn.classList.remove("left-[20px]");
+        }
+    }
+    </script>
 </body>
 
 </html>
