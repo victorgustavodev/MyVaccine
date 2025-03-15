@@ -4,7 +4,7 @@ require_once "../routes/db-connection.php";
 
 header('Content-Type: application/json');
 
-if (!isset($_SESSION['user_id']) || $_SESSION['user_role'] !== 'admin') {
+if (!isset($_SESSION['name']) || $_SESSION['user_role'] !== 'admin') {
     echo json_encode(["success" => false, "message" => "Acesso negado."]);
     exit;
 }

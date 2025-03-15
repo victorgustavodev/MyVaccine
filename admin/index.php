@@ -5,7 +5,7 @@ session_start();
 if (isset($_SESSION['user_role']) && $_SESSION['user_role'] === 'admin') {
     header('Location: ../posts/read-post.php');
     exit;
-} elseif (!isset($_SESSION['user_id'])) {
+} elseif (!isset($_SESSION['name'])) {
 }
 
 
