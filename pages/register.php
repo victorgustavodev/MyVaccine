@@ -65,7 +65,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 <!DOCTYPE html>
 <html>
-
+<script src="../assets/js/password.js"></script>
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -202,17 +202,23 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 </div>
 
                 <!-- Senha -->
-                <div class="flex flex-col gap-2">
-                    <label for="password">Senha:</label>
-                    <input type="password" name="password" id="password" class="border-2 p-2 2xl:p-3 rounded-lg"
-                        placeholder="Digite sua senha" required />
+                <div class="flex flex-col gap-2 relative">
+                     <label for="password">Senha:</label>
+                     <input type="password" name="password" id="password" class="border-2 p-2 pr-10 2xl:p-3 rounded-lg" 
+                     placeholder="Digite sua senha" required />
+                     <button type="button" onclick="togglePassword('password', 'eyeIcon1')" class="absolute right-3 top-12 text-gray-600">
+                     <i id="eyeIcon1" class="fa-solid fa-eye-slash"></i>
+                     </button>
                 </div>
 
                 <!-- Confirmar Senha -->
-                <div class="flex flex-col gap-2">
-                    <label for="confirm-password">Confirmar Senha:</label>
-                    <input type="password" name="confirm-password" id="confirm-password"
-                        class="border-2 p-2 2xl:p-3 rounded-lg" placeholder="Confirme sua senha" required />
+                <div class="flex flex-col gap-2 relative">
+                     <label for="password">Confirmar Senha:</label>
+                     <input type="password" name="password" id="password" class="border-2 p-2 pr-10 2xl:p-3 rounded-lg" 
+                     placeholder="Digite sua senha" required />
+                     <button type="button" onclick="togglePassword('password', 'eyeIcon1')" class="absolute right-3 top-12 text-gray-600">
+                     <i id="eyeIcon1" class="fa-solid fa-eye-slash"></i>
+                     </button>
                 </div>
 
                 <!-- Botões -->
