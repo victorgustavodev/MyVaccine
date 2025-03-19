@@ -168,8 +168,7 @@ if ($posts) {
                     <option value="TO">TO - Tocantins</option>
                 </select>
                 <div class="flex justify-end gap-2">
-                    <button type="button" id="closeEditModal" class="bg-gray-400 px-3 py-1 rounded"
-                        onclick="reloadPage()">Cancelar</button>
+                <button type="button" id="closeModalPostEdit" class="bg-gray-400 px-3 py-1 rounded">Cancelar</button>
                     <button type="submit" class="bg-blue-500 text-white px-3 py-1 rounded">Salvar</button>
                 </div>
             </form>

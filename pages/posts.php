@@ -127,7 +127,7 @@ if ($posts) {
             <h1 class="text-sm md:text-[24px] text-center font-bold">Pesquisar postos de saúde</h1>
             <input id="searchInput"
                 class="text-[12px] md:text-[16px] mt-4 w-full p-3 border-[1px] rounded-[16px] border-black" type="text"
-                placeholder="Insira o estado que deseja pesquisar. Ex: PE">
+                placeholder="Insira a cidade que deseja pesquisar. Ex: Campinas">
 
         </div>
 

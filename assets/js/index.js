@@ -25,6 +25,10 @@ function excluirPost(id) {
         document.getElementById("modal").classList.add("hidden");
     });
 
+    document.getElementById("closeModalPostEdit").addEventListener("click", function () {
+        document.getElementById("editModal").classList.add("hidden");
+    });
+
     // AJAX para criar posto sem recarregar a página
     document.getElementById("createPostForm").addEventListener("submit", function (event) {
         event.preventDefault();
