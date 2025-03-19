@@ -90,18 +90,21 @@ Isso deve ser o suficiente para rodar o projeto em ambas as formas. Se tiver alg
 
 ## 📂 Estrutura do Projeto
 
-- `app/`: Contém os arquivos principais do back-end.
-- `resources/views/`: Arquivos de front-end utilizando Tailwind CSS.
-- `public/`: Contém os assets públicos, como imagens e arquivos JavaScript compilados.
-- `database/`: Arquivos relacionados ao banco de dados e migrações.
+- `admin`: Rotas de usuário admin.
+- `assets`: Estilos e scripts.
+- `config`: Arquivos SQL.
+- `pages`: Paginas de autenticação do paciente
+- `patients`: Aplicação de vacina - admin
+- `posts`: Gerenciamento de postos - admin
+- `routes`: Autenticação e conexao com banco de dados
+- `stocks`: Gerenciamento de estoque - admin
+- `vaccine`: Gerenciamento de vacinas - admin
 
 ## 📜 Licença
 
 Este projeto está licenciado sob a Licença MIT. Consulte o arquivo [📜 LICENSE](LICENSE) para mais detalhes.
 
 ---
-
-![Link para o diagrama](https://excalidraw.com/#json=_x42p5K-MXuhpgIOF6DGf,DkcBQ9oXJ7mMeW2tELUQuw)
 
 ## 💼 Colaboradores
 
