@@ -17,6 +17,22 @@ INSERT INTO vaccines (name, min_age, max_age, contraindications) VALUES
 ('Vacina contra Varicela', 12, NULL, 'Gravidez, imunossupressão'),
 ('Vacina contra Haemophilus influenzae tipo b (Hib)', 2, 5, 'Alergia a componentes da vacina');
 
+-- Inserindo usuários antes do histórico de vacinação
+INSERT INTO users (cpf, role, name, password, email, dob, address, telephone) VALUES
+('12345678901', 'usuario', 'Usuário 1', SHA2('senha1', 256), 'user1@email.com', '1990-01-01', 'Endereço 1', '81999990001'),
+('98765432109', 'usuario', 'Usuário 2', SHA2('senha2', 256), 'user2@email.com', '1991-02-02', 'Endereço 2', '81999990002'),
+('11223344556', 'usuario', 'Usuário 3', SHA2('senha3', 256), 'user3@email.com', '1992-03-03', 'Endereço 3', '81999990003'),
+('66554433221', 'usuario', 'Usuário 4', SHA2('senha4', 256), 'user4@email.com', '1993-04-04', 'Endereço 4', '81999990004'),
+('12312312312', 'usuario', 'Usuário 5', SHA2('senha5', 256), 'user5@email.com', '1994-05-05', 'Endereço 5', '81999990005'),
+('32132132132', 'usuario', 'Usuário 6', SHA2('senha6', 256), 'user6@email.com', '1995-06-06', 'Endereço 6', '81999990006'),
+('45645645645', 'usuario', 'Usuário 7', SHA2('senha7', 256), 'user7@email.com', '1996-07-07', 'Endereço 7', '81999990007'),
+('65465465465', 'usuario', 'Usuário 8', SHA2('senha8', 256), 'user8@email.com', '1997-08-08', 'Endereço 8', '81999990008'),
+('78978978978', 'usuario', 'Usuário 9', SHA2('senha9', 256), 'user9@email.com', '1998-09-09', 'Endereço 9', '81999990009'),
+('98798798798', 'usuario', 'Usuário 10', SHA2('senha10', 256), 'user10@email.com', '1999-10-10', 'Endereço 10', '81999990010'),
+('15915915915', 'usuario', 'Usuário 11', SHA2('senha11', 256), 'user11@email.com', '2000-11-11', 'Endereço 11', '81999990011'),
+('35735735735', 'usuario', 'Usuário 12', SHA2('senha12', 256), 'user12@email.com', '2001-12-12', 'Endereço 12', '81999990012'),
+('75375375375', 'usuario', 'Usuário 13', SHA2('senha13', 256), 'user13@email.com', '2002-01-13', 'Endereço 13', '81999990013');
+
 -- Inserção de postos de saúde
 INSERT INTO posts (name, address, city, state) VALUES
 ('Posto Saúde Central', 'Rua Principal, 123', 'São Paulo', 'SP'),
